@@ -26,17 +26,16 @@ El presente trabajo práctico describe el diseño y la implementación de un veh
 - Configurar una salida digital/PWM para el accionamiento de una bocina como alerta sonora.
 
 ## 3. Materiales y Métodos
-### 3.1. Equipamiento
-- **Microcontrolador:** NXP LPC1769 (Cortex-M3).
-- **Comunicación Inalámbrica:** Módulo Bluetooth HC-05 para la recepción de comandos.
-- **Actuador de Dirección:** Servomotor TowerPro MG90S (piñonería metálica) controlado por PWM.
-- **Sistema de Propulsión:** Motor de corriente continua N20 con reductora y encoder integrado para control de velocidad/posición.
-- **Interfaz de Control:** Mando de PC (Gamepad) vinculado vía Bluetooth.
-- **Sensores:** LDR (Resistencia dependiente de luz) para detección de luminosidad ambiental.
-- **Indicadores y Alertas:** 
-    - Diodos LED para sistema de iluminación.
-    - Buzzer activo de 5V para señalización sonora (bocina).
-- **Instrumental de Laboratorio:** Fuente de alimentación regulada, osciloscopio digital y multímetro.
+### 3.1. Equipamiento y Asignación de Periféricos
+Para la interacción con el hardware, se utilizaron los siguientes módulos internos del LPC1769:
+
+- **Comunicación Bluetooth (HC-05):** Módulo **UART** (Universal Asynchronous Receiver-Transmitter). Se utiliza para la recepción de tramas de control provenientes del mando de PC.
+- **Control de Dirección (MG90S):** Módulo **PWM** (Pulse Width Modulation). Generación de pulsos de 50Hz con duty cycle variable para el posicionamiento del servo.
+- **Tracción (Motor N20):** Módulo **PWM** y **GPIO**. El PWM controla la velocidad mediante un puente H, mientras que los pines GPIO definen el sentido de giro.
+- **Lectura de Velocidad (Encoder):** Módulo **GPIO con Interrupciones Externas** (o QEI). Captura de pulsos para el cálculo de RPM y distancia.
+- **Sensor de Luz (LDR):** Módulo **ADC** (Analog to Digital Converter). Conversión de la señal analógica de tensión en un valor digital para procesar la intensidad lumínica.
+- **Sistema de Iluminación (LEDs):** Módulos **GPIO**. Salidas digitales para el encendido y apagado de las luces frontales/traseras.
+- **Bocina (Buzzer 5V):** Módulo **GPIO / PWM**. Accionamiento de la alerta sonora mediante una señal digital o tono de frecuencia fija.
 
 ### 3.2. Procedimiento
 [Descripción de los pasos realizados durante la práctica.]
