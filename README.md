@@ -15,7 +15,8 @@
 ---
 
 ## 1. Introducción y Justificación
-El presente pre-informe detalla la propuesta para el desarrollo de un vehículo a control remoto basado en el microcontrolador LPC1769 (arquitectura Cortex-M3). El proyecto busca integrar conocimientos de sistemas embebidos, manejo de periféricos en tiempo real y protocolos de comunicación inalámbrica. El sistema propuesto combinará la potencia de un motor brushless para la tracción y la precisión de un servomotor para la dirección, todo coordinado mediante señales de control digital y sensado ambiental.
+El presente pre-informe detalla la propuesta para el desarrollo de un vehículo a control remoto basado en el microcontrolador LPC1769 (arquitectura Cortex-M3). El proyecto se desarrolla utilizando el IDE **MCUXpresso** de NXP, aprovechando sus herramientas de depuración y gestión de proyectos para sistemas embebidos. El proyecto busca integrar conocimientos de sistemas embebidos, manejo de periféricos en tiempo real y protocolos de comunicación inalámbrica.
+ El sistema propuesto combinará la potencia de un motor brushless para la tracción y la precisión de un servomotor para la dirección, todo coordinado mediante señales de control digital y sensado ambiental.
 
 ## 2. Objetivos del Proyecto
 - Diseñar un sistema embebido robusto utilizando el microcontrolador LPC1769 como unidad de control central.
