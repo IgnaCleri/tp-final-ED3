@@ -34,7 +34,7 @@ Para cumplir con los objetivos, se planea la utilización de los siguientes mód
 - **Control de Dirección (MG90S):** Se empleará el módulo **PWM** y **GPIO**, integrando un driver para motores DC que servirá como etapa de potencia para el servo.
 - **Tracción (Motor Brushless A2212 1400KV):** Se utilizará el módulo **MCPWM**, aprovechando sus capacidades específicas para el control de motores y la generación de señales precisas para el ESC.
 - **Sensor de Luz (LDR):** Se empleará el módulo **ADC** para la digitalización de la señal analógica lumínica.
-- **Iluminación y Alerta:** Se utilizarán pines **GPIO** para los LEDs y el módulo **PWM/GPIO** para el buzzer de 5V.
+- **Iluminación y Alerta:** Se utilizarán pines **GPIO** para los LEDs y el módulo **DAC** para el buzzer de 5V.
 - **Alimentación:** El sistema será energizado mediante baterías de Polímero de Litio (LiPo) conectadas en serie (celdas de 3,7V), las cuales estarán ensambladas en un portapilas de alta corriente diseñado para soportar los requerimientos eléctricos del motor brushless.
 - **Placa de Control:** El circuito electrónico será implementado en una **PCB de fabricación propia (casera)**, diseñada para integrar la LPC1769 con los drivers de potencia, sensores y módulos de comunicación en una plataforma compacta y robusta.
 
