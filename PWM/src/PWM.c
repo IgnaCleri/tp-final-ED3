@@ -5,14 +5,14 @@
 /* =============================================================
  * CONFIGURACIÓN DE PARÁMETROS
  * ============================================================= */
-#define PWM_FREQ_HZ    20000   // Frecuencia deseada en Hz
-#define PWM_DUTY_PERC  30      // Duty cycle deseado (0 a 100)
-#define PCLK_MCPWM     25000000 // Frecuencia del PCLK (estándar 25MHz)
+#define PWM_FREQ_HZ 20000   // Frecuencia deseada en Hz
+#define PWM_DUTY_PERC 30    // Duty cycle deseado (0 a 100)
+#define PCLK_MCPWM 25000000 // Frecuencia del PCLK (estándar 25MHz)
 
 /* =============================================================
  * MACROS DE CÁLCULO
  * ============================================================= */
-#define GET_PERIOD(freq)      (PCLK_MCPWM / freq)
+#define GET_PERIOD(freq) (PCLK_MCPWM / freq)
 #define GET_PULSE(duty, freq) ((GET_PERIOD(freq) * duty) / 100)
 
 /**
@@ -60,7 +60,7 @@ int main(void) {
     // 6. Iniciar el Canal 0
     MCPWM_Start(LPC_MCPWM, 1, 0, 0);
 
-    while(1) {
+    while (1) {
         // El PWM corre por hardware sin intervención de la CPU
     }
 }
