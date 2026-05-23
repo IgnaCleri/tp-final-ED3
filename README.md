@@ -38,6 +38,11 @@ Para cumplir con los objetivos, se planea la utilización de los siguientes mód
 - **Alimentación:** El sistema será energizado mediante baterías de Polímero de Litio (LiPo) conectadas en serie (celdas de 3,7V), las cuales estarán ensambladas en un portapilas de alta corriente diseñado para soportar los requerimientos eléctricos del motor brushless.
 - **Placa de Control:** El circuito electrónico será implementado en una **PCB de fabricación propia (casera)**, diseñada para integrar la LPC1769 con los drivers de potencia, sensores y módulos de comunicación en una plataforma compacta y robusta.
 
+### 3.1. Diagrama general de componentes
+El siguiente esquema resume la arquitectura funcional prevista para el sistema, mostrando la relación entre el usuario, la etapa de control basada en LPC1769 y los distintos actuadores, sensores y módulos auxiliares.
+
+![Diagrama general de componentes](diagrama_modulos_tp_final.png)
+
 ## 4. Metodología de Trabajo Propuesta
 El desarrollo se llevará a cabo siguiendo estas etapas planificadas:
 
