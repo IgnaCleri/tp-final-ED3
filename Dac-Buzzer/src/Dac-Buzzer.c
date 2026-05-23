@@ -25,17 +25,17 @@ int main(void) {
 
 void conf_lli(void) {
 
-    LLI1.srcAddr = (uint32_t)&(audio_samples[4095]);
+    LLI1.srcAddr = (uint32_t)&audio_samples[4095];
     LLI1.dstAddr = (uint32_t)&LPC_DAC->DACR;
     LLI1.nextLLI = (uint32_t)&LLI2;
     LLI1.control = 4095 | 1 << 18 | 1 << 21 | 1 << 26;
 
-    LLI0.srcAddr = (uint32_t)&(audio_samples[0]);
+    LLI0.srcAddr = (uint32_t)&audio_samples[0];
     LLI0.dstAddr = (uint32_t)&LPC_DAC->DACR;
     LLI0.nextLLI = (uint32_t)&LLI1;
     LLI0.control = 4095 | 1 << 18 | 1 << 21 | 1 << 26;
 
-    LLI2.srcAddr = (uint32_t)&(audio_samples[8190]);
+    LLI2.srcAddr = (uint32_t)&audio_samples[8190];
     LLI2.dstAddr = (uint32_t)&LPC_DAC->DACR;
     LLI2.nextLLI = (uint32_t)&LLI0;
     LLI2.control = 2438 | 1 << 18 | 1 << 21 | 1 << 26;
