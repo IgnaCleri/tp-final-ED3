@@ -1,0 +1,63 @@
+@startuml
+left to right direction
+skinparam componentStyle rectangle
+skinparam shadowing false
+
+actor "Usuario\n(Gamepad / PC)" as User
+
+component "Modulo Bluetooth\nHC-05" as BT
+component "LPC1769\nControl Central" as MCU
+
+component "Modulo UART" as UART
+component "Modulo PWM\nDireccion" as PWM
+component "Modulo MCPWM\nTraccion" as MCPWM
+component "Modulo ADC\nSensado de luz" as ADC
+component "Modulo GPIO\nIluminacion" as GPIO
+component "Modulo DAC\nAlerta sonora" as DAC
+
+component "Servomotor\nMG90S" as SERVO
+component "ESC" as ESC
+component "Motor Brushless\nA2212" as MOTOR
+component "LDR" as LDR
+component "LEDs" as LEDS
+component "Buzzer" as BUZZER
+
+component "Modulo de Alimentacion\nBateria LiPo + etapa de potencia" as PWR
+component "PCB + Chasis" as HW
+
+User --> BT : comandos
+BT --> UART : datos serie
+UART --> MCU : recepcion
+
+MCU --> PWM : control de direccion
+PWM --> SERVO
+
+MCU --> MCPWM : control de traccion
+MCPWM --> ESC
+ESC --> MOTOR
+
+LDR --> ADC : senal analogica
+ADC --> MCU : nivel de luz
+
+MCU --> GPIO : encendido/apagado
+GPIO --> LEDS
+
+MCU --> DAC : generacion de senal
+DAC --> BUZZER
+
+PWR --> MCU
+PWR --> BT
+PWR --> SERVO
+PWR --> ESC
+PWR --> LEDS
+PWR --> BUZZER
+
+HW .. MCU
+HW .. BT
+HW .. SERVO
+HW .. ESC
+HW .. MOTOR
+HW .. LDR
+HW .. LEDS
+HW .. BUZZER
+@enduml
