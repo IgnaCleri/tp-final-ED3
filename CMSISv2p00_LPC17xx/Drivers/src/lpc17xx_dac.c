@@ -44,7 +44,7 @@
  */
 
 void DAC_Init(void) {
-    LPC_PINCON->PINSEL1  = (LPC_PINCON->PINSEL1 & ~(0x3 << 20)) | (0x2 << 20);
+    LPC_PINCON->PINSEL1 = (LPC_PINCON->PINSEL1 & ~(0x3 << 20)) | (0x2 << 20);
     LPC_PINCON->PINMODE1 = (LPC_PINCON->PINMODE1 & ~(0x3 << 20)) | (0x2 << 20);
 
     CLKPWR_SetPCLKDiv(CLKPWR_PCLKSEL_DAC, CLKPWR_PCLKSEL_CCLK_DIV_4);
@@ -62,7 +62,7 @@ void DAC_SetBias(DAC_MAX_CURRENT maxCurr) {
     LPC_DAC->DACR = (LPC_DAC->DACR & ~DAC_BIAS_EN) | (maxCurr == DAC_350uA ? DAC_BIAS_EN : 0);
 }
 
-void DAC_ConfigDAConverterControl(const DAC_CONVERTER_CFG_T* dacCfg) {
+void DAC_ConfigDAConverterControl(const DAC_CONVERTER_CFG_T *dacCfg) {
     CHECK_PARAM(PARAM_FUNCTIONALSTATE(dacCfg->doubleBuffer));
     CHECK_PARAM(PARAM_FUNCTIONALSTATE(dacCfg->dmaCounter));
     CHECK_PARAM(PARAM_FUNCTIONALSTATE(dacCfg->dmaRequest));
@@ -73,9 +73,7 @@ void DAC_ConfigDAConverterControl(const DAC_CONVERTER_CFG_T* dacCfg) {
     LPC_DAC->DACCTRL = ctrl;
 }
 
-void DAC_SetDMATimeOut(uint16_t timeOut) {
-    LPC_DAC->DACCNTVAL = DAC_CCNT_VALUE(timeOut);
-}
+void DAC_SetDMATimeOut(uint16_t timeOut) { LPC_DAC->DACCNTVAL = DAC_CCNT_VALUE(timeOut); }
 
 /**
  * @}

@@ -52,7 +52,7 @@ uint8_t SYSTICK_InternalInitTest() {
     SYSTICK_Setup();
     TEST_INIT();
 
-    const uint32_t time          = 10;
+    const uint32_t time = 10;
     const uint32_t expected_load = (SystemCoreClock / 1000) * time - 1;
     SYSTICK_InternalInit(time);
 
@@ -70,8 +70,8 @@ uint8_t SYSTICK_ExternalInitTest() {
     SYSTICK_Setup();
     TEST_INIT();
 
-    const uint32_t extFreq       = 1000000;
-    const uint32_t time          = 20;
+    const uint32_t extFreq = 1000000;
+    const uint32_t time = 20;
     const uint32_t expected_load = (extFreq / 1000) * time - 1;
     SYSTICK_ExternalInit(extFreq, time);
 
@@ -117,8 +117,9 @@ uint8_t SYSTICK_GetCurrentValueTest() {
 
     SysTick->LOAD = 0xFFFF;
     SysTick->CTRL |= 0x5;
-    for (volatile unsigned int i = 0; i < 10; i++) {}
-    const uint32_t firstVal  = SYSTICK_GetCurrentValue();
+    for (volatile unsigned int i = 0; i < 10; i++) {
+    }
+    const uint32_t firstVal = SYSTICK_GetCurrentValue();
     const uint32_t secondVal = SYSTICK_GetCurrentValue();
     EXPECT_TRUE(firstVal < 0xFFFF);
     EXPECT_TRUE(secondVal < 0xFFFF);
@@ -134,11 +135,13 @@ uint8_t SYSTICK_ClearCounterFlagTest() {
 
     SysTick->LOAD = 0xFF;
     SysTick->CTRL |= 0x5;
-    for (volatile unsigned int i = 0; i < 1000; i++) {}
+    for (volatile unsigned int i = 0; i < 1000; i++) {
+    }
     uint32_t flag = SysTick->CTRL & ST_CTRL_COUNTFLAG;
     EXPECT_TRUE(flag);
 
-    for (volatile unsigned int i = 0; i < 1000; i++) {}
+    for (volatile unsigned int i = 0; i < 1000; i++) {
+    }
     SysTick->CTRL &= ~ST_CTRL_ENABLE;
     SYSTICK_ClearCounterFlag();
     flag = SysTick->CTRL & ST_CTRL_COUNTFLAG;
@@ -157,7 +160,7 @@ uint8_t SYSTICK_GetReloadValueTest() {
     SysTick->LOAD = 0xFFFFFF;
     EXPECT_EQUAL(SYSTICK_GetReloadValue(), 0xFFFFFF);
 
-    SysTick->LOAD = 0x1FFFFFF;  // Only 24 bits should be used
+    SysTick->LOAD = 0x1FFFFFF; // Only 24 bits should be used
     EXPECT_EQUAL(SYSTICK_GetReloadValue(), 0xFFFFFF);
 
     ASSERT_TEST();
@@ -198,16 +201,18 @@ uint8_t SYSTICK_HasFiredTest() {
 
     SysTick->LOAD = 0xFF;
     SysTick->CTRL |= 0x5;
-    for (volatile unsigned int i = 0; i < 500; i++) {}
+    for (volatile unsigned int i = 0; i < 500; i++) {
+    }
     EXPECT_TRUE(SYSTICK_HasFired());
 
     SysTick->LOAD = 0xFFFFFF;
-    SysTick->VAL  = 0;
+    SysTick->VAL = 0;
     SysTick->CTRL;
-    for (volatile unsigned int i = 0; i < 10; i++) {}
+    for (volatile unsigned int i = 0; i < 10; i++) {
+    }
     EXPECT_FALSE(SYSTICK_HasFired());
 
     ASSERT_TEST();
 }
 
-#endif  // UNIT_TESTING_ENABLED
+#endif // UNIT_TESTING_ENABLED

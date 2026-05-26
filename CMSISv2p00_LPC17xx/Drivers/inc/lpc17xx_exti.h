@@ -71,10 +71,7 @@ typedef enum {
 /**
  * @brief EXTI mode option.
  */
-typedef enum {
-    EXTI_LEVEL_SENSITIVE,
-    EXTI_EDGE_SENSITIVE
-} EXTI_MODE;
+typedef enum { EXTI_LEVEL_SENSITIVE, EXTI_EDGE_SENSITIVE } EXTI_MODE;
 /** Check EXTI mode option parameter. */
 #define PARAM_EXTI_MODE(MODE) ((MODE) == EXTI_LEVEL_SENSITIVE || (MODE) == EXTI_EDGE_SENSITIVE)
 
@@ -82,10 +79,10 @@ typedef enum {
  * @brief EXTI polarity option.
  */
 typedef enum {
-    EXTI_LOW_ACTIVE   = 0,
+    EXTI_LOW_ACTIVE = 0,
     EXTI_FALLING_EDGE = 0,
-    EXTI_HIGH_ACTIVE  = 1,
-    EXTI_RISING_EDGE  = 1
+    EXTI_HIGH_ACTIVE = 1,
+    EXTI_RISING_EDGE = 1
 } EXTI_POLARITY;
 /** Check EXTI polarity option parameter. */
 #define PARAM_EXTI_POLARITY(POL) ((POL) == EXTI_LOW_ACTIVE || (POL) == EXTI_HIGH_ACTIVE)
@@ -93,11 +90,7 @@ typedef enum {
 /**
  * @brief EXTI resistor option.
  */
-typedef enum {
-    EXTI_PULLUP = 0,
-    EXTI_PULLDOWN,
-    EXTI_NOPULL
-} EXTI_RESISTOR;
+typedef enum { EXTI_PULLUP = 0, EXTI_PULLDOWN, EXTI_NOPULL } EXTI_RESISTOR;
 /** Check EXTI resistor option parameter. */
 #define PARAM_EXTI_RESISTOR(RES) ((RES) >= EXTI_PULLUP && (RES) <= EXTI_NOPULL)
 
@@ -150,7 +143,7 @@ void EXTI_PinConfig(EXTI_LINE line, EXTI_RESISTOR resMode);
  *
  * @param extiCfg Pointer to an EXTI_CFG_T structure containing the settings.
  */
-void EXTI_Config(const EXTI_CFG_T* extiCfg);
+void EXTI_Config(const EXTI_CFG_T *extiCfg);
 
 /**
  * @brief Configures and enables an external interrupt line in a single operation.
@@ -160,7 +153,7 @@ void EXTI_Config(const EXTI_CFG_T* extiCfg);
  *
  * @param extiCfg Pointer to an EXTI_CFG_T structure containing the settings.
  */
-void EXTI_ConfigEnable(const EXTI_CFG_T* extiCfg);
+void EXTI_ConfigEnable(const EXTI_CFG_T *extiCfg);
 
 /**
  * @brief Clears the pending flag for a specific external interrupt line.
@@ -200,7 +193,7 @@ void EXTI_EnableIRQ(EXTI_LINE line);
 }
 #endif
 
-#endif  // LPC17XX_EXTI_H_
+#endif // LPC17XX_EXTI_H_
 
 /**
  * @}

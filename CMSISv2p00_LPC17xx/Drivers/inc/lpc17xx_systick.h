@@ -41,17 +41,17 @@ extern "C" {
  */
 
 /** Enable SysTick Counter bit. */
-#define ST_CTRL_ENABLE    ((uint32_t)(1 << 0))
+#define ST_CTRL_ENABLE ((uint32_t)(1 << 0))
 /** Enable SysTick Interrupt bit. */
-#define ST_CTRL_TICKINT   ((uint32_t)(1 << 1))
+#define ST_CTRL_TICKINT ((uint32_t)(1 << 1))
 /** Clock Source selection bit. */
 #define ST_CTRL_CLKSOURCE ((uint32_t)(1 << 2))
 /** Count Flag bit. */
 #define ST_CTRL_COUNTFLAG ((uint32_t)(1 << 16))
 /** Maximum reload value for SysTick timer (24 bits). */
-#define ST_MAX_LOAD       ((uint32_t)(0x00FFFFFF))
+#define ST_MAX_LOAD ((uint32_t)(0x00FFFFFF))
 /** PCB bit position in PINSEL7 register. */
-#define ST_PIN_PCB_POS    ((uint32_t)(20))
+#define ST_PIN_PCB_POS ((uint32_t)(20))
 
 /**
  * @}
@@ -117,9 +117,7 @@ void SYSTICK_IntCmd(FunctionalState newState);
  *
  * @return Current value of the 24-bit counter.
  */
-static __INLINE uint32_t SYSTICK_GetCurrentValue(void) {
-    return (SysTick->VAL);
-}
+static __INLINE uint32_t SYSTICK_GetCurrentValue(void) { return (SysTick->VAL); }
 
 /**
  * @brief Clears the SysTick Count Flag.
@@ -127,9 +125,7 @@ static __INLINE uint32_t SYSTICK_GetCurrentValue(void) {
  * Performs a dummy read of the CTRL register. According to the ARM Cortex-M3 architecture, reading
  * the SysTick Control and Status Register clears the COUNTFLAG bit to 0.
  */
-static __INLINE void SYSTICK_ClearCounterFlag(void) {
-    (void)SysTick->CTRL;
-}
+static __INLINE void SYSTICK_ClearCounterFlag(void) { (void)SysTick->CTRL; }
 
 /**
  * @brief Retrieves the current reload (LOAD) value.
@@ -139,9 +135,7 @@ static __INLINE void SYSTICK_ClearCounterFlag(void) {
  *
  * @return The 24-bit reload value.
  */
-static __INLINE uint32_t SYSTICK_GetReloadValue(void) {
-    return (SysTick->LOAD & ST_MAX_LOAD);
-}
+static __INLINE uint32_t SYSTICK_GetReloadValue(void) { return (SysTick->LOAD & ST_MAX_LOAD); }
 
 /**
  * @brief Sets a new reload value for the counter.
@@ -186,7 +180,7 @@ static __INLINE FlagStatus SYSTICK_HasFired(void) {
 }
 #endif
 
-#endif  // LPC17XX_SYSTICK_H_
+#endif // LPC17XX_SYSTICK_H_
 
 /**
  * @}

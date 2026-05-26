@@ -73,7 +73,7 @@ static uint32_t converUSecToVal(uint32_t timerNum, uint32_t uSec);
  * - Use this function to identify the timer index from its register pointer.
  * - The return value 0xFFFFFFFF indicates an invalid or unknown timer pointer.
  */
-static uint32_t converPtrToTimeNum(LPC_TIM_TypeDef* TIMx);
+static uint32_t converPtrToTimeNum(LPC_TIM_TypeDef *TIMx);
 
 /**
  * @brief      Initializes the specified Timer/Counter peripheral.
@@ -88,7 +88,7 @@ static uint32_t converPtrToTimeNum(LPC_TIM_TypeDef* TIMx);
  * - Does not enable the timer; it only initializes the peripheral.
  * - After calling this function, the timer is ready for configuration.
  */
-static void TIM_Init(LPC_TIM_TypeDef* TIMx);
+static void TIM_Init(LPC_TIM_TypeDef *TIMx);
 /* ------------------- End of Private Function Prototypes ------------------- */
 
 /* --------------------------- Private Functions ---------------------------- */
@@ -109,18 +109,23 @@ static uint32_t converUSecToVal(uint32_t timerNum, uint32_t uSec) {
     return (uint32_t)(pclk * uSec / 1000000);
 }
 
-static uint32_t converPtrToTimeNum(LPC_TIM_TypeDef* TIMx) {
+static uint32_t converPtrToTimeNum(LPC_TIM_TypeDef *TIMx) {
     switch ((uintptr_t)TIMx) {
-        case (uintptr_t)LPC_TIM0: return 0;
-        case (uintptr_t)LPC_TIM1: return 1;
-        case (uintptr_t)LPC_TIM2: return 2;
-        case (uintptr_t)LPC_TIM3: return 3;
-        default: break;
+    case (uintptr_t)LPC_TIM0:
+        return 0;
+    case (uintptr_t)LPC_TIM1:
+        return 1;
+    case (uintptr_t)LPC_TIM2:
+        return 2;
+    case (uintptr_t)LPC_TIM3:
+        return 3;
+    default:
+        break;
     }
     return 0xFFFFFFFF;
 }
 
-static void TIM_Init(LPC_TIM_TypeDef* TIMx) {
+static void TIM_Init(LPC_TIM_TypeDef *TIMx) {
     if (TIMx == LPC_TIM0) {
         CLKPWR_ConfigPPWR(CLKPWR_PCONP_PCTIM0, ENABLE);
         CLKPWR_SetPCLKDiv(CLKPWR_PCLKSEL_TIMER0, CLKPWR_PCLKSEL_CCLK_DIV_4);
@@ -144,7 +149,7 @@ static void TIM_Init(LPC_TIM_TypeDef* TIMx) {
 /** @addtogroup TIM_Public_Functions
  * @{
  */
-void TIM_InitTimer(LPC_TIM_TypeDef* TIMx, const TIM_TIMERCFG_T* timerCfg) {
+void TIM_InitTimer(LPC_TIM_TypeDef *TIMx, const TIM_TIMERCFG_T *timerCfg) {
     CHECK_PARAM(PARAM_TIMx(TIMx));
     CHECK_PARAM(PARAM_TIM_PRESCALE(timerCfg->prescaleOpt));
 
@@ -163,7 +168,7 @@ void TIM_InitTimer(LPC_TIM_TypeDef* TIMx, const TIM_TIMERCFG_T* timerCfg) {
     }
 }
 
-void TIM_InitCounter(LPC_TIM_TypeDef* TIMx, const TIM_COUNTERCFG_T* counterCfg) {
+void TIM_InitCounter(LPC_TIM_TypeDef *TIMx, const TIM_COUNTERCFG_T *counterCfg) {
     CHECK_PARAM(PARAM_TIMx(TIMx));
     CHECK_PARAM(PARAM_TIM_CAPTURE_CH(counterCfg->input));
     CHECK_PARAM(PARAM_TIM_CTR_EDGE(counterCfg->edge));
@@ -173,7 +178,7 @@ void TIM_InitCounter(LPC_TIM_TypeDef* TIMx, const TIM_COUNTERCFG_T* counterCfg) 
     TIMx->CTCR = counterCfg->edge | (counterCfg->input << 2);
 }
 
-void TIM_DeInit(LPC_TIM_TypeDef* TIMx) {
+void TIM_DeInit(LPC_TIM_TypeDef *TIMx) {
     CHECK_PARAM(PARAM_TIMx(TIMx));
 
     TIMx->TCR = 0x00;
@@ -189,38 +194,38 @@ void TIM_DeInit(LPC_TIM_TypeDef* TIMx) {
     }
 }
 
-void TIM_Enable(LPC_TIM_TypeDef* TIMx) {
+void TIM_Enable(LPC_TIM_TypeDef *TIMx) {
     CHECK_PARAM(PARAM_TIMx(TIMx));
 
     TIMx->TCR |= 1UL;
 }
 
-void TIM_Disable(LPC_TIM_TypeDef* TIMx) {
+void TIM_Disable(LPC_TIM_TypeDef *TIMx) {
     CHECK_PARAM(PARAM_TIMx(TIMx));
 
     TIMx->TCR &= ~1UL;
 }
 
-uint32_t TIM_ReadTimer(LPC_TIM_TypeDef* TIMx) {
+uint32_t TIM_ReadTimer(LPC_TIM_TypeDef *TIMx) {
     CHECK_PARAM(PARAM_TIMx(TIMx));
 
     return TIMx->TC;
 }
 
-uint32_t TIM_ReadPrescale(LPC_TIM_TypeDef* TIMx) {
+uint32_t TIM_ReadPrescale(LPC_TIM_TypeDef *TIMx) {
     CHECK_PARAM(PARAM_TIMx(TIMx));
 
     return TIMx->PC;
 }
 
-void TIM_ResetCounter(LPC_TIM_TypeDef* TIMx) {
+void TIM_ResetCounter(LPC_TIM_TypeDef *TIMx) {
     CHECK_PARAM(PARAM_TIMx(TIMx));
 
     TIMx->TCR |= TIM_RESET;
     TIMx->TCR &= ~TIM_RESET;
 }
 
-void TIM_ConfigMatch(LPC_TIM_TypeDef* TIMx, const TIM_MATCHCFG_T* matchCfg) {
+void TIM_ConfigMatch(LPC_TIM_TypeDef *TIMx, const TIM_MATCHCFG_T *matchCfg) {
     CHECK_PARAM(PARAM_TIMx(TIMx));
     CHECK_PARAM(PARAM_TIM_MATCH_CH(matchCfg->channel));
     CHECK_PARAM(PARAM_FUNCTIONALSTATE(matchCfg->intEn));
@@ -239,17 +244,17 @@ void TIM_ConfigMatch(LPC_TIM_TypeDef* TIMx, const TIM_MATCHCFG_T* matchCfg) {
     TIM_SetMatchExt(TIMx, matchCfg->channel, matchCfg->extOpt);
 }
 
-void TIM_UpdateMatchValue(LPC_TIM_TypeDef* TIMx, TIM_MATCH_CH channel, uint32_t matchValue) {
+void TIM_UpdateMatchValue(LPC_TIM_TypeDef *TIMx, TIM_MATCH_CH channel, uint32_t matchValue) {
     CHECK_PARAM(PARAM_TIMx(TIMx));
     CHECK_PARAM(PARAM_TIM_MATCH_CH(channel));
 
     TIMx->IR = TIM_IR_CLR(channel);
 
-    volatile uint32_t* mReg = &TIMx->MR0;
-    mReg[channel]           = matchValue;
+    volatile uint32_t *mReg = &TIMx->MR0;
+    mReg[channel] = matchValue;
 }
 
-void TIM_SetMatchExt(LPC_TIM_TypeDef* TIMx, TIM_MATCH_CH channel, TIM_EXTMATCH_OPT type) {
+void TIM_SetMatchExt(LPC_TIM_TypeDef *TIMx, TIM_MATCH_CH channel, TIM_EXTMATCH_OPT type) {
     CHECK_PARAM(PARAM_TIMx(TIMx));
     CHECK_PARAM(PARAM_TIM_MATCH_CH(channel));
     CHECK_PARAM(PARAM_TIM_EXTMATCH_OPT(type));
@@ -258,7 +263,7 @@ void TIM_SetMatchExt(LPC_TIM_TypeDef* TIMx, TIM_MATCH_CH channel, TIM_EXTMATCH_O
     TIMx->EMR |= TIM_EM_SET(channel, type);
 }
 
-void TIM_ConfigCapture(LPC_TIM_TypeDef* TIMx, const TIM_CAPTURECFG_T* capCfg) {
+void TIM_ConfigCapture(LPC_TIM_TypeDef *TIMx, const TIM_CAPTURECFG_T *capCfg) {
     CHECK_PARAM(PARAM_TIMx(TIMx));
     CHECK_PARAM(PARAM_TIM_CAPTURE_CH(capCfg->channel));
     CHECK_PARAM(PARAM_FUNCTIONALSTATE(capCfg->risingEn));
@@ -272,22 +277,22 @@ void TIM_ConfigCapture(LPC_TIM_TypeDef* TIMx, const TIM_CAPTURECFG_T* capCfg) {
     TIMx->CCR |= capMask << (capCfg->channel * 3);
 }
 
-uint32_t TIM_GetCaptureValue(LPC_TIM_TypeDef* TIMx, TIM_CAPTURE_CH channel) {
+uint32_t TIM_GetCaptureValue(LPC_TIM_TypeDef *TIMx, TIM_CAPTURE_CH channel) {
     CHECK_PARAM(PARAM_TIMx(TIMx));
     CHECK_PARAM(PARAM_TIM_CAPTURE_CH(channel));
 
-    volatile const uint32_t* pCR = &TIMx->CR0;
+    volatile const uint32_t *pCR = &TIMx->CR0;
     return pCR[channel];
 }
 
-void TIM_ClearIntPending(LPC_TIM_TypeDef* TIMx, TIM_INT intFlag) {
+void TIM_ClearIntPending(LPC_TIM_TypeDef *TIMx, TIM_INT intFlag) {
     CHECK_PARAM(PARAM_TIMx(TIMx));
     CHECK_PARAM(PARAM_TIM_INT(intFlag));
 
     TIMx->IR = TIM_IR_CLR(intFlag);
 }
 
-FlagStatus TIM_GetIntStatus(LPC_TIM_TypeDef* TIMx, TIM_INT intFlag) {
+FlagStatus TIM_GetIntStatus(LPC_TIM_TypeDef *TIMx, TIM_INT intFlag) {
     CHECK_PARAM(PARAM_TIMx(TIMx));
     CHECK_PARAM(PARAM_TIM_INT(intFlag));
 

@@ -16,5 +16,5 @@
 
 void run_all_tests(void);
 
-#endif  // UNIT_TESTING_ENABLED
-#endif  // RUN_TESTS_H
+#endif // UNIT_TESTING_ENABLED
+#endif // RUN_TESTS_H

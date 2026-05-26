@@ -48,132 +48,132 @@
  * @brief Lookup Table of Connection Type matched with Peripheral Data (FIFO) register base address
  */
 #ifdef __IAR_SYSTEMS_ICC__
-volatile const void* GPDMA_LUTPerAddr[] = {
-    (&LPC_SSP0->DR),                 // SSP0 Tx
-    (&LPC_SSP0->DR),                 // SSP0 Rx
-    (&LPC_SSP1->DR),                 // SSP1 Tx
-    (&LPC_SSP1->DR),                 // SSP1 Rx
-    (&LPC_ADC->ADGDR),               // ADC
-    (&LPC_I2S->I2STXFIFO),           // I2S Tx
-    (&LPC_I2S->I2SRXFIFO),           // I2S Rx
-    (&LPC_DAC->DACR),                // DAC
-    (&LPC_UART0->/*RBTHDLR.*/ THR),  // UART0 Tx
-    (&LPC_UART0->/*RBTHDLR.*/ RBR),  // UART0 Rx
-    (&LPC_UART1->/*RBTHDLR.*/ THR),  // UART1 Tx
-    (&LPC_UART1->/*RBTHDLR.*/ RBR),  // UART1 Rx
-    (&LPC_UART2->/*RBTHDLR.*/ THR),  // UART2 Tx
-    (&LPC_UART2->/*RBTHDLR.*/ RBR),  // UART2 Rx
-    (&LPC_UART3->/*RBTHDLR.*/ THR),  // UART3 Tx
-    (&LPC_UART3->/*RBTHDLR.*/ RBR),  // UART3 Rx
-    (&LPC_TIM0->MR0),                // MAT0.0
-    (&LPC_TIM0->MR1),                // MAT0.1
-    (&LPC_TIM1->MR0),                // MAT1.0
-    (&LPC_TIM1->MR1),                // MAT1.1
-    (&LPC_TIM2->MR0),                // MAT2.0
-    (&LPC_TIM2->MR1),                // MAT2.1
-    (&LPC_TIM3->MR0),                // MAT3.0
-    (&LPC_TIM3->MR1)                 // MAT3.1
+volatile const void *GPDMA_LUTPerAddr[] = {
+    (&LPC_SSP0->DR),                // SSP0 Tx
+    (&LPC_SSP0->DR),                // SSP0 Rx
+    (&LPC_SSP1->DR),                // SSP1 Tx
+    (&LPC_SSP1->DR),                // SSP1 Rx
+    (&LPC_ADC->ADGDR),              // ADC
+    (&LPC_I2S->I2STXFIFO),          // I2S Tx
+    (&LPC_I2S->I2SRXFIFO),          // I2S Rx
+    (&LPC_DAC->DACR),               // DAC
+    (&LPC_UART0->/*RBTHDLR.*/ THR), // UART0 Tx
+    (&LPC_UART0->/*RBTHDLR.*/ RBR), // UART0 Rx
+    (&LPC_UART1->/*RBTHDLR.*/ THR), // UART1 Tx
+    (&LPC_UART1->/*RBTHDLR.*/ RBR), // UART1 Rx
+    (&LPC_UART2->/*RBTHDLR.*/ THR), // UART2 Tx
+    (&LPC_UART2->/*RBTHDLR.*/ RBR), // UART2 Rx
+    (&LPC_UART3->/*RBTHDLR.*/ THR), // UART3 Tx
+    (&LPC_UART3->/*RBTHDLR.*/ RBR), // UART3 Rx
+    (&LPC_TIM0->MR0),               // MAT0.0
+    (&LPC_TIM0->MR1),               // MAT0.1
+    (&LPC_TIM1->MR0),               // MAT1.0
+    (&LPC_TIM1->MR1),               // MAT1.1
+    (&LPC_TIM2->MR0),               // MAT2.0
+    (&LPC_TIM2->MR1),               // MAT2.1
+    (&LPC_TIM3->MR0),               // MAT3.0
+    (&LPC_TIM3->MR1)                // MAT3.1
 };
 #else
 const uint32_t GPDMA_LUTPerAddr[] = {
-    ((uint32_t)(uintptr_t)&LPC_SSP0->DR),        // SSP0 Tx
-    ((uint32_t)(uintptr_t)&LPC_SSP0->DR),        // SSP0 Rx
-    ((uint32_t)(uintptr_t)&LPC_SSP1->DR),        // SSP1 Tx
-    ((uint32_t)(uintptr_t)&LPC_SSP1->DR),        // SSP1 Rx
-    ((uint32_t)(uintptr_t)&LPC_ADC->ADGDR),      // ADC
-    ((uint32_t)(uintptr_t)&LPC_I2S->I2STXFIFO),  // I2S Tx
-    ((uint32_t)(uintptr_t)&LPC_I2S->I2SRXFIFO),  // I2S Rx
-    ((uint32_t)(uintptr_t)&LPC_DAC->DACR),       // DAC
-    ((uint32_t)(uintptr_t)&LPC_UART0->THR),      // UART0 Tx
-    ((uint32_t)(uintptr_t)&LPC_UART0->RBR),      // UART0 Rx
-    ((uint32_t)(uintptr_t)&LPC_UART1->THR),      // UART1 Tx
-    ((uint32_t)(uintptr_t)&LPC_UART1->RBR),      // UART1 Rx
-    ((uint32_t)(uintptr_t)&LPC_UART2->THR),      // UART2 Tx
-    ((uint32_t)(uintptr_t)&LPC_UART2->RBR),      // UART2 Rx
-    ((uint32_t)(uintptr_t)&LPC_UART3->THR),      // UART3 Tx
-    ((uint32_t)(uintptr_t)&LPC_UART3->RBR),      // UART3 Rx
-    ((uint32_t)(uintptr_t)&LPC_TIM0->MR0),       // MAT0.0
-    ((uint32_t)(uintptr_t)&LPC_TIM0->MR1),       // MAT0.1
-    ((uint32_t)(uintptr_t)&LPC_TIM1->MR0),       // MAT1.0
-    ((uint32_t)(uintptr_t)&LPC_TIM1->MR1),       // MAT1.1
-    ((uint32_t)(uintptr_t)&LPC_TIM2->MR0),       // MAT2.0
-    ((uint32_t)(uintptr_t)&LPC_TIM2->MR1),       // MAT2.1
-    ((uint32_t)(uintptr_t)&LPC_TIM3->MR0),       // MAT3.0
-    ((uint32_t)(uintptr_t)&LPC_TIM3->MR1)        // MAT3.1
+    ((uint32_t)(uintptr_t)&LPC_SSP0->DR),       // SSP0 Tx
+    ((uint32_t)(uintptr_t)&LPC_SSP0->DR),       // SSP0 Rx
+    ((uint32_t)(uintptr_t)&LPC_SSP1->DR),       // SSP1 Tx
+    ((uint32_t)(uintptr_t)&LPC_SSP1->DR),       // SSP1 Rx
+    ((uint32_t)(uintptr_t)&LPC_ADC->ADGDR),     // ADC
+    ((uint32_t)(uintptr_t)&LPC_I2S->I2STXFIFO), // I2S Tx
+    ((uint32_t)(uintptr_t)&LPC_I2S->I2SRXFIFO), // I2S Rx
+    ((uint32_t)(uintptr_t)&LPC_DAC->DACR),      // DAC
+    ((uint32_t)(uintptr_t)&LPC_UART0->THR),     // UART0 Tx
+    ((uint32_t)(uintptr_t)&LPC_UART0->RBR),     // UART0 Rx
+    ((uint32_t)(uintptr_t)&LPC_UART1->THR),     // UART1 Tx
+    ((uint32_t)(uintptr_t)&LPC_UART1->RBR),     // UART1 Rx
+    ((uint32_t)(uintptr_t)&LPC_UART2->THR),     // UART2 Tx
+    ((uint32_t)(uintptr_t)&LPC_UART2->RBR),     // UART2 Rx
+    ((uint32_t)(uintptr_t)&LPC_UART3->THR),     // UART3 Tx
+    ((uint32_t)(uintptr_t)&LPC_UART3->RBR),     // UART3 Rx
+    ((uint32_t)(uintptr_t)&LPC_TIM0->MR0),      // MAT0.0
+    ((uint32_t)(uintptr_t)&LPC_TIM0->MR1),      // MAT0.1
+    ((uint32_t)(uintptr_t)&LPC_TIM1->MR0),      // MAT1.0
+    ((uint32_t)(uintptr_t)&LPC_TIM1->MR1),      // MAT1.1
+    ((uint32_t)(uintptr_t)&LPC_TIM2->MR0),      // MAT2.0
+    ((uint32_t)(uintptr_t)&LPC_TIM2->MR1),      // MAT2.1
+    ((uint32_t)(uintptr_t)&LPC_TIM3->MR0),      // MAT3.0
+    ((uint32_t)(uintptr_t)&LPC_TIM3->MR1)       // MAT3.1
 };
 #endif
 /**
  * @brief Lookup Table of GPDMA Channel Number matched with GPDMA channel pointer
  */
-LPC_GPDMACH_TypeDef* pGPDMACh[8] = {
-    LPC_GPDMACH0,  // GPDMA Channel 0
-    LPC_GPDMACH1,  // GPDMA Channel 1
-    LPC_GPDMACH2,  // GPDMA Channel 2
-    LPC_GPDMACH3,  // GPDMA Channel 3
-    LPC_GPDMACH4,  // GPDMA Channel 4
-    LPC_GPDMACH5,  // GPDMA Channel 5
-    LPC_GPDMACH6,  // GPDMA Channel 6
-    LPC_GPDMACH7   // GPDMA Channel 7
+LPC_GPDMACH_TypeDef *pGPDMACh[8] = {
+    LPC_GPDMACH0, // GPDMA Channel 0
+    LPC_GPDMACH1, // GPDMA Channel 1
+    LPC_GPDMACH2, // GPDMA Channel 2
+    LPC_GPDMACH3, // GPDMA Channel 3
+    LPC_GPDMACH4, // GPDMA Channel 4
+    LPC_GPDMACH5, // GPDMA Channel 5
+    LPC_GPDMACH6, // GPDMA Channel 6
+    LPC_GPDMACH7  // GPDMA Channel 7
 };
 
 /**
  * @brief Optimized Peripheral Source and Destination burst size
  */
 const uint8_t GPDMA_LUTPerBurst[] = {
-    GPDMA_BSIZE_4,   // SSP0 Tx
-    GPDMA_BSIZE_4,   // SSP0 Rx
-    GPDMA_BSIZE_4,   // SSP1 Tx
-    GPDMA_BSIZE_4,   // SSP1 Rx
-    GPDMA_BSIZE_4,   // ADC
-    GPDMA_BSIZE_32,  // I2S channel 0
-    GPDMA_BSIZE_32,  // I2S channel 1
-    GPDMA_BSIZE_1,   // DAC
-    GPDMA_BSIZE_1,   // UART0 Tx
-    GPDMA_BSIZE_1,   // UART0 Rx
-    GPDMA_BSIZE_1,   // UART1 Tx
-    GPDMA_BSIZE_1,   // UART1 Rx
-    GPDMA_BSIZE_1,   // UART2 Tx
-    GPDMA_BSIZE_1,   // UART2 Rx
-    GPDMA_BSIZE_1,   // UART3 Tx
-    GPDMA_BSIZE_1,   // UART3 Rx
-    GPDMA_BSIZE_1,   // MAT0.0
-    GPDMA_BSIZE_1,   // MAT0.1
-    GPDMA_BSIZE_1,   // MAT1.0
-    GPDMA_BSIZE_1,   // MAT1.1
-    GPDMA_BSIZE_1,   // MAT2.0
-    GPDMA_BSIZE_1,   // MAT2.1
-    GPDMA_BSIZE_1,   // MAT3.0
-    GPDMA_BSIZE_1    // MAT3.1
+    GPDMA_BSIZE_4,  // SSP0 Tx
+    GPDMA_BSIZE_4,  // SSP0 Rx
+    GPDMA_BSIZE_4,  // SSP1 Tx
+    GPDMA_BSIZE_4,  // SSP1 Rx
+    GPDMA_BSIZE_4,  // ADC
+    GPDMA_BSIZE_32, // I2S channel 0
+    GPDMA_BSIZE_32, // I2S channel 1
+    GPDMA_BSIZE_1,  // DAC
+    GPDMA_BSIZE_1,  // UART0 Tx
+    GPDMA_BSIZE_1,  // UART0 Rx
+    GPDMA_BSIZE_1,  // UART1 Tx
+    GPDMA_BSIZE_1,  // UART1 Rx
+    GPDMA_BSIZE_1,  // UART2 Tx
+    GPDMA_BSIZE_1,  // UART2 Rx
+    GPDMA_BSIZE_1,  // UART3 Tx
+    GPDMA_BSIZE_1,  // UART3 Rx
+    GPDMA_BSIZE_1,  // MAT0.0
+    GPDMA_BSIZE_1,  // MAT0.1
+    GPDMA_BSIZE_1,  // MAT1.0
+    GPDMA_BSIZE_1,  // MAT1.1
+    GPDMA_BSIZE_1,  // MAT2.0
+    GPDMA_BSIZE_1,  // MAT2.1
+    GPDMA_BSIZE_1,  // MAT3.0
+    GPDMA_BSIZE_1   // MAT3.1
 };
 
 /**
  * @brief Optimized Peripheral Source and Destination transfer width
  */
 const uint8_t GPDMA_LUTPerWid[] = {
-    GPDMA_BYTE,  // SSP0 Tx
-    GPDMA_BYTE,  // SSP0 Rx
-    GPDMA_BYTE,  // SSP1 Tx
-    GPDMA_BYTE,  // SSP1 Rx
-    GPDMA_WORD,  // ADC
-    GPDMA_WORD,  // I2S channel 0
-    GPDMA_WORD,  // I2S channel 1
-    GPDMA_BYTE,  // DAC
-    GPDMA_BYTE,  // UART0 Tx
-    GPDMA_BYTE,  // UART0 Rx
-    GPDMA_BYTE,  // UART1 Tx
-    GPDMA_BYTE,  // UART1 Rx
-    GPDMA_BYTE,  // UART2 Tx
-    GPDMA_BYTE,  // UART2 Rx
-    GPDMA_BYTE,  // UART3 Tx
-    GPDMA_BYTE,  // UART3 Rx
-    GPDMA_WORD,  // MAT0.0
-    GPDMA_WORD,  // MAT0.1
-    GPDMA_WORD,  // MAT1.0
-    GPDMA_WORD,  // MAT1.1
-    GPDMA_WORD,  // MAT2.0
-    GPDMA_WORD,  // MAT2.1
-    GPDMA_WORD,  // MAT3.0
-    GPDMA_WORD   // MAT3.1
+    GPDMA_BYTE, // SSP0 Tx
+    GPDMA_BYTE, // SSP0 Rx
+    GPDMA_BYTE, // SSP1 Tx
+    GPDMA_BYTE, // SSP1 Rx
+    GPDMA_WORD, // ADC
+    GPDMA_WORD, // I2S channel 0
+    GPDMA_WORD, // I2S channel 1
+    GPDMA_BYTE, // DAC
+    GPDMA_BYTE, // UART0 Tx
+    GPDMA_BYTE, // UART0 Rx
+    GPDMA_BYTE, // UART1 Tx
+    GPDMA_BYTE, // UART1 Rx
+    GPDMA_BYTE, // UART2 Tx
+    GPDMA_BYTE, // UART2 Rx
+    GPDMA_BYTE, // UART3 Tx
+    GPDMA_BYTE, // UART3 Rx
+    GPDMA_WORD, // MAT0.0
+    GPDMA_WORD, // MAT0.1
+    GPDMA_WORD, // MAT1.0
+    GPDMA_WORD, // MAT1.1
+    GPDMA_WORD, // MAT2.0
+    GPDMA_WORD, // MAT2.1
+    GPDMA_WORD, // MAT3.0
+    GPDMA_WORD  // MAT3.1
 };
 
 /**
@@ -194,20 +194,20 @@ static Status GPDMA_ValidateChannel(GPDMA_CH channelNum);
  * @param[in] ch Pointer to the DMA channel registers.
  * @param[in] channelNum DMA channel number.
  */
-static void GPDMA_ResetChannel(LPC_GPDMACH_TypeDef* ch, GPDMA_CH channelNum);
+static void GPDMA_ResetChannel(LPC_GPDMACH_TypeDef *ch, GPDMA_CH channelNum);
 
 /**
  * @brief Configures DMA channel registers according to the configuration structure.
  * @param[in] ch Pointer to the DMA channel registers.
  * @param[in] cfg Pointer to the DMA channel configuration structure.
  */
-static void GPDMA_ConfigChannelRegisters(LPC_GPDMACH_TypeDef* ch, const GPDMA_Channel_CFG_T* cfg);
+static void GPDMA_ConfigChannelRegisters(LPC_GPDMACH_TypeDef *ch, const GPDMA_Channel_CFG_T *cfg);
 
 /**
  * @brief Configures the DMAREQSEL register for peripheral connections.
  * @param[in] cfg Pointer to the DMA channel configuration structure.
  */
-static void GPDMA_ConfigDMAReqSel(const GPDMA_Channel_CFG_T* cfg);
+static void GPDMA_ConfigDMAReqSel(const GPDMA_Channel_CFG_T *cfg);
 /* ------------------- End of Private Function Prototypes ------------------- */
 
 /* --------------------------- Private Functions ---------------------------- */
@@ -218,14 +218,14 @@ static Status GPDMA_ValidateChannel(GPDMA_CH channelNum) {
     return SUCCESS;
 }
 
-static void GPDMA_ResetChannel(LPC_GPDMACH_TypeDef* ch, GPDMA_CH channelNum) {
+static void GPDMA_ResetChannel(LPC_GPDMACH_TypeDef *ch, GPDMA_CH channelNum) {
     LPC_GPDMA->DMACIntTCClear = GPDMA_ChannelBit(channelNum);
-    LPC_GPDMA->DMACIntErrClr  = GPDMA_ChannelBit(channelNum);
-    ch->DMACCControl          = 0;
-    ch->DMACCConfig           = 0;
+    LPC_GPDMA->DMACIntErrClr = GPDMA_ChannelBit(channelNum);
+    ch->DMACCControl = 0;
+    ch->DMACCConfig = 0;
 }
 
-static void GPDMA_ConfigChannelRegisters(LPC_GPDMACH_TypeDef* ch, const GPDMA_Channel_CFG_T* cfg) {
+static void GPDMA_ConfigChannelRegisters(LPC_GPDMACH_TypeDef *ch, const GPDMA_Channel_CFG_T *cfg) {
     uint32_t ctrl = GPDMA_DMACCxControl_TransferSize(cfg->transferSize);
 
     uint32_t srcAddr = cfg->srcMemAddr;
@@ -236,7 +236,7 @@ static void GPDMA_ConfigChannelRegisters(LPC_GPDMACH_TypeDef* ch, const GPDMA_Ch
     if (cfg->type == GPDMA_M2P || cfg->type == GPDMA_P2P) {
         dstAddr = GPDMA_LUTPerAddr[cfg->dstConn];
     }
-    ch->DMACCSrcAddr  = srcAddr;
+    ch->DMACCSrcAddr = srcAddr;
     ch->DMACCDestAddr = dstAddr;
 
     const uint32_t sWidth =
@@ -261,7 +261,7 @@ static void GPDMA_ConfigChannelRegisters(LPC_GPDMACH_TypeDef* ch, const GPDMA_Ch
     ch->DMACCControl = ctrl | (cfg->intTC ? GPDMA_DMACCxControl_I : 0);
 }
 
-static void GPDMA_ConfigDMAReqSel(const GPDMA_Channel_CFG_T* cfg) {
+static void GPDMA_ConfigDMAReqSel(const GPDMA_Channel_CFG_T *cfg) {
     if (cfg->srcConn > 15) {
         LPC_SC->DMAREQSEL |= (1 << (cfg->srcConn - 16));
     } else {
@@ -285,25 +285,27 @@ void GPDMA_Init(void) {
     CLKPWR_ConfigPPWR(CLKPWR_PCONP_PCGPDMA, ENABLE);
 
     for (int i = 0; i < GPDMA_NUM_CHANNELS; i++) {
-        pGPDMACh[i]->DMACCConfig  = 0;
+        pGPDMACh[i]->DMACCConfig = 0;
         pGPDMACh[i]->DMACCControl = 0;
     }
 
     LPC_GPDMA->DMACIntTCClear = GPDMA_DMACIntStat_ALL;
-    LPC_GPDMA->DMACIntErrClr  = GPDMA_DMACIntStat_ALL;
+    LPC_GPDMA->DMACIntErrClr = GPDMA_DMACIntStat_ALL;
 
     LPC_GPDMA->DMACConfig = GPDMA_DMACConfig_E;
-    while (!(LPC_GPDMA->DMACConfig & GPDMA_DMACConfig_E)) {}
+    while (!(LPC_GPDMA->DMACConfig & GPDMA_DMACConfig_E)) {
+    }
 }
 
 void GPDMA_DeInit(void) {
     LPC_GPDMA->DMACConfig &= ~GPDMA_DMACConfig_E;
-    while (LPC_GPDMA->DMACConfig & GPDMA_DMACConfig_E) {}
+    while (LPC_GPDMA->DMACConfig & GPDMA_DMACConfig_E) {
+    }
 
     CLKPWR_ConfigPPWR(CLKPWR_PCONP_PCGPDMA, DISABLE);
 }
 
-Status GPDMA_SetupChannel(const GPDMA_Channel_CFG_T* dmaCfg) {
+Status GPDMA_SetupChannel(const GPDMA_Channel_CFG_T *dmaCfg) {
     CHECK_PARAM(PARAM_GPDMA_CHANNEL(dmaCfg->channelNum));
     CHECK_PARAM(dmaCfg->transferSize > 0 && dmaCfg->transferSize <= 4095);
     CHECK_PARAM(PARAM_GPDMA_TRANSFER_WIDTH(dmaCfg->dst.width));
@@ -317,7 +319,7 @@ Status GPDMA_SetupChannel(const GPDMA_Channel_CFG_T* dmaCfg) {
         return ERROR;
     }
 
-    LPC_GPDMACH_TypeDef* pDMAch = pGPDMACh[dmaCfg->channelNum];
+    LPC_GPDMACH_TypeDef *pDMAch = pGPDMACh[dmaCfg->channelNum];
 
     GPDMA_ResetChannel(pDMAch, dmaCfg->channelNum);
 
@@ -351,9 +353,10 @@ void GPDMA_ChannelStop(GPDMA_CH channel) {
 
 void GPDMA_ChannelGracefulStop(GPDMA_CH channel) {
     CHECK_PARAM(PARAM_GPDMA_CHANNEL(channel));
-    LPC_GPDMACH_TypeDef* pDMAch = pGPDMACh[channel];
+    LPC_GPDMACH_TypeDef *pDMAch = pGPDMACh[channel];
     pDMAch->DMACCConfig |= GPDMA_DMACCxConfig_H;
-    while (pDMAch->DMACCConfig & GPDMA_DMACCxConfig_A) {}
+    while (pDMAch->DMACCConfig & GPDMA_DMACCxConfig_A) {
+    }
 }
 
 void GPDMA_ChannelPause(GPDMA_CH channel) {
@@ -375,13 +378,26 @@ IntStatus GPDMA_IntGetStatus(GPDMA_STATUS_TYPE type, GPDMA_CH channel) {
     const uint32_t channel_mask = GPDMA_ChannelBit(channel);
 
     switch (type) {
-        case GPDMA_INT: status_reg = LPC_GPDMA->DMACIntStat; break;
-        case GPDMA_INTTC: status_reg = LPC_GPDMA->DMACIntTCStat; break;
-        case GPDMA_INTERR: status_reg = LPC_GPDMA->DMACIntErrStat; break;
-        case GPDMA_RAW_INTTC: status_reg = LPC_GPDMA->DMACRawIntTCStat; break;
-        case GPDMA_RAW_INTERR: status_reg = LPC_GPDMA->DMACRawIntErrStat; break;
-        case GPDMA_ENABLED_CH: status_reg = LPC_GPDMA->DMACEnbldChns; break;
-        default: return RESET;
+    case GPDMA_INT:
+        status_reg = LPC_GPDMA->DMACIntStat;
+        break;
+    case GPDMA_INTTC:
+        status_reg = LPC_GPDMA->DMACIntTCStat;
+        break;
+    case GPDMA_INTERR:
+        status_reg = LPC_GPDMA->DMACIntErrStat;
+        break;
+    case GPDMA_RAW_INTTC:
+        status_reg = LPC_GPDMA->DMACRawIntTCStat;
+        break;
+    case GPDMA_RAW_INTERR:
+        status_reg = LPC_GPDMA->DMACRawIntErrStat;
+        break;
+    case GPDMA_ENABLED_CH:
+        status_reg = LPC_GPDMA->DMACEnbldChns;
+        break;
+    default:
+        return RESET;
     }
 
     return (status_reg & channel_mask) ? SET : RESET;

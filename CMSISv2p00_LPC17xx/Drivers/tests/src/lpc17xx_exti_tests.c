@@ -22,7 +22,7 @@ void EXTI_Setup(void) {
     NVIC_DisableIRQ(EINT2_IRQn);
     NVIC_DisableIRQ(EINT3_IRQn);
 
-    LPC_SC->EXTMODE  = 0x0;
+    LPC_SC->EXTMODE = 0x0;
     LPC_SC->EXTPOLAR = 0x0;
     LPC_SC->EXTINT |= 0xF;
 }
@@ -50,7 +50,7 @@ void EXTI_RunTests(void) {
 uint8_t EXTI_InitTest(void) {
     TEST_INIT();
 
-    LPC_SC->EXTMODE  = 0xF;
+    LPC_SC->EXTMODE = 0xF;
     LPC_SC->EXTPOLAR = 0xF;
 
     EXTI_Init();
@@ -138,4 +138,4 @@ uint8_t EXTI_EnableIRQTest(void) {
     ASSERT_TEST();
 }
 
-#endif  // UNIT_TESTING_ENABLED
+#endif // UNIT_TESTING_ENABLED

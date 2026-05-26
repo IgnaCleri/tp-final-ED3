@@ -30,19 +30,19 @@ void PWM_Setup(void) {
     LPC_PWM1->TCR = 0;
     LPC_PWM1->IR |= 0x3F;
     LPC_PWM1->CTCR = 0;
-    LPC_PWM1->PR   = 0;
-    LPC_PWM1->MCR  = 0;
-    LPC_PWM1->CCR  = 0;
-    LPC_PWM1->MR0  = 0;
-    LPC_PWM1->MR1  = 0;
-    LPC_PWM1->MR2  = 0;
-    LPC_PWM1->MR3  = 0;
-    LPC_PWM1->MR4  = 0;
-    LPC_PWM1->MR5  = 0;
-    LPC_PWM1->MR6  = 0;
-    LPC_PWM1->LER  = 0x3F;
-    LPC_PWM1->TCR  = (1 << 1);
-    LPC_PWM1->TCR  = 0;
+    LPC_PWM1->PR = 0;
+    LPC_PWM1->MCR = 0;
+    LPC_PWM1->CCR = 0;
+    LPC_PWM1->MR0 = 0;
+    LPC_PWM1->MR1 = 0;
+    LPC_PWM1->MR2 = 0;
+    LPC_PWM1->MR3 = 0;
+    LPC_PWM1->MR4 = 0;
+    LPC_PWM1->MR5 = 0;
+    LPC_PWM1->MR6 = 0;
+    LPC_PWM1->LER = 0x3F;
+    LPC_PWM1->TCR = (1 << 1);
+    LPC_PWM1->TCR = 0;
 }
 
 void PWM_TearDown(void) {}
@@ -74,8 +74,8 @@ uint8_t PWM_InitTimerTest(void) {
     TEST_INIT();
 
     PWM_TIMERCFG_T cfg = {0};
-    cfg.prescaleOpt    = PWM_US;
-    cfg.prescaleValue  = 1000;
+    cfg.prescaleOpt = PWM_US;
+    cfg.prescaleValue = 1000;
 
     PWM_InitTimer(&cfg);
     EXPECT_EQUAL(LPC_PWM1->CTCR & PWM_CTCR_MODE_MASK, TIM_TIMER_MODE);
@@ -92,8 +92,8 @@ uint8_t PWM_InitCounterTest(void) {
     TEST_INIT();
 
     PWM_COUNTERCFG_T cfg = {0};
-    cfg.input            = PWM_CAPTURE_1;
-    cfg.edge             = PWM_CTR_FALLING;
+    cfg.input = PWM_CAPTURE_1;
+    cfg.edge = PWM_CTR_FALLING;
 
     PWM_InitCounter(&cfg);
     EXPECT_EQUAL(LPC_PWM1->CTCR & PWM_CTCR_MODE_MASK, PWM_CTR_FALLING);
@@ -110,8 +110,8 @@ uint8_t PWM_DeInitTest(void) {
     TEST_INIT();
 
     PWM_TIMERCFG_T cfg = {0};
-    cfg.prescaleOpt    = PWM_TICK;
-    cfg.prescaleValue  = 1;
+    cfg.prescaleOpt = PWM_TICK;
+    cfg.prescaleValue = 1;
 
     PWM_InitTimer(&cfg);
     // counter enable and PWM enable bits are set to check if they are cleared after
@@ -122,7 +122,7 @@ uint8_t PWM_DeInitTest(void) {
     // Power for PWM1 should be disabled after de-initialization, so bit 6 in PCONP should be
     // cleared
     EXPECT_EQUAL((LPC_SC->PCONP & 1UL << 6) >> 1, 0x00);
-    LPC_SC->PCONP |= 1UL << 6;  // Re-enable power for PWM1 for other tests
+    LPC_SC->PCONP |= 1UL << 6; // Re-enable power for PWM1 for other tests
 
     // TCR Counter enable and PWM enable bits should be cleared after de-initialization
     EXPECT_EQUAL(LPC_PWM1->TCR, 0x0);
@@ -226,10 +226,10 @@ uint8_t PWM_ConfigMatchTest(void) {
 
     PWM_MATCHCFG_T matchCfg = {0};
 
-    matchCfg.channel    = PWM_MATCH_5;
-    matchCfg.intEn      = ENABLE;
-    matchCfg.resetEn    = DISABLE;
-    matchCfg.stopEn     = ENABLE;
+    matchCfg.channel = PWM_MATCH_5;
+    matchCfg.intEn = ENABLE;
+    matchCfg.resetEn = DISABLE;
+    matchCfg.stopEn = ENABLE;
     matchCfg.matchValue = 0xFF;
     PWM_ConfigMatch(&matchCfg);
 
@@ -274,8 +274,8 @@ uint8_t PWM_ClearIntPendingTest(void) {
     TEST_INIT();
 
     PWM_TIMERCFG_T cfg = {0};
-    cfg.prescaleOpt    = PWM_TICK;
-    cfg.prescaleValue  = 1;
+    cfg.prescaleOpt = PWM_TICK;
+    cfg.prescaleValue = 1;
 
     PWM_InitTimer(&cfg);
     // Set match value and enable interrupt on match for channel 0
@@ -283,7 +283,8 @@ uint8_t PWM_ClearIntPendingTest(void) {
     LPC_PWM1->MCR |= PWM_MCR_INT(0) | PWM_MCR_STOP(0);
     LPC_PWM1->TCR |= PWM_TCR_COUNTER_ENABLE;
 
-    for (volatile unsigned int _d = 0; _d < 100; ++_d) {}
+    for (volatile unsigned int _d = 0; _d < 100; ++_d) {
+    }
 
     // After match, interrupt flag for channel 0 should be set in IR
     EXPECT_EQUAL(LPC_PWM1->IR & 0x1, 0x1);
@@ -300,8 +301,8 @@ uint8_t PWM_GetIntStatusTest(void) {
     TEST_INIT();
 
     PWM_TIMERCFG_T cfg = {0};
-    cfg.prescaleOpt    = PWM_TICK;
-    cfg.prescaleValue  = 1;
+    cfg.prescaleOpt = PWM_TICK;
+    cfg.prescaleValue = 1;
 
     PWM_InitTimer(&cfg);
     // Set match value and enable interrupt on match for channel 0
@@ -309,7 +310,8 @@ uint8_t PWM_GetIntStatusTest(void) {
     LPC_PWM1->MCR |= PWM_MCR_INT(0) | PWM_MCR_STOP(0);
     LPC_PWM1->TCR |= PWM_TCR_COUNTER_ENABLE;
 
-    for (volatile unsigned int _d = 0; _d < 100; ++_d) {}
+    for (volatile unsigned int _d = 0; _d < 100; ++_d) {
+    }
 
     EXPECT_EQUAL(PWM_GetIntStatus(PWM_MR0_INT), SET);
     PWM_ClearIntPending(PWM_MR0_INT);
@@ -354,4 +356,4 @@ uint8_t PWM_GetCaptureValueTest(void) {
     ASSERT_TEST();
 }
 
-#endif  // UNIT_TESTING_ENABLED
+#endif // UNIT_TESTING_ENABLED

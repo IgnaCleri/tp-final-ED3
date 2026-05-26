@@ -40,9 +40,9 @@ uint8_t FIO_ByteSetMaskTest(void);
  * @brief Guarantees port0 as output low.
  */
 void GPIO_Setup(void) {
-    LPC_GPIO0->FIODIR      = 0xFFFFFFFF;
-    LPC_GPIO0->FIOCLR      = 0xFFFFFFFF;
-    LPC_GPIO0->FIOMASK     = 0x00000000;
+    LPC_GPIO0->FIODIR = 0xFFFFFFFF;
+    LPC_GPIO0->FIOCLR = 0xFFFFFFFF;
+    LPC_GPIO0->FIOMASK = 0x00000000;
     LPC_GPIOINT->IO0IntClr = 0xFFFFFFFF;
 }
 
@@ -622,4 +622,4 @@ uint8_t FIO_ByteSetMaskTest(void) {
     ASSERT_TEST();
 }
 
-#endif  // UNIT_TESTING_ENABLED
+#endif // UNIT_TESTING_ENABLED

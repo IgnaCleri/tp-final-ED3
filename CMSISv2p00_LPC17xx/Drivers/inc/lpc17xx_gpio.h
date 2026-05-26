@@ -47,27 +47,27 @@ extern "C" {
 
 /* -------------------- MACROS BYTE POINTER DEFINITIONS --------------------- */
 /** Fast GPIO port 0 byte accessible definition. */
-#define GPIO0_Byte ((GPIO_Byte_TypeDef*)(LPC_GPIO0_BASE))
+#define GPIO0_Byte ((GPIO_Byte_TypeDef *)(LPC_GPIO0_BASE))
 /** Fast GPIO port 1 byte accessible definition. */
-#define GPIO1_Byte ((GPIO_Byte_TypeDef*)(LPC_GPIO1_BASE))
+#define GPIO1_Byte ((GPIO_Byte_TypeDef *)(LPC_GPIO1_BASE))
 /** Fast GPIO port 2 byte accessible definition. */
-#define GPIO2_Byte ((GPIO_Byte_TypeDef*)(LPC_GPIO2_BASE))
+#define GPIO2_Byte ((GPIO_Byte_TypeDef *)(LPC_GPIO2_BASE))
 /** Fast GPIO port 3 byte accessible definition. */
-#define GPIO3_Byte ((GPIO_Byte_TypeDef*)(LPC_GPIO3_BASE))
+#define GPIO3_Byte ((GPIO_Byte_TypeDef *)(LPC_GPIO3_BASE))
 /** Fast GPIO port 4 byte accessible definition. */
-#define GPIO4_Byte ((GPIO_Byte_TypeDef*)(LPC_GPIO4_BASE))
+#define GPIO4_Byte ((GPIO_Byte_TypeDef *)(LPC_GPIO4_BASE))
 
 /* ------------------ MACROS HALF-WORD POINTER DEFINITIONS ------------------ */
 /** Fast GPIO port 0 half-word accessible definition. */
-#define GPIO0_HalfWord ((GPIO_HalfWord_TypeDef*)(LPC_GPIO0_BASE))
+#define GPIO0_HalfWord ((GPIO_HalfWord_TypeDef *)(LPC_GPIO0_BASE))
 /** Fast GPIO port 1 half-word accessible definition. */
-#define GPIO1_HalfWord ((GPIO_HalfWord_TypeDef*)(LPC_GPIO1_BASE))
+#define GPIO1_HalfWord ((GPIO_HalfWord_TypeDef *)(LPC_GPIO1_BASE))
 /** Fast GPIO port 2 half-word accessible definition. */
-#define GPIO2_HalfWord ((GPIO_HalfWord_TypeDef*)(LPC_GPIO2_BASE))
+#define GPIO2_HalfWord ((GPIO_HalfWord_TypeDef *)(LPC_GPIO2_BASE))
 /** Fast GPIO port 3 half-word accessible definition. */
-#define GPIO3_HalfWord ((GPIO_HalfWord_TypeDef*)(LPC_GPIO3_BASE))
+#define GPIO3_HalfWord ((GPIO_HalfWord_TypeDef *)(LPC_GPIO3_BASE))
 /** Fast GPIO port 4 half-word accessible definition. */
-#define GPIO4_HalfWord ((GPIO_HalfWord_TypeDef*)(LPC_GPIO4_BASE))
+#define GPIO4_HalfWord ((GPIO_HalfWord_TypeDef *)(LPC_GPIO4_BASE))
 
 /**
  * @}
@@ -84,42 +84,28 @@ extern "C" {
 /**
  * @brief Half-word access for GPIO ports.
  */
-typedef enum {
-    GPIO_HALFWORD_LOW = 0,
-    GPIO_HALFWORD_HIGH
-} GPIO_HALFWORD;
+typedef enum { GPIO_HALFWORD_LOW = 0, GPIO_HALFWORD_HIGH } GPIO_HALFWORD;
 /** Check GPIO half-word option parameter. */
 #define PARAM_GPIO_HALFWORD(HW) ((HW) == GPIO_HALFWORD_LOW || (HW) == GPIO_HALFWORD_HIGH)
 
 /**
  * @brief Byte access for GPIO ports.
  */
-typedef enum {
-    GPIO_BYTE_0 = 0,
-    GPIO_BYTE_1,
-    GPIO_BYTE_2,
-    GPIO_BYTE_3
-} GPIO_BYTE;
+typedef enum { GPIO_BYTE_0 = 0, GPIO_BYTE_1, GPIO_BYTE_2, GPIO_BYTE_3 } GPIO_BYTE;
 /** Check GPIO byte option parameter. */
 #define PARAM_GPIO_BYTE(BYTE) ((BYTE) >= GPIO_BYTE_0 && (BYTE) <= GPIO_BYTE_3)
 
 /**
  * @brief Direction selection for GPIO pins.
  */
-typedef enum {
-    GPIO_INPUT = 0,
-    GPIO_OUTPUT
-} GPIO_DIR;
+typedef enum { GPIO_INPUT = 0, GPIO_OUTPUT } GPIO_DIR;
 /** Check GPIO direction option parameter. */
 #define PARAM_GPIO_DIR(DIR) ((DIR) == GPIO_INPUT || (DIR) == GPIO_OUTPUT)
 
 /**
  * @brief Edge selection for GPIO interrupts.
  */
-typedef enum {
-    GPIO_INT_RISING = 0,
-    GPIO_INT_FALLING
-} GPIO_INT_EDGE;
+typedef enum { GPIO_INT_RISING = 0, GPIO_INT_FALLING } GPIO_INT_EDGE;
 /** Check GPIO interrupt edge option parameter. */
 #define PARAM_GPIO_INT_EDGE(EDGE) ((EDGE) == GPIO_INT_RISING || (EDGE) == GPIO_INT_FALLING)
 
@@ -595,7 +581,7 @@ void FIO_ByteSetMask(LPC_PORT port, GPIO_BYTE byte, uint8_t pinMask, FunctionalS
 }
 #endif
 
-#endif  // LPC17XX_GPIO_H_
+#endif // LPC17XX_GPIO_H_
 
 /**
  * @}

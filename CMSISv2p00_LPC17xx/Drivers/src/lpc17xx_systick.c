@@ -82,7 +82,7 @@ void SYSTICK_ExternalInit(uint32_t extFreq, uint32_t time) {
     const uint32_t ticksPerMs = extFreq / 1000;
 
     if (ticksPerMs == 0) {
-        return;  // Avoid division by zero if extFreq is less than 1000 Hz
+        return; // Avoid division by zero if extFreq is less than 1000 Hz
     }
 
     if (time > (ST_MAX_LOAD / ticksPerMs)) {

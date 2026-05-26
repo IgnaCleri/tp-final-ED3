@@ -201,4 +201,4 @@ static uint8_t ADC_ChannelGetDataTest(void) {
     ASSERT_TEST();
 }
 
-#endif  // UNIT_TESTING_ENABLED
+#endif // UNIT_TESTING_ENABLED

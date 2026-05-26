@@ -11,5 +11,5 @@
 
 void EXTI_RunTests(void);
 
-#endif  // UNIT_TESTING_ENABLED
-#endif  // LPC17XX_EXTI_TESTS_H
+#endif // UNIT_TESTING_ENABLED
+#endif // LPC17XX_EXTI_TESTS_H

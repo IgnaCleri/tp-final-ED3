@@ -9,5 +9,5 @@
 
 void UART_RunTests(void);
 
-#endif  // UNIT_TESTING_ENABLED
-#endif  // LPC17XX_UART_TESTS_H
+#endif // UNIT_TESTING_ENABLED
+#endif // LPC17XX_UART_TESTS_H

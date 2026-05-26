@@ -23,12 +23,12 @@ static uint8_t UART_SendReceiveLoopbackTest(void);
 
 static const UART_CFG_T uart_default_cfg = {
     .baudRate = 115200,
-    .dataBits  = UART_DBITS_8,
-    .parity    = UART_PARITY_NONE,
-    .stopBits  = UART_STOPBIT_1,
+    .dataBits = UART_DBITS_8,
+    .parity = UART_PARITY_NONE,
+    .stopBits = UART_STOPBIT_1,
 };
 
-static LPC_UART_TypeDef* const uart_all[4] = {UART0, UART1, UART2, UART3};
+static LPC_UART_TypeDef *const uart_all[4] = {UART0, UART1, UART2, UART3};
 
 static const uint32_t uart_pconp_bit[4] = {
     (1u << 3),
@@ -46,9 +46,7 @@ static void UART_SetupLoopbackPins(void) {
     LPC_PINCON->PINMODE0 &= ~((0x2 << 4) | (0x2 << 6));
 }
 
-static void UART_ClearLoopbackPins(void) {
-    LPC_PINCON->PINSEL0 &= ~((0x3 << 4) | (0x3 << 6));
-}
+static void UART_ClearLoopbackPins(void) { LPC_PINCON->PINSEL0 &= ~((0x3 << 4) | (0x3 << 6)); }
 
 void UART_Setup(void) {
     for (int i = 0; i < 4; i++) {
@@ -117,14 +115,13 @@ static uint8_t UART_DeInitTest(void) {
 static uint8_t UART_InitAllDataBitsTest(void) {
     TEST_INIT();
 
-    const UART_DATABITS bits[4] = {UART_DBITS_5, UART_DBITS_6, UART_DBITS_7,
-                                       UART_DBITS_8};
+    const UART_DATABITS bits[4] = {UART_DBITS_5, UART_DBITS_6, UART_DBITS_7, UART_DBITS_8};
 
     UART_CFG_T cfg = uart_default_cfg;
 
     for (int i = 0; i < 4; i++) {
         const uint32_t expected_lcr[4] = {0x00, 0x01, 0x02, 0x03};
-        cfg.dataBits                   = bits[i];
+        cfg.dataBits = bits[i];
         UART_Init(UART2, &cfg);
         // For every data bit setting, LCR[1:0] should match the expected value
         EXPECT_EQUAL(UART2->LCR & 0x03, expected_lcr[i]);
@@ -181,8 +178,8 @@ static uint8_t UART_FIFOConfigTest(void) {
     UART_FIFO_CFG_T fifo_cfg = {
         .resetRxBuf = ENABLE,
         .resetTxBuf = ENABLE,
-        .dmaMode    = DISABLE,
-        .level      = UART_FIFO_TRGLEV0,
+        .dmaMode = DISABLE,
+        .level = UART_FIFO_TRGLEV0,
     };
 
     UART_FIFOConfig(UART2, &fifo_cfg);
@@ -319,4 +316,4 @@ static uint8_t UART_SendReceiveLoopbackTest(void) {
     ASSERT_TEST();
 }
 
-#endif  // UNIT_TESTING_ENABLED
+#endif // UNIT_TESTING_ENABLED

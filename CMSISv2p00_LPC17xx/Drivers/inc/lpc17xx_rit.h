@@ -1,22 +1,50 @@
-/***********************************************************************//**
- * @file        lpc17xx_rit.h
- * @brief        Contains all macro definitions and function prototypes
- *                 support for RIT firmware library on LPC17xx
- * @version        2.0
- * @date        21. May. 2010
- * @author        NXP MCU SW Application Team
- **************************************************************************
- * Software that is described herein is for illustrative purposes only
- * which provides customers with programming information regarding the
- * products. This software is supplied "AS IS" without any warranties.
- * NXP Semiconductors assumes no responsibility or liability for the
- * use of the software, conveys no license or title under any patent,
- * copyright, or mask work right to the product. NXP Semiconductors
- * reserves the right to make changes in the software without
- * notification. NXP Semiconductors also make no representation or
- * warranty that such application will be suitable for the specified
- * use without further testing or modification.
- **************************************************************************/
+/***********************************************************************/ /**
+                                                                           * @file  lpc17xx_rit.h
+                                                                           * @brief        Contains
+                                                                           * all macro definitions
+                                                                           * and function prototypes
+                                                                           *                 support
+                                                                           * for RIT firmware
+                                                                           * library on LPC17xx
+                                                                           * @version        2.0
+                                                                           * @date        21. May.
+                                                                           * 2010
+                                                                           * @author        NXP MCU
+                                                                           * SW Application Team
+                                                                           **************************************************************************
+                                                                           * Software that is
+                                                                           * described herein is for
+                                                                           * illustrative purposes
+                                                                           * only which provides
+                                                                           * customers with
+                                                                           * programming information
+                                                                           * regarding the products.
+                                                                           * This software is
+                                                                           * supplied "AS IS"
+                                                                           * without any warranties.
+                                                                           * NXP Semiconductors
+                                                                           * assumes no
+                                                                           * responsibility or
+                                                                           * liability for the use
+                                                                           * of the software,
+                                                                           * conveys no license or
+                                                                           * title under any patent,
+                                                                           * copyright, or mask work
+                                                                           * right to the product.
+                                                                           * NXP Semiconductors
+                                                                           * reserves the right to
+                                                                           * make changes in the
+                                                                           * software without
+                                                                           * notification. NXP
+                                                                           * Semiconductors also
+                                                                           * make no representation
+                                                                           * or warranty that such
+                                                                           * application will be
+                                                                           * suitable for the
+                                                                           * specified use without
+                                                                           * further testing or
+                                                                           * modification.
+                                                                           **************************************************************************/
 
 /* Peripheral group ----------------------------------------------------------- */
 /** @defgroup RIT RIT
@@ -31,12 +59,9 @@
 #include "LPC17xx.h"
 #include "lpc_types.h"
 
-
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
-
 
 /* Private Macros ------------------------------------------------------------- */
 /** @defgroup RIT_Private_Macros RIT Private Macros
@@ -44,25 +69,24 @@ extern "C"
  */
 
 /* --------------------- BIT DEFINITIONS -------------------------------------- */
-/*********************************************************************//**
- * Macro defines for RIT control register
- **********************************************************************/
+/*********************************************************************/ /**
+                                                                         * Macro defines for RIT
+                                                                         * control register
+                                                                         **********************************************************************/
 /**    Set interrupt flag when the counter value equals the masked compare value */
-#define RIT_CTRL_INTEN    ((uint32_t) (1))
+#define RIT_CTRL_INTEN ((uint32_t)(1))
 /** Set timer enable clear to 0 when the counter value equals the masked compare value  */
-#define RIT_CTRL_ENCLR     ((uint32_t) _BIT(1))
+#define RIT_CTRL_ENCLR ((uint32_t)_BIT(1))
 /** Set timer enable on debug */
-#define RIT_CTRL_ENBR    ((uint32_t) _BIT(2))
+#define RIT_CTRL_ENBR ((uint32_t)_BIT(2))
 /** Set timer enable */
-#define RIT_CTRL_TEN    ((uint32_t) _BIT(3))
+#define RIT_CTRL_TEN ((uint32_t)_BIT(3))
 
 /** Macro to determine if it is valid RIT peripheral */
-#define PARAM_RITx(n)    (((uint32_t *)n)==((uint32_t *)LPC_RIT))
+#define PARAM_RITx(n) (((uint32_t *)n) == ((uint32_t *)LPC_RIT))
 /**
  * @}
  */
-
-
 
 /* Public Functions ----------------------------------------------------------- */
 /** @defgroup RIT_Public_Functions RIT Public Functions

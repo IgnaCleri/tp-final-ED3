@@ -44,7 +44,7 @@ extern "C" {
 
 /* ---------------------------- BIT DEFINITIONS ----------------------------- */
 /** Bit mask for an especific channel. */
-#define GPDMA_ChannelBit(n)       ((1UL << n))
+#define GPDMA_ChannelBit(n) ((1UL << n))
 /** Bit mask for an especific request source. */
 #define GPDMA_DMACSoftBReq_Src(n) ((1UL << n))
 
@@ -56,36 +56,36 @@ extern "C" {
 /** Transfer size bits mask. */
 #define GPDMA_DMACCxControl_TransferSize(n) (((n & 0xFFF) << 0))
 /** Source burst size bits mask. */
-#define GPDMA_DMACCxControl_SBSize(n)       (((n & 0x07) << 12))
+#define GPDMA_DMACCxControl_SBSize(n) (((n & 0x07) << 12))
 /** Destination burst size bits mask. */
-#define GPDMA_DMACCxControl_DBSize(n)       (((n & 0x07) << 15))
+#define GPDMA_DMACCxControl_DBSize(n) (((n & 0x07) << 15))
 /** Source transfer width bits mask. */
-#define GPDMA_DMACCxControl_SWidth(n)       (((n & 0x07) << 18))
+#define GPDMA_DMACCxControl_SWidth(n) (((n & 0x07) << 18))
 /** Destination transfer width bits mask. */
-#define GPDMA_DMACCxControl_DWidth(n)       (((n & 0x07) << 21))
+#define GPDMA_DMACCxControl_DWidth(n) (((n & 0x07) << 21))
 /** Source increment control bit. */
-#define GPDMA_DMACCxControl_SI              ((1UL << 26))
+#define GPDMA_DMACCxControl_SI ((1UL << 26))
 /** Destination increment control bit. */
-#define GPDMA_DMACCxControl_DI              ((1UL << 27))
+#define GPDMA_DMACCxControl_DI ((1UL << 27))
 /** Terminal count interrupt enable bit. */
-#define GPDMA_DMACCxControl_I               ((1UL << 31))
+#define GPDMA_DMACCxControl_I ((1UL << 31))
 
 /** Channel enable bit. */
-#define GPDMA_DMACCxConfig_E                 ((1UL << 0))
+#define GPDMA_DMACCxConfig_E ((1UL << 0))
 /** Source peripheral bits mask. */
-#define GPDMA_DMACCxConfig_SrcPeripheral(n)  (((n) << 1))
+#define GPDMA_DMACCxConfig_SrcPeripheral(n) (((n) << 1))
 /** Destination peripheral bits mask. */
 #define GPDMA_DMACCxConfig_DestPeripheral(n) (((n) << 6))
 /** Transfer type bits mask. */
-#define GPDMA_DMACCxConfig_TransferType(n)   (((n) << 11))
+#define GPDMA_DMACCxConfig_TransferType(n) (((n) << 11))
 /** Interrupt error mask. */
-#define GPDMA_DMACCxConfig_IE                ((1UL << 14))
+#define GPDMA_DMACCxConfig_IE ((1UL << 14))
 /** Interrupt terminal count mask. */
-#define GPDMA_DMACCxConfig_ITC               ((1UL << 15))
+#define GPDMA_DMACCxConfig_ITC ((1UL << 15))
 /** Active status bit. */
-#define GPDMA_DMACCxConfig_A                 ((1UL << 17))
+#define GPDMA_DMACCxConfig_A ((1UL << 17))
 /** Halt status bit. */
-#define GPDMA_DMACCxConfig_H                 ((1UL << 18))
+#define GPDMA_DMACCxConfig_H ((1UL << 18))
 
 /* ---------------------------- MASK DEFINITIONS ---------------------------- */
 #define GPDMA_DMACIntStat_ALL ((0xFF))
@@ -150,12 +150,7 @@ typedef enum {
 /**
  * @brief GPDMA Transfer type enumeration.
  */
-typedef enum {
-    GPDMA_M2M = 0,
-    GPDMA_M2P,
-    GPDMA_P2M,
-    GPDMA_P2P
-} GPDMA_TRANSFER_TYPE;
+typedef enum { GPDMA_M2M = 0, GPDMA_M2P, GPDMA_P2M, GPDMA_P2P } GPDMA_TRANSFER_TYPE;
 /** Check GPDMA transfer type option parameter. */
 #define PARAM_GPDMA_TRANSFER_TYPE(TYPE) ((TYPE >= GPDMA_M2M) && (TYPE <= GPDMA_P2P))
 
@@ -179,22 +174,14 @@ typedef enum {
 /**
  * @brief Transfer width in Source and Destination enumeration.
  */
-typedef enum {
-    GPDMA_BYTE = 0,
-    GPDMA_HALFWORD,
-    GPDMA_WORD,
-    GPDMA_WIDTH_AUTO
-} GPDMA_TRANSFER_WIDTH;
+typedef enum { GPDMA_BYTE = 0, GPDMA_HALFWORD, GPDMA_WORD, GPDMA_WIDTH_AUTO } GPDMA_TRANSFER_WIDTH;
 /** Check GPDMA transfer width option parameter. */
 #define PARAM_GPDMA_TRANSFER_WIDTH(WIDTH) ((WIDTH >= GPDMA_BYTE) && (WIDTH <= GPDMA_WIDTH_AUTO))
 
 /**
  * @brief GPDMA Request select enumeration.
  */
-typedef enum {
-    GPDMA_UART = 0,
-    GPDMA_TIMER
-} GPDMA_REQUEST_SELECT;
+typedef enum { GPDMA_UART = 0, GPDMA_TIMER } GPDMA_REQUEST_SELECT;
 /** Check GPDMA request select option parameter. */
 #define PARAM_GPDMA_REQUEST_SELECT(SEL) ((SEL == GPDMA_UART) || (SEL == GPDMA_TIMER))
 
@@ -302,7 +289,7 @@ void GPDMA_DeInit(void);
  * @return SUCCESS if the configuration was applied, ERROR if the channel is busy or parameters are
  * invalid.
  */
-Status GPDMA_SetupChannel(const GPDMA_Channel_CFG_T* dmaCfg);
+Status GPDMA_SetupChannel(const GPDMA_Channel_CFG_T *dmaCfg);
 
 /**
  * @brief Starts the DMA transfer on the specified channel.

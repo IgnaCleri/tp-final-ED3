@@ -150,8 +150,7 @@ WEAK extern void __valid_user_code_checksum();
 //
 //*****************************************************************************
 extern void (*const g_pfnVectors[])(void);
-__attribute__((used,
-               section(".isr_vector"))) void (*const g_pfnVectors[])(void) = {
+__attribute__((used, section(".isr_vector"))) void (*const g_pfnVectors[])(void) = {
     // Core Level - CM3
     &_vStackTop,                // The initial stack pointer
     ResetISR,                   // The reset handler
@@ -218,21 +217,20 @@ __attribute__((used,
 // ResetISR() function in order to cope with MCUs with multiple banks of
 // memory.
 //*****************************************************************************
-__attribute__((section(".after_vectors"))) void
-data_init(unsigned int romstart, unsigned int start, unsigned int len) {
-  unsigned int *pulDest = (unsigned int *)start;
-  unsigned int *pulSrc = (unsigned int *)romstart;
-  unsigned int loop;
-  for (loop = 0; loop < len; loop = loop + 4)
-    *pulDest++ = *pulSrc++;
+__attribute__((section(".after_vectors"))) void data_init(unsigned int romstart, unsigned int start,
+                                                          unsigned int len) {
+    unsigned int *pulDest = (unsigned int *)start;
+    unsigned int *pulSrc = (unsigned int *)romstart;
+    unsigned int loop;
+    for (loop = 0; loop < len; loop = loop + 4)
+        *pulDest++ = *pulSrc++;
 }
 
-__attribute__((section(".after_vectors"))) void bss_init(unsigned int start,
-                                                         unsigned int len) {
-  unsigned int *pulDest = (unsigned int *)start;
-  unsigned int loop;
-  for (loop = 0; loop < len; loop = loop + 4)
-    *pulDest++ = 0;
+__attribute__((section(".after_vectors"))) void bss_init(unsigned int start, unsigned int len) {
+    unsigned int *pulDest = (unsigned int *)start;
+    unsigned int loop;
+    for (loop = 0; loop < len; loop = loop + 4)
+        *pulDest++ = 0;
 }
 
 //*****************************************************************************
@@ -254,54 +252,54 @@ extern unsigned int __bss_section_table_end;
 //*****************************************************************************
 __attribute__((section(".after_vectors"))) void ResetISR(void) {
 
-  //
-  // Copy the data sections from flash to SRAM.
-  //
-  unsigned int LoadAddr, ExeAddr, SectionLen;
-  unsigned int *SectionTableAddr;
+    //
+    // Copy the data sections from flash to SRAM.
+    //
+    unsigned int LoadAddr, ExeAddr, SectionLen;
+    unsigned int *SectionTableAddr;
 
-  // Load base address of Global Section Table
-  SectionTableAddr = &__data_section_table;
+    // Load base address of Global Section Table
+    SectionTableAddr = &__data_section_table;
 
-  // Copy the data sections from flash to SRAM.
-  while (SectionTableAddr < &__data_section_table_end) {
-    LoadAddr = *SectionTableAddr++;
-    ExeAddr = *SectionTableAddr++;
-    SectionLen = *SectionTableAddr++;
-    data_init(LoadAddr, ExeAddr, SectionLen);
-  }
-  // At this point, SectionTableAddr = &__bss_section_table;
-  // Zero fill the bss segment
-  while (SectionTableAddr < &__bss_section_table_end) {
-    ExeAddr = *SectionTableAddr++;
-    SectionLen = *SectionTableAddr++;
-    bss_init(ExeAddr, SectionLen);
-  }
+    // Copy the data sections from flash to SRAM.
+    while (SectionTableAddr < &__data_section_table_end) {
+        LoadAddr = *SectionTableAddr++;
+        ExeAddr = *SectionTableAddr++;
+        SectionLen = *SectionTableAddr++;
+        data_init(LoadAddr, ExeAddr, SectionLen);
+    }
+    // At this point, SectionTableAddr = &__bss_section_table;
+    // Zero fill the bss segment
+    while (SectionTableAddr < &__bss_section_table_end) {
+        ExeAddr = *SectionTableAddr++;
+        SectionLen = *SectionTableAddr++;
+        bss_init(ExeAddr, SectionLen);
+    }
 
 #if defined(__USE_CMSIS) || defined(__USE_LPCOPEN)
-  SystemInit();
+    SystemInit();
 #endif
 
 #if defined(__cplusplus)
-  //
-  // Call C++ library initialisation
-  //
-  __libc_init_array();
+    //
+    // Call C++ library initialisation
+    //
+    __libc_init_array();
 #endif
 
 #if defined(__REDLIB__)
-  // Call the Redlib library, which in turn calls main()
-  __main();
+    // Call the Redlib library, which in turn calls main()
+    __main();
 #else
-  main();
+    main();
 #endif
 
-  //
-  // main() shouldn't return, but if it does, we'll just enter an infinite loop
-  //
-  while (1) {
-    ;
-  }
+    //
+    // main() shouldn't return, but if it does, we'll just enter an infinite loop
+    //
+    while (1) {
+        ;
+    }
 }
 
 //*****************************************************************************
@@ -309,48 +307,48 @@ __attribute__((section(".after_vectors"))) void ResetISR(void) {
 // handler routines in your application code.
 //*****************************************************************************
 __attribute__((section(".after_vectors"))) void NMI_Handler(void) {
-  while (1) {
-  }
+    while (1) {
+    }
 }
 
 __attribute__((section(".after_vectors"))) void HardFault_Handler(void) {
-  while (1) {
-  }
+    while (1) {
+    }
 }
 
 __attribute__((section(".after_vectors"))) void MemManage_Handler(void) {
-  while (1) {
-  }
+    while (1) {
+    }
 }
 
 __attribute__((section(".after_vectors"))) void BusFault_Handler(void) {
-  while (1) {
-  }
+    while (1) {
+    }
 }
 
 __attribute__((section(".after_vectors"))) void UsageFault_Handler(void) {
-  while (1) {
-  }
+    while (1) {
+    }
 }
 
 __attribute__((section(".after_vectors"))) void SVC_Handler(void) {
-  while (1) {
-  }
+    while (1) {
+    }
 }
 
 __attribute__((section(".after_vectors"))) void DebugMon_Handler(void) {
-  while (1) {
-  }
+    while (1) {
+    }
 }
 
 __attribute__((section(".after_vectors"))) void PendSV_Handler(void) {
-  while (1) {
-  }
+    while (1) {
+    }
 }
 
 __attribute__((section(".after_vectors"))) void SysTick_Handler(void) {
-  while (1) {
-  }
+    while (1) {
+    }
 }
 
 //*****************************************************************************
@@ -360,6 +358,6 @@ __attribute__((section(".after_vectors"))) void SysTick_Handler(void) {
 //
 //*****************************************************************************
 __attribute__((section(".after_vectors"))) void IntDefaultHandler(void) {
-  while (1) {
-  }
+    while (1) {
+    }
 }

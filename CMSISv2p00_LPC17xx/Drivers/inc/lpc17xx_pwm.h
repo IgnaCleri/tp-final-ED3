@@ -43,43 +43,43 @@ extern "C" {
 /* ------------------------ MACROS MASKS DEFINITIONS ------------------------ */
 
 /** CTCR register mode mask. */
-#define PWM_CTCR_MODE_MASK  ((0x3))
+#define PWM_CTCR_MODE_MASK ((0x3))
 /** CTCR register count input select mask. */
 #define PWM_CTCR_INPUT_MASK ((0xC))
 
 /* ------------------------- MACROS BIT DEFINITIONS ------------------------- */
 /** CTCR register mode mask. */
-#define PWM_CTCR_MODE_MASK          ((0x3))
+#define PWM_CTCR_MODE_MASK ((0x3))
 /** PWM Capture input select */
-#define PWM_CTCR_SELECT_INPUT(n)    ((uint32_t)((n) << 2))
+#define PWM_CTCR_SELECT_INPUT(n) ((uint32_t)((n) << 2))
 /** IR register mask */
-#define PWM_IR_BITMASK              ((uint32_t)(0x0000073F))
+#define PWM_IR_BITMASK ((uint32_t)(0x0000073F))
 /** MCR interrupt on MATCHx bit. */
-#define PWM_MCR_INT(MRx)            ((uint32_t)(1 << (3 * (MRx))))
+#define PWM_MCR_INT(MRx) ((uint32_t)(1 << (3 * (MRx))))
 /** MCR reset on MATCHx bit. */
-#define PWM_MCR_RESET(MRx)          ((uint32_t)(1 << ((3 * (MRx)) + 1)))
+#define PWM_MCR_RESET(MRx) ((uint32_t)(1 << ((3 * (MRx)) + 1)))
 /** MCR stop on MATCHx bit. */
-#define PWM_MCR_STOP(MRx)           ((uint32_t)(1 << ((3 * (MRx)) + 2)))
+#define PWM_MCR_STOP(MRx) ((uint32_t)(1 << ((3 * (MRx)) + 2)))
 /** MCR register channel mask bit. */
 #define PWM_MCR_CHANNEL_MASKBIT(CH) ((uint32_t)(7 << (CH * 3)))
 /** TCR counter enable bit. */
-#define PWM_TCR_COUNTER_ENABLE      ((uint32_t)(1 << 0))
+#define PWM_TCR_COUNTER_ENABLE ((uint32_t)(1 << 0))
 /** TCR counter reset bit. */
-#define PWM_TCR_COUNTER_RESET       ((uint32_t)(1 << 1))
+#define PWM_TCR_COUNTER_RESET ((uint32_t)(1 << 1))
 /** TCR PWM enable bit. */
-#define PWM_TCR_PWM_ENABLE          ((uint32_t)(1 << 3))
+#define PWM_TCR_PWM_ENABLE ((uint32_t)(1 << 3))
 /** PCR edge select bit. */
-#define PWM_PCR_PWMSELn(CH)         ((uint32_t)(_BIT(CH)))
+#define PWM_PCR_PWMSELn(CH) ((uint32_t)(_BIT(CH)))
 /** PCR PWM channel output enable bit. */
-#define PWM_PCR_PWMENAn(CH)         ((uint32_t)((1) << ((CH) + 8)))
+#define PWM_PCR_PWMENAn(CH) ((uint32_t)((1) << ((CH) + 8)))
 /** CCR register channel mask bit. */
 #define PWM_CCR_CHANNEL_MASKBIT(CH) ((uint32_t)(7 << (CH * 3)))
 /** CCR rising edge sensitive channel bit. */
-#define PWM_CCR_CAP_RISING(CAPx)    ((uint32_t)(1 << (((CAPx & 0x2) << 1) + (CAPx & 0x1))))
+#define PWM_CCR_CAP_RISING(CAPx) ((uint32_t)(1 << (((CAPx & 0x2) << 1) + (CAPx & 0x1))))
 /** CCR falling edge sensitive channel bit.*/
-#define PWM_CCR_CAP_FALLING(CAPx)   ((uint32_t)(1 << (((CAPx & 0x2) << 1) + (CAPx & 0x1) + 1)))
+#define PWM_CCR_CAP_FALLING(CAPx) ((uint32_t)(1 << (((CAPx & 0x2) << 1) + (CAPx & 0x1) + 1)))
 /** CCR interrupt on event channel bit. */
-#define PWM_CCR_INT_ON_CAP(CAPx)    ((uint32_t)(1 << (((CAPx & 0x2) << 1) + (CAPx & 0x1) + 2)))
+#define PWM_CCR_INT_ON_CAP(CAPx) ((uint32_t)(1 << (((CAPx & 0x2) << 1) + (CAPx & 0x1) + 2)))
 
 /**
  * @}
@@ -93,41 +93,28 @@ extern "C" {
 /**
  * @brief Timer/counter operating mode.
  */
-typedef enum {
-    PWM_TIMER_MODE = 0,
-    PWM_COUNTER_MODE
-} PWM_MODE;
+typedef enum { PWM_TIMER_MODE = 0, PWM_COUNTER_MODE } PWM_MODE;
 /** Check PWM mode option parameter. */
 #define PARAM_PWM_TIM_MODE(n) ((n >= PWM_TIMER_MODE) && (n <= PWM_COUNTER_MODE))
 
 /**
  * @brief Counter mode edge selection.
  */
-typedef enum {
-    PWM_CTR_RISING = 1,
-    PWM_CTR_FALLING,
-    PWM_CTR_ANY
-} PWM_CTR_EDGE;
+typedef enum { PWM_CTR_RISING = 1, PWM_CTR_FALLING, PWM_CTR_ANY } PWM_CTR_EDGE;
 /** Check PWM counter mode edge selection parameter. */
 #define PARAM_PWM_CTR_EDGE(EDGE) ((EDGE) >= PWM_CTR_RISING && (EDGE) <= PWM_CTR_ANY)
 
 /**
  * @brief Timer/Counter prescale option.
  */
-typedef enum {
-    PWM_TICK = 0,
-    PWM_US
-} PWM_PRESCALE;
+typedef enum { PWM_TICK = 0, PWM_US } PWM_PRESCALE;
 /** Check PWM prescale option parameter. */
 #define PARAM_PWM_PRESCALE(OPT) ((OPT == PWM_TICK) || (OPT == PWM_US))
 
 /**
  * @brief Capture channel enum and parameter macro
  */
-typedef enum {
-    PWM_CAPTURE_0 = 0,
-    PWM_CAPTURE_1
-} PWM_CAPTURE;
+typedef enum { PWM_CAPTURE_0 = 0, PWM_CAPTURE_1 } PWM_CAPTURE;
 /** Check PWM capture channel parameter. */
 #define PARAM_PWM_CAPTURE(CH) (((CH) >= PWM_CAPTURE_0) && ((CH) <= PWM_CAPTURE_1))
 
@@ -163,10 +150,7 @@ typedef enum {
 /**
  * @brief PWM operating mode options.
  */
-typedef enum {
-    PWM_SINGLE_EDGE = 0,
-    PWM_DUAL_EDGE
-} PWM_CHANNEL_EDGE;
+typedef enum { PWM_SINGLE_EDGE = 0, PWM_DUAL_EDGE } PWM_CHANNEL_EDGE;
 /** Check PWM channel edge mode parameter. */
 #define PARAM_PWM_CHANNEL_EDGE(n) ((n == PWM_SINGLE_EDGE) || (n == PWM_DUAL_EDGE))
 
@@ -185,8 +169,8 @@ typedef enum {
     PWM_MR6_INT
 } PWM_INT_TYPE;
 /** Check PWM interrupt type parameter. */
-#define PARAM_PWM_INT_TYPE(TYPE)                         \
-    (((TYPE) >= PWM_MR0_INT && (TYPE) <= PWM_CR1_INT) || \
+#define PARAM_PWM_INT_TYPE(TYPE)                                                                   \
+    (((TYPE) >= PWM_MR0_INT && (TYPE) <= PWM_CR1_INT) ||                                           \
      ((TYPE) >= PWM_MR4_INT && (TYPE) <= PWM_MR6_INT))
 
 /**
@@ -286,7 +270,7 @@ typedef struct {
  *
  * @param timerCfg Pointer to a PWM_TIMERCFG_T structure containing the prescale options and values.
  */
-void PWM_InitTimer(const PWM_TIMERCFG_T* timerCfg);
+void PWM_InitTimer(const PWM_TIMERCFG_T *timerCfg);
 
 /**
  * @brief Initializes the PWM in Counter Mode using an external input.
@@ -297,7 +281,7 @@ void PWM_InitTimer(const PWM_TIMERCFG_T* timerCfg);
  * @param counterCfg Pointer to a PWM_COUNTERCFG_T structure specifying the input source and the
  * edge type.
  */
-void PWM_InitCounter(const PWM_COUNTERCFG_T* counterCfg);
+void PWM_InitCounter(const PWM_COUNTERCFG_T *counterCfg);
 
 /**
  * @brief De-initializes the PWM1 peripheral.
@@ -402,7 +386,7 @@ void PWM_ResetCounter(void);
  * @param pwmMatchCfg Pointer to a PWM_MATCHCFG_T structure containing configuration and initial
  * match value.
  */
-void PWM_ConfigMatch(const PWM_MATCHCFG_T* pwmMatchCfg);
+void PWM_ConfigMatch(const PWM_MATCHCFG_T *pwmMatchCfg);
 
 /**
  *
@@ -433,7 +417,8 @@ void PWM_MatchUpdateDouble(PWM_MATCH_OPT matchA, uint32_t newValueA, PWM_MATCH_O
 /**
  * @brief Clears a pending interrupt flag in the PWM peripheral.
  *
- * Writes a '1' to the corresponding bit in the Interrupt Register (IR). This acknowledges the event and allows the generation of subsequent interrupt requests.
+ * Writes a '1' to the corresponding bit in the Interrupt Register (IR). This acknowledges the event
+ * and allows the generation of subsequent interrupt requests.
  *
  * @param intFlag The interrupt source to clear (PWM_xxx_INT).
  */
@@ -442,7 +427,8 @@ void PWM_ClearIntPending(PWM_INT_TYPE intFlag);
 /**
  * @brief Retrieves the current status of a PWM interrupt flag.
  *
- * Checks the Interrupt Register (IR) to determine if a specific match or capture event has triggered an interrupt request.
+ * Checks the Interrupt Register (IR) to determine if a specific match or capture event has
+ * triggered an interrupt request.
  *
  * @param intFlag The interrupt source to check (PWM_xxx_INT).
  * @return SET if the interrupt is pending, RESET otherwise.
@@ -452,11 +438,13 @@ FlagStatus PWM_GetIntStatus(PWM_INT_TYPE intFlag);
 /**
  * @brief Configures the capture logic for external signal timing.
  *
- * Sets the Capture Control Register (CCR) to define which edges (rising, falling, or both) on the selected CAP input will load the Timer Counter (TC) value into a capture register and whether an interrupt is generated.
+ * Sets the Capture Control Register (CCR) to define which edges (rising, falling, or both) on the
+ * selected CAP input will load the Timer Counter (TC) value into a capture register and whether an
+ * interrupt is generated.
  *
  * @param capCfg Pointer to a PWM_CAPTURECFG_T structure with capture settings.
  */
-void PWM_ConfigCapture(const PWM_CAPTURECFG_T* capCfg);
+void PWM_ConfigCapture(const PWM_CAPTURECFG_T *capCfg);
 
 /**
  * @brief Reads the captured value from a specific capture register.

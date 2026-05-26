@@ -42,43 +42,43 @@ extern "C" {
 
 /* ---------------------------- BIT DEFINITIONS ----------------------------- */
 /**  Selects which of the AD0.0:7 pins is (are) to be sampled and converted */
-#define ADC_CR_CH_SEL(n)           ((1UL << n))
+#define ADC_CR_CH_SEL(n) ((1UL << n))
 /**  The APB clock (PCLK) is divided by (this value plus one) to produce the clock for the A/D */
-#define ADC_CR_CLKDIV(n)           ((n << 8))
+#define ADC_CR_CLKDIV(n) ((n << 8))
 /**  Repeated conversions A/D enable bit */
-#define ADC_CR_BURST               ((1UL << 16))
+#define ADC_CR_BURST ((1UL << 16))
 /**  ADC convert in power down mode */
-#define ADC_CR_PDN                 ((1UL << 21))
+#define ADC_CR_PDN ((1UL << 21))
 /**  Start mask bits */
-#define ADC_CR_START_MASK          ((7UL << 24))
+#define ADC_CR_START_MASK ((7UL << 24))
 /**  Select Start Mode */
 #define ADC_CR_START_MODE_SEL(SEL) ((SEL << 24))
 /**  Start conversion now */
-#define ADC_CR_START_NOW           ((1UL << 24))
+#define ADC_CR_START_NOW ((1UL << 24))
 /**  Start conversion when the edge selected by bit 27 occurs on P2.10/EINT0 */
-#define ADC_CR_START_EINT0         ((2UL << 24))
+#define ADC_CR_START_EINT0 ((2UL << 24))
 /** Start conversion when the edge selected by bit 27 occurs on P1.27/CAP0.1 */
-#define ADC_CR_START_CAP01         ((3UL << 24))
+#define ADC_CR_START_CAP01 ((3UL << 24))
 /**  Start conversion when the edge selected by bit 27 occurs on MAT0.1 */
-#define ADC_CR_START_MAT01         ((4UL << 24))
+#define ADC_CR_START_MAT01 ((4UL << 24))
 /**  Start conversion when the edge selected by bit 27 occurs on MAT0.3 */
-#define ADC_CR_START_MAT03         ((5UL << 24))
+#define ADC_CR_START_MAT03 ((5UL << 24))
 /**  Start conversion when the edge selected by bit 27 occurs on MAT1.0 */
-#define ADC_CR_START_MAT10         ((6UL << 24))
+#define ADC_CR_START_MAT10 ((6UL << 24))
 /**  Start conversion when the edge selected by bit 27 occurs on MAT1.1 */
-#define ADC_CR_START_MAT11         ((7UL << 24))
+#define ADC_CR_START_MAT11 ((7UL << 24))
 /**  Start conversion on a falling edge on the selected CAP/MAT signal */
-#define ADC_CR_EDGE                ((1UL << 27))
+#define ADC_CR_EDGE ((1UL << 27))
 
 /* ----------------------- ADGDR REGISTER DEFINITIONS ----------------------- */
 /** When DONE is 1, this field contains result value of ADC conversion */
-#define ADC_GDR_RESULT(n)    (((n >> 4) & 0xFFF))
+#define ADC_GDR_RESULT(n) (((n >> 4) & 0xFFF))
 /** These bits contain the channel from which the LS bits were converted */
-#define ADC_GDR_CH(n)        (((n >> 24) & 0x7))
+#define ADC_GDR_CH(n) (((n >> 24) & 0x7))
 /** This bit is 1 in burst mode if the results of one or more conversions was (were) lost */
 #define ADC_GDR_OVERRUN_FLAG ((1UL << 30))
 /** This bit is set to 1 when an A/D conversion completes */
-#define ADC_GDR_DONE_FLAG    ((1UL << 31))
+#define ADC_GDR_DONE_FLAG ((1UL << 31))
 
 /** These bits are used to mask the channel selection bits in the GDR register */
 #define ADC_GDR_CH_MASK ((7UL << 24))
@@ -86,39 +86,39 @@ extern "C" {
 /* ---------------------- ADINTEN REGISTER DEFINITIONS ---------------------- */
 /** These bits allow control over which A/D channels generate interrupts for conversion completion
  */
-#define ADC_INTEN_CH(n)  ((1UL << n))
+#define ADC_INTEN_CH(n) ((1UL << n))
 /** When 1, enables the global DONE flag in ADDR to generate an interrupt */
 #define ADC_INTEN_GLOBAL ((1UL << 8))
 
 /* ----------------------- ADDRx REGISTER DEFINITIONS ----------------------- */
 /** When DONE is 1, this field contains result value of ADC conversion */
-#define ADC_DR_RESULT(n)    (((n >> 4) & 0xFFF))
+#define ADC_DR_RESULT(n) (((n >> 4) & 0xFFF))
 /** These bits mirror the OVERRRUN status flags that appear in the
  * result register for each A/D channel */
 #define ADC_DR_OVERRUN_FLAG ((1UL << 30))
 /** This bit is set to 1 when an A/D conversion completes. It is cleared
  * when this register is read */
-#define ADC_DR_DONE_FLAG    ((1UL << 31))
+#define ADC_DR_DONE_FLAG ((1UL << 31))
 
 /* ---------------------- ADSTAT REGISTER DEFINITIONS ----------------------- */
 /** These bits mirror the DONE status flags that appear in the result
  * register for each A/D channel */
-#define ADC_STAT_CH_DONE_FLAG(n)    ((n & 0xFF))
+#define ADC_STAT_CH_DONE_FLAG(n) ((n & 0xFF))
 /** These bits mirror the OVERRRUN status flags that appear in the
  * result register for each A/D channel */
 #define ADC_STAT_CH_OVERRUN_FLAG(n) (((n >> 8) & 0xFF))
 /** This bit is the A/D interrupt flag */
-#define ADC_STAT_INT_FLAG           ((1UL << 16))
+#define ADC_STAT_INT_FLAG ((1UL << 16))
 
 /* ----------------------- ADTRM REGISTER DEFINITIONS ----------------------- */
 /** Offset trim bits for ADC operation */
 #define ADC_ADCOFFS(n) (((n & 0xF) << 4))
 /** Written to boot code*/
-#define ADC_TRIM(n)    (((n & 0xF) << 8))
+#define ADC_TRIM(n) (((n & 0xF) << 8))
 
 /* ------------------------ CHECK PARAM DEFINITIONS ------------------------- */
 /** Check ADC parameter */
-#define PARAM_ADCx(n) (((uint32_t*)n) == ((uint32_t*)LPC_ADC))
+#define PARAM_ADCx(n) (((uint32_t *)n) == ((uint32_t *)LPC_ADC))
 
 /** Check ADC rate parameter */
 #define PARAM_ADC_RATE(rate) ((rate > 0) && (rate <= 200000))
@@ -182,21 +182,15 @@ typedef enum {
 /**
  * @brief ADC edge selection for start conversion.
  */
-typedef enum {
-    ADC_START_ON_RISING = 0,
-    ADC_START_ON_FALLING
-} ADC_START_ON_EDGE;
+typedef enum { ADC_START_ON_RISING = 0, ADC_START_ON_FALLING } ADC_START_ON_EDGE;
 /** Check ADC state parameter */
-#define PARAM_ADC_START_ON_EDGE(EDGE) \
+#define PARAM_ADC_START_ON_EDGE(EDGE)                                                              \
     ((EDGE == ADC_START_ON_RISING) || (EDGE == ADC_START_ON_FALLING))
 
 /**
  * @brief ADC data status.
  */
-typedef enum {
-    ADC_DATA_OVERRUN = 0,
-    ADC_DATA_DONE
-} ADC_DATA_STATUS;
+typedef enum { ADC_DATA_OVERRUN = 0, ADC_DATA_DONE } ADC_DATA_STATUS;
 /** Check ADC state parameter */
 #define PARAM_ADC_DATA_STATUS(OPT) ((OPT == ADC_DATA_OVERRUN) || (OPT == ADC_DATA_DONE))
 

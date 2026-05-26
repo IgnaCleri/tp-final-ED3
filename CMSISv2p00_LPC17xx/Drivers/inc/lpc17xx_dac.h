@@ -43,26 +43,26 @@ extern "C" {
 /** After the selected settling time after this field is written with a
 new VALUE, the voltage on the AOUT pin (with respect to VSSA)
 is VALUE/1024 × VREF */
-#define DAC_VALUE(n)      ((uint32_t)((n & 0x3FF) << 6))
+#define DAC_VALUE(n) ((uint32_t)((n & 0x3FF) << 6))
 /** If this bit = 0: The settling time of the DAC is 1 microsecond max,
  * and the maximum current is 700 microAmpere
  * If this bit = 1: The settling time of the DAC is 2.5 microsecond
  * and the maximum current is 350 microAmpere */
-#define DAC_BIAS_EN       ((uint32_t)(1 << 16))
+#define DAC_BIAS_EN ((uint32_t)(1 << 16))
 /** Value to reload interrupt DMA counter */
 #define DAC_CCNT_VALUE(n) ((uint32_t)(n & 0xffff))
 
 /** DCAR double buffering */
-#define DAC_DBLBUF_ENA   ((uint32_t)(1 << 1))
+#define DAC_DBLBUF_ENA ((uint32_t)(1 << 1))
 /** DCAR Time out count enable */
-#define DAC_CNT_ENA      ((uint32_t)(1 << 2))
+#define DAC_CNT_ENA ((uint32_t)(1 << 2))
 /** DCAR DMA access */
-#define DAC_DMA_ENA      ((uint32_t)(1 << 3))
+#define DAC_DMA_ENA ((uint32_t)(1 << 3))
 /** DCAR DACCTRL mask bit */
 #define DAC_DACCTRL_MASK ((uint32_t)(0x0F))
 
 /** Macro to determine if it is valid DAC peripheral */
-#define PARAM_DACx(n) (((uint32_t*)n) == ((uint32_t*)LPC_DAC))
+#define PARAM_DACx(n) (((uint32_t *)n) == ((uint32_t *)LPC_DAC))
 
 /**
  * @}
@@ -142,7 +142,7 @@ void DAC_SetBias(DAC_MAX_CURRENT maxCurr);
  *
  * @param  dacCfg  Pointer to a DAC_CONVERTER_CFG_T structure containing the settings.
  */
-void DAC_ConfigDAConverterControl(const DAC_CONVERTER_CFG_T* dacCfg);
+void DAC_ConfigDAConverterControl(const DAC_CONVERTER_CFG_T *dacCfg);
 
 /**
  * @brief  Sets the reload value for the DAC timeout counter.

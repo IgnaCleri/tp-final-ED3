@@ -14,13 +14,11 @@ static uint8_t DAC_SetBiasTest(void);
 static uint8_t DAC_ConfigDAConverterControlTest(void);
 static uint8_t DAC_SetDMATimeOutTest(void);
 
-void DAC_Setup(void) {
-    DAC_Init();
-}
+void DAC_Setup(void) { DAC_Init(); }
 
 void DAC_TearDown(void) {
     // Reset pin configuration to turn off DAC
-    LPC_PINCON->PINSEL1  = 0UL;
+    LPC_PINCON->PINSEL1 = 0UL;
     LPC_PINCON->PINMODE1 = 0UL;
 }
 
@@ -40,10 +38,10 @@ static uint8_t DAC_InitTest(void) {
     TEST_INIT();
 
     DAC_Init();
-    EXPECT_EQUAL(LPC_PINCON->PINSEL1 & (0x3 << 20), 0x2 << 20);   // P0.26 as DAC output
-    EXPECT_EQUAL(LPC_PINCON->PINMODE1 & (0x3 << 20), 0x2 << 20);  // P0.26 with no pull-up/down
+    EXPECT_EQUAL(LPC_PINCON->PINSEL1 & (0x3 << 20), 0x2 << 20);  // P0.26 as DAC output
+    EXPECT_EQUAL(LPC_PINCON->PINMODE1 & (0x3 << 20), 0x2 << 20); // P0.26 with no pull-up/down
 
-    EXPECT_EQUAL(LPC_DAC->DACR & DAC_BIAS_EN, 0);  // Default to 700 uA
+    EXPECT_EQUAL(LPC_DAC->DACR & DAC_BIAS_EN, 0); // Default to 700 uA
 
     DAC_TearDown();
     ASSERT_TEST();
@@ -79,9 +77,9 @@ static uint8_t DAC_ConfigDAConverterControlTest(void) {
     DAC_Init();
 
     DAC_CONVERTER_CFG_T cfg = {0};
-    cfg.doubleBuffer        = ENABLE;
-    cfg.dmaCounter          = DISABLE;
-    cfg.dmaRequest          = ENABLE;
+    cfg.doubleBuffer = ENABLE;
+    cfg.dmaCounter = DISABLE;
+    cfg.dmaRequest = ENABLE;
 
     DAC_ConfigDAConverterControl(&cfg);
     EXPECT_EQUAL(LPC_DAC->DACCTRL & DAC_DBLBUF_ENA, DAC_DBLBUF_ENA);
@@ -89,8 +87,8 @@ static uint8_t DAC_ConfigDAConverterControlTest(void) {
     EXPECT_EQUAL(LPC_DAC->DACCTRL & DAC_DMA_ENA, DAC_DMA_ENA);
 
     cfg.doubleBuffer = DISABLE;
-    cfg.dmaCounter   = ENABLE;
-    cfg.dmaRequest   = DISABLE;
+    cfg.dmaCounter = ENABLE;
+    cfg.dmaRequest = DISABLE;
 
     DAC_ConfigDAConverterControl(&cfg);
     EXPECT_EQUAL(LPC_DAC->DACCTRL & DAC_DBLBUF_ENA, 0);
@@ -115,4 +113,4 @@ static uint8_t DAC_SetDMATimeOutTest(void) {
     ASSERT_TEST();
 }
 
-#endif  // UNIT_TESTING_ENABLED
+#endif // UNIT_TESTING_ENABLED

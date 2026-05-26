@@ -43,7 +43,7 @@
  * @param[in]   port    GPIO_PORT_x, where x is in the range [0,4].
  * @return      Pointer to GPIO peripheral, or NULL if port is invalid.
  */
-static LPC_GPIO_TypeDef* GPIO_GetPointer(uint8_t port);
+static LPC_GPIO_TypeDef *GPIO_GetPointer(uint8_t port);
 
 /**
  * @brief       Returns a pointer to the FIO peripheral structure halfword
@@ -51,7 +51,7 @@ static LPC_GPIO_TypeDef* GPIO_GetPointer(uint8_t port);
  * @param[in]   port    GPIO_PORT_x, where x is in the range [0,4].
  * @return      Pointer to FIO peripheral, or NULL if port is invalid.
  */
-static GPIO_HalfWord_TypeDef* FIO_HalfWordGetPointer(uint8_t port);
+static GPIO_HalfWord_TypeDef *FIO_HalfWordGetPointer(uint8_t port);
 
 /**
  * @brief       Returns a pointer to the FIO peripheral structure byte
@@ -59,21 +59,15 @@ static GPIO_HalfWord_TypeDef* FIO_HalfWordGetPointer(uint8_t port);
  * @param[in]   port    GPIO_PORT_x, where x is in the range [0,4].
  * @return      Pointer to FIO peripheral, or NULL if port is invalid.
  */
-static GPIO_Byte_TypeDef* FIO_ByteGetPointer(uint8_t port);
+static GPIO_Byte_TypeDef *FIO_ByteGetPointer(uint8_t port);
 /* ------------------- End of Private Function Prototypes ------------------- */
 
 /* --------------------------- Private Functions ---------------------------- */
-static LPC_GPIO_TypeDef* GPIO_GetPointer(uint8_t port) {
-    return &LPC_GPIO0[port];
-}
+static LPC_GPIO_TypeDef *GPIO_GetPointer(uint8_t port) { return &LPC_GPIO0[port]; }
 
-static GPIO_HalfWord_TypeDef* FIO_HalfWordGetPointer(uint8_t port) {
-    return &GPIO0_HalfWord[port];
-}
+static GPIO_HalfWord_TypeDef *FIO_HalfWordGetPointer(uint8_t port) { return &GPIO0_HalfWord[port]; }
 
-static GPIO_Byte_TypeDef* FIO_ByteGetPointer(uint8_t port) {
-    return &GPIO0_Byte[port];
-}
+static GPIO_Byte_TypeDef *FIO_ByteGetPointer(uint8_t port) { return &GPIO0_Byte[port]; }
 /* ------------------------ End of Private Functions ------------------------ */
 
 /* ---------------------------- Public Functions ---------------------------- */
@@ -86,7 +80,7 @@ void GPIO_SetDir(LPC_PORT port, uint32_t pinMask, GPIO_DIR dir) {
     CHECK_PARAM(PARAM_LPC_PORT(port));
     CHECK_PARAM(PARAM_GPIO_DIR(dir));
 
-    LPC_GPIO_TypeDef* pGPIO = GPIO_GetPointer(port);
+    LPC_GPIO_TypeDef *pGPIO = GPIO_GetPointer(port);
 
     if (dir == GPIO_OUTPUT) {
         pGPIO->FIODIR |= pinMask;
@@ -98,7 +92,7 @@ void GPIO_SetDir(LPC_PORT port, uint32_t pinMask, GPIO_DIR dir) {
 void GPIO_SetPins(LPC_PORT port, uint32_t pinMask) {
     CHECK_PARAM(PARAM_LPC_PORT(port));
 
-    LPC_GPIO_TypeDef* pGPIO = GPIO_GetPointer(port);
+    LPC_GPIO_TypeDef *pGPIO = GPIO_GetPointer(port);
 
     pGPIO->FIOSET = pinMask;
 }
@@ -106,7 +100,7 @@ void GPIO_SetPins(LPC_PORT port, uint32_t pinMask) {
 void GPIO_ClearPins(LPC_PORT port, uint32_t pinMask) {
     CHECK_PARAM(PARAM_LPC_PORT(port));
 
-    LPC_GPIO_TypeDef* pGPIO = GPIO_GetPointer(port);
+    LPC_GPIO_TypeDef *pGPIO = GPIO_GetPointer(port);
 
     pGPIO->FIOCLR = pinMask;
 }
@@ -116,8 +110,8 @@ void GPIO_SetPinState(LPC_PORT port, LPC_PIN pin, SetState newState) {
     CHECK_PARAM(PARAM_LPC_PIN(pin));
     CHECK_PARAM(PARAM_SETSTATE(newState));
 
-    LPC_GPIO_TypeDef* pGPIO = GPIO_GetPointer(port);
-    const uint32_t pinMask  = GPIO_PIN_MASK << pin;
+    LPC_GPIO_TypeDef *pGPIO = GPIO_GetPointer(port);
+    const uint32_t pinMask = GPIO_PIN_MASK << pin;
 
     if (newState == SET) {
         pGPIO->FIOSET = pinMask;
@@ -129,7 +123,7 @@ void GPIO_SetPinState(LPC_PORT port, LPC_PIN pin, SetState newState) {
 void GPIO_WriteValue(LPC_PORT port, uint32_t newValue) {
     CHECK_PARAM(PARAM_LPC_PORT(port));
 
-    LPC_GPIO_TypeDef* pGPIO = GPIO_GetPointer(port);
+    LPC_GPIO_TypeDef *pGPIO = GPIO_GetPointer(port);
 
     pGPIO->FIOCLR = ~newValue;
     pGPIO->FIOSET = newValue;
@@ -138,7 +132,7 @@ void GPIO_WriteValue(LPC_PORT port, uint32_t newValue) {
 uint32_t GPIO_ReadValue(LPC_PORT port) {
     CHECK_PARAM(PARAM_LPC_PORT(port));
 
-    LPC_GPIO_TypeDef* pGPIO = GPIO_GetPointer(port);
+    LPC_GPIO_TypeDef *pGPIO = GPIO_GetPointer(port);
 
     return pGPIO->FIOPIN;
 
@@ -148,7 +142,7 @@ uint32_t GPIO_ReadValue(LPC_PORT port) {
 void GPIO_TogglePins(LPC_PORT port, uint32_t pinMask) {
     CHECK_PARAM(PARAM_LPC_PORT(port));
 
-    LPC_GPIO_TypeDef* pGPIO = GPIO_GetPointer(port);
+    LPC_GPIO_TypeDef *pGPIO = GPIO_GetPointer(port);
 
     const uint32_t current = pGPIO->FIOPIN;
 
@@ -160,7 +154,7 @@ void GPIO_SetMask(LPC_PORT port, uint32_t pinMask, FunctionalState newState) {
     CHECK_PARAM(PARAM_LPC_PORT(port));
     CHECK_PARAM(PARAM_FUNCTIONALSTATE(newState));
 
-    LPC_GPIO_TypeDef* pFIO = GPIO_GetPointer(port);
+    LPC_GPIO_TypeDef *pFIO = GPIO_GetPointer(port);
 
     if (newState) {
         pFIO->FIOMASK |= pinMask;
@@ -173,7 +167,7 @@ void GPIO_IntConfigPort(LPC_PORT port, uint32_t newValue, GPIO_INT_EDGE edgeStat
     CHECK_PARAM(PARAM_GPIO_INT_PORT(port));
     CHECK_PARAM(PARAM_GPIO_INT_EDGE(edgeState));
 
-    __IO uint32_t* pIntReg = NULL;
+    __IO uint32_t *pIntReg = NULL;
 
     if (port == PORT_0) {
         pIntReg = edgeState == GPIO_INT_RISING ? &LPC_GPIOINT->IO0IntEnR : &LPC_GPIOINT->IO0IntEnF;
@@ -191,7 +185,7 @@ void GPIO_IntConfigPin(LPC_PORT port, LPC_PIN pin, GPIO_INT_EDGE edgeState,
     CHECK_PARAM(PARAM_GPIO_INT_EDGE(edgeState));
     CHECK_PARAM(PARAM_FUNCTIONALSTATE(newState));
 
-    __IO uint32_t* pIntReg = NULL;
+    __IO uint32_t *pIntReg = NULL;
     const uint32_t pinMask = GPIO_PIN_MASK << pin;
 
     if (port == PORT_0) {
@@ -222,8 +216,8 @@ SetState GPIO_GetPinIntStatus(LPC_PORT port, uint32_t pin, GPIO_INT_EDGE edgeSta
     CHECK_PARAM(PARAM_GPIO_INT_PORT(port));
     CHECK_PARAM(PARAM_GPIO_INT_EDGE(edgeState));
 
-    __I uint32_t* pIntStatReg = NULL;
-    const uint32_t pinMask    = GPIO_PIN_MASK << pin;
+    __I uint32_t *pIntStatReg = NULL;
+    const uint32_t pinMask = GPIO_PIN_MASK << pin;
 
     if (port == PORT_0) {
         pIntStatReg =
@@ -250,33 +244,21 @@ void GPIO_ClearInt(LPC_PORT port, uint32_t pinMask) {
 }
 
 /* ---------------------- FIO (word-accessible) style ----------------------- */
-void FIO_SetDir(LPC_PORT port, uint32_t pinMask, GPIO_DIR dir) {
-    GPIO_SetDir(port, pinMask, dir);
-}
+void FIO_SetDir(LPC_PORT port, uint32_t pinMask, GPIO_DIR dir) { GPIO_SetDir(port, pinMask, dir); }
 
-void FIO_SetPins(LPC_PORT port, uint32_t pinMask) {
-    GPIO_SetPins(port, pinMask);
-}
+void FIO_SetPins(LPC_PORT port, uint32_t pinMask) { GPIO_SetPins(port, pinMask); }
 
-void FIO_ClearPins(LPC_PORT port, uint32_t pinMask) {
-    GPIO_ClearPins(port, pinMask);
-}
+void FIO_ClearPins(LPC_PORT port, uint32_t pinMask) { GPIO_ClearPins(port, pinMask); }
 
 void FIO_SetPinState(LPC_PORT port, LPC_PIN pin, SetState newState) {
     GPIO_SetPinState(port, pin, newState);
 }
 
-void FIO_WriteValue(LPC_PORT port, uint32_t newValue) {
-    GPIO_WriteValue(port, newValue);
-}
+void FIO_WriteValue(LPC_PORT port, uint32_t newValue) { GPIO_WriteValue(port, newValue); }
 
-uint32_t FIO_ReadValue(LPC_PORT port) {
-    return (GPIO_ReadValue(port));
-}
+uint32_t FIO_ReadValue(LPC_PORT port) { return (GPIO_ReadValue(port)); }
 
-void FIO_TogglePins(LPC_PORT port, uint32_t pinMask) {
-    GPIO_TogglePins(port, pinMask);
-}
+void FIO_TogglePins(LPC_PORT port, uint32_t pinMask) { GPIO_TogglePins(port, pinMask); }
 
 void FIO_SetMask(LPC_PORT port, uint32_t pinMask, FunctionalState newState) {
     GPIO_SetMask(port, pinMask, newState);
@@ -291,17 +273,13 @@ void FIO_IntConfigPin(LPC_PORT port, LPC_PIN pin, GPIO_INT_EDGE edgeState,
     GPIO_IntConfigPin(port, pin, edgeState, newState);
 }
 
-SetState FIO_GetPortIntStatus(LPC_PORT port) {
-    return GPIO_GetPortIntStatus(port);
-}
+SetState FIO_GetPortIntStatus(LPC_PORT port) { return GPIO_GetPortIntStatus(port); }
 
 SetState FIO_GetPinIntStatus(LPC_PORT port, uint32_t pin, GPIO_INT_EDGE edgeState) {
     return GPIO_GetPinIntStatus(port, pin, edgeState);
 }
 
-void FIO_ClearInt(LPC_PORT port, uint32_t pinMask) {
-    GPIO_ClearInt(port, pinMask);
-}
+void FIO_ClearInt(LPC_PORT port, uint32_t pinMask) { GPIO_ClearInt(port, pinMask); }
 
 /* -------------------- FIO (halfword-accessible) style --------------------- */
 void FIO_HalfWordSetDir(LPC_PORT port, GPIO_HALFWORD halfword, uint16_t pinMask, GPIO_DIR dir) {
@@ -309,7 +287,7 @@ void FIO_HalfWordSetDir(LPC_PORT port, GPIO_HALFWORD halfword, uint16_t pinMask,
     CHECK_PARAM(PARAM_GPIO_HALFWORD(halfword));
     CHECK_PARAM(PARAM_GPIO_DIR(dir));
 
-    GPIO_HalfWord_TypeDef* pFIO = FIO_HalfWordGetPointer(port);
+    GPIO_HalfWord_TypeDef *pFIO = FIO_HalfWordGetPointer(port);
 
     if (dir == GPIO_OUTPUT) {
         if (halfword == GPIO_HALFWORD_HIGH) {
@@ -330,7 +308,7 @@ void FIO_HalfWordSetPins(LPC_PORT port, GPIO_HALFWORD halfword, uint16_t pinMask
     CHECK_PARAM(PARAM_LPC_PORT(port));
     CHECK_PARAM(PARAM_GPIO_HALFWORD(halfword));
 
-    GPIO_HalfWord_TypeDef* pFIO = FIO_HalfWordGetPointer(port);
+    GPIO_HalfWord_TypeDef *pFIO = FIO_HalfWordGetPointer(port);
 
     if (halfword == GPIO_HALFWORD_HIGH) {
         pFIO->FIOSETU = pinMask;
@@ -343,7 +321,7 @@ void FIO_HalfWordClearPins(LPC_PORT port, GPIO_HALFWORD halfword, uint16_t pinMa
     CHECK_PARAM(PARAM_LPC_PORT(port));
     CHECK_PARAM(PARAM_GPIO_HALFWORD(halfword));
 
-    GPIO_HalfWord_TypeDef* pFIO = FIO_HalfWordGetPointer(port);
+    GPIO_HalfWord_TypeDef *pFIO = FIO_HalfWordGetPointer(port);
 
     if (halfword == GPIO_HALFWORD_HIGH) {
         pFIO->FIOCLRU = pinMask;
@@ -356,7 +334,7 @@ void FIO_HalfWordWriteValue(LPC_PORT port, GPIO_HALFWORD halfword, uint16_t newV
     CHECK_PARAM(PARAM_LPC_PORT(port));
     CHECK_PARAM(PARAM_GPIO_HALFWORD(halfword));
 
-    GPIO_HalfWord_TypeDef* pFIO = FIO_HalfWordGetPointer(port);
+    GPIO_HalfWord_TypeDef *pFIO = FIO_HalfWordGetPointer(port);
 
     if (halfword == GPIO_HALFWORD_HIGH) {
         pFIO->FIOCLRU = ~newValue;
@@ -371,7 +349,7 @@ uint16_t FIO_HalfWordReadValue(LPC_PORT port, GPIO_HALFWORD halfword) {
     CHECK_PARAM(PARAM_LPC_PORT(port));
     CHECK_PARAM(PARAM_GPIO_HALFWORD(halfword));
 
-    GPIO_HalfWord_TypeDef* pFIO = FIO_HalfWordGetPointer(port);
+    GPIO_HalfWord_TypeDef *pFIO = FIO_HalfWordGetPointer(port);
 
     if (halfword == GPIO_HALFWORD_HIGH) {
         return (pFIO->FIOPINU);
@@ -384,7 +362,7 @@ void FIO_HalfWordTogglePins(LPC_PORT port, GPIO_HALFWORD halfword, uint16_t pinM
     CHECK_PARAM(PARAM_LPC_PORT(port));
     CHECK_PARAM(PARAM_GPIO_HALFWORD(halfword));
 
-    GPIO_HalfWord_TypeDef* pFIO = FIO_HalfWordGetPointer(port);
+    GPIO_HalfWord_TypeDef *pFIO = FIO_HalfWordGetPointer(port);
 
     if (halfword == GPIO_HALFWORD_HIGH) {
         const uint16_t current = pFIO->FIOPINU;
@@ -405,7 +383,7 @@ void FIO_HalfWordSetMask(LPC_PORT port, GPIO_HALFWORD halfword, uint16_t pinMask
     CHECK_PARAM(PARAM_GPIO_HALFWORD(halfword));
     CHECK_PARAM(PARAM_FUNCTIONALSTATE(newState));
 
-    GPIO_HalfWord_TypeDef* pFIO = FIO_HalfWordGetPointer(port);
+    GPIO_HalfWord_TypeDef *pFIO = FIO_HalfWordGetPointer(port);
 
     if (newState == ENABLE) {
         if (halfword == GPIO_HALFWORD_HIGH) {
@@ -428,7 +406,7 @@ void FIO_ByteSetDir(LPC_PORT port, GPIO_BYTE byte, uint8_t pinMask, GPIO_DIR dir
     CHECK_PARAM(PARAM_GPIO_BYTE(byte));
     CHECK_PARAM(PARAM_GPIO_DIR(dir));
 
-    GPIO_Byte_TypeDef* pFIO = FIO_ByteGetPointer(port);
+    GPIO_Byte_TypeDef *pFIO = FIO_ByteGetPointer(port);
 
     if (dir == GPIO_OUTPUT) {
         pFIO->FIODIR[byte] |= pinMask;
@@ -441,7 +419,7 @@ void FIO_ByteSetPins(LPC_PORT port, GPIO_BYTE byte, uint8_t pinMask) {
     CHECK_PARAM(PARAM_LPC_PORT(port));
     CHECK_PARAM(PARAM_GPIO_BYTE(byte));
 
-    GPIO_Byte_TypeDef* pFIO = FIO_ByteGetPointer(port);
+    GPIO_Byte_TypeDef *pFIO = FIO_ByteGetPointer(port);
 
     pFIO->FIOSET[byte] = pinMask;
 }
@@ -450,7 +428,7 @@ void FIO_ByteClearPins(LPC_PORT port, GPIO_BYTE byte, uint8_t pinMask) {
     CHECK_PARAM(PARAM_LPC_PORT(port));
     CHECK_PARAM(PARAM_GPIO_BYTE(byte));
 
-    GPIO_Byte_TypeDef* pFIO = FIO_ByteGetPointer(port);
+    GPIO_Byte_TypeDef *pFIO = FIO_ByteGetPointer(port);
 
     pFIO->FIOCLR[byte] = pinMask;
 }
@@ -459,7 +437,7 @@ void FIO_ByteWriteValue(LPC_PORT port, GPIO_BYTE byte, uint8_t newValue) {
     CHECK_PARAM(PARAM_LPC_PORT(port));
     CHECK_PARAM(PARAM_GPIO_BYTE(byte));
 
-    GPIO_Byte_TypeDef* pFIO = FIO_ByteGetPointer(port);
+    GPIO_Byte_TypeDef *pFIO = FIO_ByteGetPointer(port);
 
     pFIO->FIOCLR[byte] = ~newValue;
     pFIO->FIOSET[byte] = newValue;
@@ -469,7 +447,7 @@ uint8_t FIO_ByteReadValue(LPC_PORT port, GPIO_BYTE byte) {
     CHECK_PARAM(PARAM_LPC_PORT(port));
     CHECK_PARAM(PARAM_GPIO_BYTE(byte));
 
-    GPIO_Byte_TypeDef* pFIO = FIO_ByteGetPointer(port);
+    GPIO_Byte_TypeDef *pFIO = FIO_ByteGetPointer(port);
 
     return (pFIO->FIOPIN[byte]);
 }
@@ -478,11 +456,11 @@ void FIO_ByteTogglePins(LPC_PORT port, GPIO_BYTE byte, uint8_t pinMask) {
     CHECK_PARAM(PARAM_LPC_PORT(port));
     CHECK_PARAM(PARAM_GPIO_BYTE(byte));
 
-    GPIO_Byte_TypeDef* pFIO = FIO_ByteGetPointer(port);
+    GPIO_Byte_TypeDef *pFIO = FIO_ByteGetPointer(port);
 
     const uint8_t current = pFIO->FIOPIN[byte];
-    pFIO->FIOSET[byte]    = (~current) & pinMask;
-    pFIO->FIOCLR[byte]    = current & pinMask;
+    pFIO->FIOSET[byte] = (~current) & pinMask;
+    pFIO->FIOCLR[byte] = current & pinMask;
 }
 
 void FIO_ByteSetMask(LPC_PORT port, GPIO_BYTE byte, uint8_t pinMask, FunctionalState newState) {
@@ -490,7 +468,7 @@ void FIO_ByteSetMask(LPC_PORT port, GPIO_BYTE byte, uint8_t pinMask, FunctionalS
     CHECK_PARAM(PARAM_GPIO_BYTE(byte));
     CHECK_PARAM(PARAM_FUNCTIONALSTATE(newState));
 
-    GPIO_Byte_TypeDef* pFIO = FIO_ByteGetPointer(port);
+    GPIO_Byte_TypeDef *pFIO = FIO_ByteGetPointer(port);
 
     if (newState == ENABLE) {
         pFIO->FIOMASK[byte] |= pinMask;

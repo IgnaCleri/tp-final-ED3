@@ -42,10 +42,10 @@ extern "C" {
  */
 
 /* ------------------------ MACROS MASKS DEFINITIONS ------------------------ */
-#define PINSEL_FUNC_MASK     ((0x3UL)) /**< Function selection mask. */
+#define PINSEL_FUNC_MASK ((0x3UL))     /**< Function selection mask. */
 #define PINSEL_RES_MODE_MASK ((0x3UL)) /**< Resistor mode selection mask. */
-#define PINSEL_PIN_MASK      ((0x1UL)) /** Pin selection mask. */
-#define PINSEL_OD_MASK       ((0x1UL)) /**< Open-drain mode selection mask. */
+#define PINSEL_PIN_MASK ((0x1UL))      /** Pin selection mask. */
+#define PINSEL_OD_MASK ((0x1UL))       /**< Open-drain mode selection mask. */
 
 /* ------------------------- MACROS BIT DEFINITIONS ------------------------- */
 #define PINSEL_TRACE_POS ((0x3UL)) /**< Trace pin position. */
@@ -81,22 +81,14 @@ typedef enum {
 /**
  * @brief Pin mode selection for PINSEL.
  */
-typedef enum {
-    PINSEL_PULLUP = 0,
-    PINSEL_REPEATER,
-    PINSEL_TRISTATE,
-    PINSEL_PULLDOWN
-} PINSEL_MODE;
+typedef enum { PINSEL_PULLUP = 0, PINSEL_REPEATER, PINSEL_TRISTATE, PINSEL_PULLDOWN } PINSEL_MODE;
 /** Check PINSEL pin mode option parameter. */
 #define PARAM_PINSEL_MODE(MODE) ((MODE) >= PINSEL_PULLUP && (MODE) <= PINSEL_PULLDOWN)
 
 /**
  * @brief I2C drive mode selection for PINSEL.
  */
-typedef enum {
-    PINSEL_I2C_NORMAL = 0,
-    PINSEL_I2C_FAST
-} PINSEL_I2C_MODE;
+typedef enum { PINSEL_I2C_NORMAL = 0, PINSEL_I2C_FAST } PINSEL_I2C_MODE;
 /** Check PINSEL I2C mode option parameter. */
 #define PARAM_PINSEL_I2C_MODE(MODE) ((MODE) == PINSEL_I2C_NORMAL || (MODE) == PINSEL_I2C_FAST)
 
@@ -135,22 +127,24 @@ typedef struct {
  *
  * @param pinCfg Pointer to a PINSEL_CFG_T structure containing the pin configuration.
  */
-void PINSEL_ConfigPin(const PINSEL_CFG_T* pinCfg);
+void PINSEL_ConfigPin(const PINSEL_CFG_T *pinCfg);
 
 /**
  * @brief Configures multiple pins on the same port with identical settings.
  *
- * Iterates through a 32-bit mask and applies the specified function, resistor mode, and open-drain settings to every pin identified in the mask.
+ * Iterates through a 32-bit mask and applies the specified function, resistor mode, and open-drain
+ * settings to every pin identified in the mask.
  *
  * @param pinCfg  Pointer to a PINSEL_CFG_T configuration structure (pin field is ignored).
  * @param pinMask A 32-bit mask representing the pins to be configured.
  */
-void PINSEL_ConfigMultiplePins(const PINSEL_CFG_T* pinCfg, uint32_t pinMask);
+void PINSEL_ConfigMultiplePins(const PINSEL_CFG_T *pinCfg, uint32_t pinMask);
 
 /**
  * @brief Enables or disables the ETM Trace port function.
  *
- * Modifies the PINSEL10 register to enable or disable the hardware trace functionality. When enabled, specific pins are dedicated to the trace port for debugging and instruction tracking.
+ * Modifies the PINSEL10 register to enable or disable the hardware trace functionality. When
+ * enabled, specific pins are dedicated to the trace port for debugging and instruction tracking.
  *
  * @param newState ENABLE to activate trace, DISABLE to return pins to default GPIO.
  */
@@ -159,7 +153,8 @@ void PINSEL_ConfigTraceFunc(FunctionalState newState);
 /**
  * @brief Configures the hardware characteristics for I2C pins.
  *
- * Updates the I2CPADCFG register to control the drive mode (Standard/Fast) and the glitch filter/slew rate for the dedicated I2C pins (P0.27 and P0.28).
+ * Updates the I2CPADCFG register to control the drive mode (Standard/Fast) and the glitch
+ * filter/slew rate for the dedicated I2C pins (P0.27 and P0.28).
  *
  * @param driveMode      Sets the pad drive strength (PINSEL_I2C_NORMAL or PINSEL_I2C_FAST).
  * @param filterSlewRate ENABLE or DISABLE the glitch filter and slew rate control.
@@ -174,7 +169,7 @@ void PINSEL_SetI2CPins(PINSEL_I2C_MODE driveMode, FunctionalState filterSlewRate
 }
 #endif
 
-#endif  // LPC17XX_PINSEL_H_
+#endif // LPC17XX_PINSEL_H_
 
 /**
  * @}

@@ -4,13 +4,7 @@
 /**
  * @brief Port selection for GPIO and PINSEL.
  */
-typedef enum {
-    PORT_0 = 0,
-    PORT_1,
-    PORT_2,
-    PORT_3,
-    PORT_4
-} LPC_PORT;
+typedef enum { PORT_0 = 0, PORT_1, PORT_2, PORT_3, PORT_4 } LPC_PORT;
 /** Check port option parameter for GPIO and PINSEL. */
 #define PARAM_LPC_PORT(PORT) ((PORT) >= PORT_0 && (PORT) <= PORT_4)
 
@@ -54,4 +48,4 @@ typedef enum {
 /** Check pin option parameter. */
 #define PARAM_LPC_PIN(PIN) ((PIN) >= PIN_0 && (PIN) <= PIN_31)
 
-#endif  //LPC17XX_LPC17XX_COMMON_H
+#endif // LPC17XX_LPC17XX_COMMON_H

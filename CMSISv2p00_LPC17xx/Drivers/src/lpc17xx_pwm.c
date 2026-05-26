@@ -60,12 +60,12 @@ static void PWM_Init(void) {
 
     LPC_PWM1->TCR = 0x00;
     PWM_ResetCounter();
-    LPC_PWM1->MCR  = 0x00;
-    LPC_PWM1->CCR  = 0x00;
-    LPC_PWM1->PCR  = 0x00;
-    LPC_PWM1->LER  = 0x00;
+    LPC_PWM1->MCR = 0x00;
+    LPC_PWM1->CCR = 0x00;
+    LPC_PWM1->PCR = 0x00;
+    LPC_PWM1->LER = 0x00;
     LPC_PWM1->CTCR = 0x00;
-    LPC_PWM1->IR   = PWM_IR_BITMASK;
+    LPC_PWM1->IR = PWM_IR_BITMASK;
 }
 
 /* ---------------------------- Public Functions ---------------------------- */
@@ -73,7 +73,7 @@ static void PWM_Init(void) {
  * @{
  */
 
-void PWM_InitTimer(const PWM_TIMERCFG_T* timerCfg) {
+void PWM_InitTimer(const PWM_TIMERCFG_T *timerCfg) {
     CHECK_PARAM(PARAM_PWM_PRESCALE(timerCfg->prescaleOpt));
 
     PWM_Init();
@@ -91,7 +91,7 @@ void PWM_InitTimer(const PWM_TIMERCFG_T* timerCfg) {
     }
 }
 
-void PWM_InitCounter(const PWM_COUNTERCFG_T* counterCfg) {
+void PWM_InitCounter(const PWM_COUNTERCFG_T *counterCfg) {
     CHECK_PARAM(PARAM_PWM_CAPTURE(counterCfg->input));
     CHECK_PARAM(PARAM_PWM_CTR_EDGE(counterCfg->edge));
 
@@ -141,13 +141,9 @@ void PWM_ChannelConfig(PWM_CHANNEL channel, PWM_CHANNEL_EDGE edgeMode) {
     }
 }
 
-void PWM_Enable() {
-    LPC_PWM1->TCR |= PWM_TCR_PWM_ENABLE;
-}
+void PWM_Enable() { LPC_PWM1->TCR |= PWM_TCR_PWM_ENABLE; }
 
-void PWM_Disable() {
-    LPC_PWM1->TCR &= ~PWM_TCR_PWM_ENABLE;
-}
+void PWM_Disable() { LPC_PWM1->TCR &= ~PWM_TCR_PWM_ENABLE; }
 
 void PWM_ChannelEnable(PWM_CHANNEL channel) {
     CHECK_PARAM(PARAM_PWM_CHANNEL(channel));
@@ -161,20 +157,16 @@ void PWM_ChannelDisable(PWM_CHANNEL channel) {
     LPC_PWM1->PCR &= ~PWM_PCR_PWMENAn(channel);
 }
 
-void PWM_CounterEnable() {
-    LPC_PWM1->TCR |= PWM_TCR_COUNTER_ENABLE;
-}
+void PWM_CounterEnable() { LPC_PWM1->TCR |= PWM_TCR_COUNTER_ENABLE; }
 
-void PWM_CounterDisable() {
-    LPC_PWM1->TCR &= ~PWM_TCR_COUNTER_ENABLE;
-}
+void PWM_CounterDisable() { LPC_PWM1->TCR &= ~PWM_TCR_COUNTER_ENABLE; }
 
 void PWM_ResetCounter(void) {
     LPC_PWM1->TCR |= PWM_TCR_COUNTER_RESET;
     LPC_PWM1->TCR &= ~PWM_TCR_COUNTER_RESET;
 }
 
-void PWM_ConfigMatch(const PWM_MATCHCFG_T* pwmMatchCfg) {
+void PWM_ConfigMatch(const PWM_MATCHCFG_T *pwmMatchCfg) {
     CHECK_PARAM(PARAM_PWM_MATCH_OPT(pwmMatchCfg->channel));
     CHECK_PARAM(PARAM_FUNCTIONALSTATE(pwmMatchCfg->intEn));
     CHECK_PARAM(PARAM_FUNCTIONALSTATE(pwmMatchCfg->resetEn));
@@ -193,7 +185,7 @@ void PWM_ConfigMatch(const PWM_MATCHCFG_T* pwmMatchCfg) {
 void PWM_MatchUpdateSingle(PWM_MATCH_OPT match, uint32_t matchValue) {
     CHECK_PARAM(PARAM_PWM_MATCH_OPT(match));
 
-    volatile uint32_t* MR[] = {&LPC_PWM1->MR0, &LPC_PWM1->MR1, &LPC_PWM1->MR2, &LPC_PWM1->MR3,
+    volatile uint32_t *MR[] = {&LPC_PWM1->MR0, &LPC_PWM1->MR1, &LPC_PWM1->MR2, &LPC_PWM1->MR3,
                                &LPC_PWM1->MR4, &LPC_PWM1->MR5, &LPC_PWM1->MR6};
 
     *MR[match] = matchValue;
@@ -205,7 +197,7 @@ void PWM_MatchUpdateDouble(PWM_MATCH_OPT matchA, uint32_t newValueA, PWM_MATCH_O
     CHECK_PARAM(PARAM_PWM_MATCH_OPT(matchA));
     CHECK_PARAM(PARAM_PWM_MATCH_OPT(matchB));
 
-    volatile uint32_t* MR[] = {&LPC_PWM1->MR0, &LPC_PWM1->MR1, &LPC_PWM1->MR2, &LPC_PWM1->MR3,
+    volatile uint32_t *MR[] = {&LPC_PWM1->MR0, &LPC_PWM1->MR1, &LPC_PWM1->MR2, &LPC_PWM1->MR3,
                                &LPC_PWM1->MR4, &LPC_PWM1->MR5, &LPC_PWM1->MR6};
 
     *MR[matchA] = newValueA;
@@ -225,7 +217,7 @@ FlagStatus PWM_GetIntStatus(PWM_INT_TYPE intFlag) {
     return LPC_PWM1->IR & _BIT(intFlag) ? SET : RESET;
 }
 
-void PWM_ConfigCapture(const PWM_CAPTURECFG_T* capCfg) {
+void PWM_ConfigCapture(const PWM_CAPTURECFG_T *capCfg) {
     CHECK_PARAM(PARAM_PWM_CAPTURE(capCfg->channel));
     CHECK_PARAM(PARAM_FUNCTIONALSTATE(capCfg->risingEn));
     CHECK_PARAM(PARAM_FUNCTIONALSTATE(capCfg->fallingEn));
@@ -242,11 +234,14 @@ uint32_t PWM_GetCaptureValue(PWM_CAPTURE capChannel) {
     CHECK_PARAM(PARAM_PWM_CAPTURE(capChannel));
 
     switch (capChannel) {
-        case PWM_CAPTURE_0: return LPC_PWM1->CR0;
+    case PWM_CAPTURE_0:
+        return LPC_PWM1->CR0;
 
-        case PWM_CAPTURE_1: return LPC_PWM1->CR1;
+    case PWM_CAPTURE_1:
+        return LPC_PWM1->CR1;
 
-        default: return 0;
+    default:
+        return 0;
     }
 }
 

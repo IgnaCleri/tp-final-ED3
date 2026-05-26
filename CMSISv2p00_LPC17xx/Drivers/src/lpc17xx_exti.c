@@ -90,7 +90,7 @@ void EXTI_Init(void) {
     NVIC_DisableIRQ(EINT2_IRQn);
     NVIC_DisableIRQ(EINT3_IRQn);
 
-    LPC_SC->EXTMODE  = 0x0;
+    LPC_SC->EXTMODE = 0x0;
     LPC_SC->EXTPOLAR = 0x0;
 }
 
@@ -112,7 +112,7 @@ void EXTI_PinConfig(EXTI_LINE line, EXTI_RESISTOR resMode) {
     }
 }
 
-void EXTI_Config(const EXTI_CFG_T* extiCfg) {
+void EXTI_Config(const EXTI_CFG_T *extiCfg) {
     CHECK_PARAM(PARAM_EXTI_LINE(extiCfg->line));
     CHECK_PARAM(PARAM_EXTI_MODE(extiCfg->mode));
     CHECK_PARAM(PARAM_EXTI_POLARITY(extiCfg->polarity));
@@ -123,7 +123,7 @@ void EXTI_Config(const EXTI_CFG_T* extiCfg) {
     EXTI_SetPolarity(extiCfg->line, extiCfg->polarity);
 }
 
-void EXTI_ConfigEnable(const EXTI_CFG_T* extiCfg) {
+void EXTI_ConfigEnable(const EXTI_CFG_T *extiCfg) {
     CHECK_PARAM(PARAM_EXTI_LINE(extiCfg->line));
     CHECK_PARAM(PARAM_EXTI_MODE(extiCfg->mode));
     CHECK_PARAM(PARAM_EXTI_POLARITY(extiCfg->polarity));

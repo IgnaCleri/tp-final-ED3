@@ -67,7 +67,7 @@ static void PINSEL_setPinFunc(uint8_t port, uint8_t pin, uint8_t func) {
     const uint32_t regIDx = 2 * port + pin / 16;
     const uint32_t pinPos = (pin % 16) * 2;
 
-    __IO uint32_t* pPinCon = &LPC_PINCON->PINSEL0;
+    __IO uint32_t *pPinCon = &LPC_PINCON->PINSEL0;
 
     pPinCon[regIDx] &= ~(PINSEL_FUNC_MASK << pinPos);
     pPinCon[regIDx] |= (uint32_t)func << pinPos;
@@ -77,14 +77,14 @@ static void PINSEL_setResistorMode(uint8_t port, uint8_t pin, uint8_t mode) {
     const uint32_t regIDx = (2 * port) + (pin / 16);
     const uint32_t pinPos = (pin % 16) * 2;
 
-    __IO uint32_t* pModeCon = &LPC_PINCON->PINMODE0;
+    __IO uint32_t *pModeCon = &LPC_PINCON->PINMODE0;
 
     pModeCon[regIDx] &= ~(PINSEL_RES_MODE_MASK << pinPos);
     pModeCon[regIDx] |= (uint32_t)mode << pinPos;
 }
 
 static void PINSEL_setOpenDrainMode(uint8_t port, uint8_t pin, FunctionalState state) {
-    __IO uint32_t* pODCon = &LPC_PINCON->PINMODE_OD0;
+    __IO uint32_t *pODCon = &LPC_PINCON->PINMODE_OD0;
 
     if (state == ENABLE) {
         pODCon[port] |= (PINSEL_OD_MASK << pin);
@@ -99,7 +99,7 @@ static void PINSEL_setOpenDrainMode(uint8_t port, uint8_t pin, FunctionalState s
  * @{
  */
 
-void PINSEL_ConfigPin(const PINSEL_CFG_T* pinCfg) {
+void PINSEL_ConfigPin(const PINSEL_CFG_T *pinCfg) {
     CHECK_PARAM(PARAM_LPC_PORT(pinCfg->port));
     CHECK_PARAM(PARAM_LPC_PIN(pinCfg->pin));
     CHECK_PARAM(PARAM_PINSEL_FUNC(pinCfg->func));
@@ -111,7 +111,7 @@ void PINSEL_ConfigPin(const PINSEL_CFG_T* pinCfg) {
     PINSEL_setOpenDrainMode(pinCfg->port, pinCfg->pin, pinCfg->openDrain);
 }
 
-void PINSEL_ConfigMultiplePins(const PINSEL_CFG_T* pinCfg, uint32_t pinMask) {
+void PINSEL_ConfigMultiplePins(const PINSEL_CFG_T *pinCfg, uint32_t pinMask) {
     CHECK_PARAM(PARAM_LPC_PORT(pinCfg->port));
     CHECK_PARAM(PARAM_PINSEL_FUNC(pinCfg->func));
 

@@ -22,13 +22,9 @@ static uint8_t GPDMA_ClearIntPendingTest(void);
 static uint32_t gpdma_src_buf[4] = {0xDEADBEEF, 0xCAFEBABE, 0x12345678, 0xABCDABCD};
 static uint32_t gpdma_dst_buf[4] = {0};
 
-void GPDMA_Setup(void) {
-    GPDMA_Init();
-}
+void GPDMA_Setup(void) { GPDMA_Init(); }
 
-void GPDMA_TearDown(void) {
-    GPDMA_DeInit();
-}
+void GPDMA_TearDown(void) { GPDMA_DeInit(); }
 
 void GPDMA_RunTests(void) {
     RUN_TESTS_INIT();
@@ -87,23 +83,23 @@ static uint8_t GPDMA_SetupChannelTest(void) {
     TEST_INIT();
 
     const GPDMA_Channel_CFG_T cfg = {
-        .channelNum   = GPDMA_CH_0,
+        .channelNum = GPDMA_CH_0,
         .transferSize = 4,
-        .type         = GPDMA_M2M,
-        .srcMemAddr   = (uintptr_t)gpdma_src_buf,
-        .dstMemAddr   = (uintptr_t)gpdma_dst_buf,
-        .srcConn      = 0,
-        .dstConn      = 0,
-        .src          = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
-        .dst          = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
-        .intTC        = ENABLE,
-        .intErr       = ENABLE,
-        .linkedList   = 0};
+        .type = GPDMA_M2M,
+        .srcMemAddr = (uintptr_t)gpdma_src_buf,
+        .dstMemAddr = (uintptr_t)gpdma_dst_buf,
+        .srcConn = 0,
+        .dstConn = 0,
+        .src = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
+        .dst = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
+        .intTC = ENABLE,
+        .intErr = ENABLE,
+        .linkedList = 0};
 
     const Status result = GPDMA_SetupChannel(&cfg);
     EXPECT_EQUAL(result, SUCCESS);
 
-    const LPC_GPDMACH_TypeDef* pDMAch = pGPDMACh[GPDMA_CH_0];
+    const LPC_GPDMACH_TypeDef *pDMAch = pGPDMACh[GPDMA_CH_0];
 
     /* Source and destination addresses must match */
     EXPECT_EQUAL(pDMAch->DMACCSrcAddr, (uint32_t)(uintptr_t)gpdma_src_buf);
@@ -140,18 +136,18 @@ static uint8_t GPDMA_ChannelStartStopTest(void) {
                                          (0x2u << 21) | (1u << 26) | (1u << 27))};
 
     const GPDMA_Channel_CFG_T cfg = {
-        .channelNum   = GPDMA_CH_0,
-        .srcMemAddr   = (uint32_t)(uintptr_t)gpdma_src_buf,
-        .dstMemAddr   = (uint32_t)(uintptr_t)gpdma_dst_buf,
+        .channelNum = GPDMA_CH_0,
+        .srcMemAddr = (uint32_t)(uintptr_t)gpdma_src_buf,
+        .dstMemAddr = (uint32_t)(uintptr_t)gpdma_dst_buf,
         .transferSize = 4,
-        .type         = GPDMA_M2M,
-        .srcConn      = 0,
-        .dstConn      = 0,
-        .src          = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
-        .dst          = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
-        .linkedList   = (uint32_t)(uintptr_t)&gpdma_lli,
-        .intTC        = DISABLE,
-        .intErr       = DISABLE,
+        .type = GPDMA_M2M,
+        .srcConn = 0,
+        .dstConn = 0,
+        .src = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
+        .dst = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
+        .linkedList = (uint32_t)(uintptr_t)&gpdma_lli,
+        .intTC = DISABLE,
+        .intErr = DISABLE,
     };
     GPDMA_SetupChannel(&cfg);
 
@@ -178,18 +174,18 @@ static uint8_t GPDMA_ChannelPauseResumeTest(void) {
                                          (0x2u << 21) | (1u << 26) | (1u << 27))};
 
     GPDMA_Channel_CFG_T cfg = {
-        .channelNum   = GPDMA_CH_1,
-        .srcMemAddr   = (uint32_t)(uintptr_t)gpdma_src_buf,
-        .dstMemAddr   = (uint32_t)(uintptr_t)gpdma_dst_buf,
+        .channelNum = GPDMA_CH_1,
+        .srcMemAddr = (uint32_t)(uintptr_t)gpdma_src_buf,
+        .dstMemAddr = (uint32_t)(uintptr_t)gpdma_dst_buf,
         .transferSize = 4,
-        .type         = GPDMA_M2M,
-        .srcConn      = 0,
-        .dstConn      = 0,
-        .src          = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
-        .dst          = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
-        .intTC        = DISABLE,
-        .intErr       = DISABLE,
-        .linkedList   = (uint32_t)(uintptr_t)&gpdma_lli,
+        .type = GPDMA_M2M,
+        .srcConn = 0,
+        .dstConn = 0,
+        .src = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
+        .dst = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
+        .intTC = DISABLE,
+        .intErr = DISABLE,
+        .linkedList = (uint32_t)(uintptr_t)&gpdma_lli,
     };
     GPDMA_SetupChannel(&cfg);
     GPDMA_ChannelStart(GPDMA_CH_1);
@@ -216,18 +212,18 @@ static uint8_t GPDMA_ChannelGracefulStopTest(void) {
                                          (0x2u << 21) | (1u << 26) | (1u << 27))};
 
     const GPDMA_Channel_CFG_T cfg = {
-        .channelNum   = GPDMA_CH_0,
-        .srcMemAddr   = (uint32_t)(uintptr_t)gpdma_src_buf,
-        .dstMemAddr   = (uint32_t)(uintptr_t)gpdma_dst_buf,
+        .channelNum = GPDMA_CH_0,
+        .srcMemAddr = (uint32_t)(uintptr_t)gpdma_src_buf,
+        .dstMemAddr = (uint32_t)(uintptr_t)gpdma_dst_buf,
         .transferSize = 4,
-        .type         = GPDMA_M2M,
-        .srcConn      = 0,
-        .dstConn      = 0,
-        .src          = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
-        .dst          = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
-        .intTC        = DISABLE,
-        .intErr       = DISABLE,
-        .linkedList   = (uint32_t)(uintptr_t)&gpdma_lli,
+        .type = GPDMA_M2M,
+        .srcConn = 0,
+        .dstConn = 0,
+        .src = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
+        .dst = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
+        .intTC = DISABLE,
+        .intErr = DISABLE,
+        .linkedList = (uint32_t)(uintptr_t)&gpdma_lli,
     };
     GPDMA_SetupChannel(&cfg);
     GPDMA_ChannelStart(GPDMA_CH_0);
@@ -245,18 +241,18 @@ static uint8_t GPDMA_IntGetStatusTest(void) {
     TEST_INIT();
 
     GPDMA_Channel_CFG_T cfg = {
-        .channelNum   = GPDMA_CH_0,
-        .srcMemAddr   = (uint32_t)(uintptr_t)gpdma_src_buf,
-        .dstMemAddr   = (uint32_t)(uintptr_t)gpdma_dst_buf,
+        .channelNum = GPDMA_CH_0,
+        .srcMemAddr = (uint32_t)(uintptr_t)gpdma_src_buf,
+        .dstMemAddr = (uint32_t)(uintptr_t)gpdma_dst_buf,
         .transferSize = 4,
-        .type         = GPDMA_M2M,
-        .srcConn      = 0,
-        .dstConn      = 0,
-        .src          = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
-        .dst          = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
-        .intTC        = ENABLE,
-        .intErr       = ENABLE,
-        .linkedList   = 0,
+        .type = GPDMA_M2M,
+        .srcConn = 0,
+        .dstConn = 0,
+        .src = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
+        .dst = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
+        .intTC = ENABLE,
+        .intErr = ENABLE,
+        .linkedList = 0,
     };
     GPDMA_SetupChannel(&cfg);
 
@@ -280,18 +276,18 @@ static uint8_t GPDMA_ClearIntPendingTest(void) {
     TEST_INIT();
 
     GPDMA_Channel_CFG_T cfg = {
-        .channelNum   = GPDMA_CH_0,
-        .srcMemAddr   = (uint32_t)(uintptr_t)gpdma_src_buf,
-        .dstMemAddr   = (uint32_t)(uintptr_t)gpdma_dst_buf,
+        .channelNum = GPDMA_CH_0,
+        .srcMemAddr = (uint32_t)(uintptr_t)gpdma_src_buf,
+        .dstMemAddr = (uint32_t)(uintptr_t)gpdma_dst_buf,
         .transferSize = 4,
-        .type         = GPDMA_M2M,
-        .srcConn      = 0,
-        .dstConn      = 0,
-        .src          = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
-        .dst          = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
-        .intTC        = ENABLE,
-        .intErr       = ENABLE,
-        .linkedList   = 0,
+        .type = GPDMA_M2M,
+        .srcConn = 0,
+        .dstConn = 0,
+        .src = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
+        .dst = {.width = GPDMA_WORD, .burst = GPDMA_BSIZE_4, .increment = ENABLE},
+        .intTC = ENABLE,
+        .intErr = ENABLE,
+        .linkedList = 0,
     };
     GPDMA_SetupChannel(&cfg);
     GPDMA_ChannelStart(GPDMA_CH_0);
@@ -315,4 +311,4 @@ static uint8_t GPDMA_ClearIntPendingTest(void) {
     ASSERT_TEST();
 }
 
-#endif  // UNIT_TESTING_ENABLED
+#endif // UNIT_TESTING_ENABLED

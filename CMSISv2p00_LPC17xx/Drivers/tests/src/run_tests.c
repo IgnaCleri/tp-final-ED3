@@ -15,4 +15,4 @@ void run_all_tests(void) {
     UART_RunTests();
 }
 
-#endif  // UNIT_TESTING_ENABLED
+#endif // UNIT_TESTING_ENABLED
