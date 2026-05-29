@@ -1,0 +1,51 @@
+name: Repo Hygiene
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  hygiene:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify ignored local-only paths stay out of Git
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          tracked_files="$(git ls-files)"
+          local_only_pattern='^\.idea/|^\.mcuxpressoide_packages_support/'
+          generated_pattern='(^|/)(Debug|Release)/|\.axf$|\.bin$|\.d$|\.map$|\.o$|\.pyc$|\.su$'
+
+          if printf '%s\n' "$tracked_files" | grep -Eq "$local_only_pattern"; then
+            echo "Found local-only files tracked in Git (.idea or .mcuxpressoide_packages_support)."
+            exit 1
+          fi
+
+          if printf '%s\n' "$tracked_files" | grep -Eq "$generated_pattern"; then
+            echo "Found generated build artifacts tracked in Git."
+            exit 1
+          fi
+
+      - name: Verify required ignore rules
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          grep -Fx '/.idea/' .gitignore > /dev/null
+          grep -Fx '/.mcuxpressoide_packages_support/' .gitignore > /dev/null
+
+      - name: Verify README file references
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -f README.md
+          test -f diagrama_modulos_tp_final.png
+          grep -F 'diagrama_modulos_tp_final.png' README.md > /dev/null

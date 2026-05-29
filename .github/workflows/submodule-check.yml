@@ -1,0 +1,45 @@
+name: Submodule Check
+
+on:
+  push:
+    paths:
+      - ".gitmodules"
+      - ".github/workflows/submodule-check.yml"
+      - "CMSISv2p00_LPC17xx"
+      - "main/.cproject"
+      - "README.md"
+  pull_request:
+    paths:
+      - ".gitmodules"
+      - ".github/workflows/submodule-check.yml"
+      - "CMSISv2p00_LPC17xx"
+      - "main/.cproject"
+      - "README.md"
+
+jobs:
+  submodule:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository with submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Verify gitlink registration
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git ls-files --stage CMSISv2p00_LPC17xx | grep -Eq '^160000 '
+
+      - name: Verify submodule checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git submodule status --recursive
+          test -d CMSISv2p00_LPC17xx
+          test -f CMSISv2p00_LPC17xx/README.md

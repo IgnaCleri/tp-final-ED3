@@ -5,24 +5,62 @@ on:
     paths:
       - ".clang-format"
       - ".github/workflows/clang-format.yml"
-      - "main/src/main.c"
+      - "main/src/**"
+      - "main/inc/**"
   pull_request:
     paths:
       - ".clang-format"
       - ".github/workflows/clang-format.yml"
-      - "main/src/main.c"
+      - "main/src/**"
+      - "main/inc/**"
 
 jobs:
   check-format:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install clang-format
         run: sudo apt-get update && sudo apt-get install -y clang-format
 
-      - name: Verify formatting
+      - name: Collect changed firmware files
+        id: changed-files
+        shell: bash
         run: |
-          clang-format --dry-run --Werror main/src/main.c
+          set -euo pipefail
+
+          if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+            git fetch --no-tags --depth=1 origin "${{ github.base_ref }}"
+            mapfile -t files < <(git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" -- 'main/src/*.c' 'main/inc/*.h')
+          elif [[ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]]; then
+            mapfile -t files < <(git diff --name-only --diff-filter=ACMR "${{ github.event.before }}" "${{ github.sha }}" -- 'main/src/*.c' 'main/inc/*.h')
+          else
+            mapfile -t files < <(git diff-tree --no-commit-id --name-only -r "${{ github.sha }}" -- 'main/src/*.c' 'main/inc/*.h')
+          fi
+
+          if [[ ${#files[@]} -eq 0 ]]; then
+            echo "files=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          {
+            echo "files<<EOF"
+            printf '%s\n' "${files[@]}"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Verify formatting
+        if: steps.changed-files.outputs.files != ''
+        shell: bash
+        run: |
+          printf '%s\n' "${{ steps.changed-files.outputs.files }}" | xargs -r clang-format --dry-run --Werror
+
+      - name: Skip when no firmware files changed
+        if: steps.changed-files.outputs.files == ''
+        run: echo "No changed firmware files to format-check."

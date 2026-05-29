@@ -1,0 +1,24 @@
+#!/bin/sh
+set -eu
+
+if ! git diff --cached --check --no-color; then
+    echo ""
+    echo "Corregi los problemas de whitespace antes de commitear."
+    exit 1
+fi
+
+staged_files="$(git diff --cached --name-only --diff-filter=ACMR)"
+
+if [ -z "$staged_files" ]; then
+    exit 0
+fi
+
+if printf '%s\n' "$staged_files" | grep -Eq '^\.idea/|^\.mcuxpressoide_packages_support/'; then
+    echo "No se permite commitear .idea/ ni .mcuxpressoide_packages_support/."
+    exit 1
+fi
+
+if printf '%s\n' "$staged_files" | grep -Eq '(^|/)(Debug|Release)/|\.axf$|\.bin$|\.d$|\.map$|\.o$|\.pyc$|\.su$'; then
+    echo "No se permite commitear artefactos generados de build."
+    exit 1
+fi
