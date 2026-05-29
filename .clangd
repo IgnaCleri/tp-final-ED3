@@ -1,0 +1,20 @@
+CompileFlags:
+  Add:
+    - --target=arm-none-eabi
+    - -mcpu=cortex-m3
+    - -mthumb
+    - -std=c11
+    - -DDEBUG
+    - -DCORE_M3
+    - -D__CODE_RED
+    - -D__LPC17XX__
+    - -D__REDLIB__
+    - -D__USE_CMSIS=CMSISv2p00_LPC17xx
+    - -ICMSISv2p00_LPC17xx/inc
+    - -ICMSISv2p00_LPC17xx/Drivers/inc
+    - -Imain/src
+    - -Iinc
+    - -Isrc
+
+Index:
+  Background: Build

@@ -1,39 +1,37 @@
-/*
- * Copyright 2022 NXP
- * NXP confidential.
- * This software is owned or controlled by NXP and may only be used strictly
- * in accordance with the applicable license terms.  By expressly accepting
- * such terms or by downloading, installing, activating and/or otherwise using
- * the software, you are agreeing that you have read, and that you agree to
- * comply with and are bound by, such license terms.  If you do not agree to
- * be bound by the applicable license terms, then you may not retain, install,
- * activate or otherwise use the software.
- */
+#include "adc.h"
+#include "dac.h"
+#include "dma.h"
+#include "servo.h"
+#include "timer0.h"
+#include "uart.h"
 
-#ifdef __USE_CMSIS
-#include "LPC17xx.h"
-#endif
+volatile mando_t *mando_data = (volatile mando_t *)MANDO_DATA_ADDR;
+uint8_t posicion_actual = 0;
+uint8_t posicion_anterior = 0;
 
-#include <cr_section_macros.h>
+int main(void)
+{
+    mando_data->gatillo = 0;
+    mando_data->joystick = 0;
+    mando_data->botones = 0;
 
-#include <stdio.h>
+    DAC_GenerarSenoidal();
+    conf_uart2();
+    dma_uart();
+    servo_pines();
+    conf_servo();
+    DAC_ConfigurarSalidaDMA();
+    DMA_ConfigurarSirenaDAC();
+    TIMER0_ConfigurarSirena();
+    ADC_Config();
 
-// TODO: insert other include files here
-
-// TODO: insert other definitions and declarations here
-
-int main(void) {
-
-    printf("Hello World\n");
-
-    // Force the counter to be placed into memory
-    volatile static int i = 0;
-    // Enter an infinite loop, just incrementing a counter
-    while (1) {
-        i++;
-        // "Dummy" NOP to allow source level single
-        // stepping of tight while() loop
-        __asm volatile("nop");
+    while (1)
+    {
+        posicion_actual = mando_data->joystick;
+        if (posicion_actual != posicion_anterior)
+        {
+            posicion_anterior = posicion_actual;
+            servo_actualizar(posicion_actual);
+        }
     }
-    return 0;
 }

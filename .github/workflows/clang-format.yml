@@ -6,17 +6,11 @@ on:
       - ".clang-format"
       - ".github/workflows/clang-format.yml"
       - "main/src/main.c"
-      - "PWM/src/PWM.c"
-      - "uart-bt/src/uart-bt.c"
-      - "Dac-Buzzer/src/Dac-Buzzer.c"
   pull_request:
     paths:
       - ".clang-format"
       - ".github/workflows/clang-format.yml"
       - "main/src/main.c"
-      - "PWM/src/PWM.c"
-      - "uart-bt/src/uart-bt.c"
-      - "Dac-Buzzer/src/Dac-Buzzer.c"
 
 jobs:
   check-format:
@@ -31,8 +25,4 @@ jobs:
 
       - name: Verify formatting
         run: |
-          clang-format --dry-run --Werror \
-            main/src/main.c \
-            PWM/src/PWM.c \
-            uart-bt/src/uart-bt.c \
-            Dac-Buzzer/src/Dac-Buzzer.c
+          clang-format --dry-run --Werror main/src/main.c
