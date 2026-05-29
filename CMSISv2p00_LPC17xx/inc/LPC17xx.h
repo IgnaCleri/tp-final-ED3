@@ -34,7 +34,7 @@
 
 typedef enum IRQn {
     /******  Cortex-M3 Processor Exceptions Numbers
-       ***************************************************/
+     ***************************************************/
     NonMaskableInt_IRQn = -14,   /*!< 2 Non Maskable Interrupt                         */
     MemoryManagement_IRQn = -12, /*!< 4 Cortex-M3 Memory Management Interrupt          */
     BusFault_IRQn = -11,         /*!< 5 Cortex-M3 Bus Fault Interrupt                  */
@@ -45,7 +45,7 @@ typedef enum IRQn {
     SysTick_IRQn = -1,           /*!< 15 Cortex-M3 System Tick Interrupt               */
 
     /******  LPC17xx Specific Interrupt Numbers
-       *******************************************************/
+     *******************************************************/
     WDT_IRQn = 0,          /*!< Watchdog Timer Interrupt                         */
     TIMER0_IRQn = 1,       /*!< Timer0 Interrupt                                 */
     TIMER1_IRQn = 2,       /*!< Timer1 Interrupt                                 */

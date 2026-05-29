@@ -85,8 +85,9 @@ extern "C" {
 
 /* QEI Capture Mode Option */
 #define QEI_CAPMODE_2X ((uint32_t)(0)) /**< Capture mode: Only Phase-A edges are counted (2X) */
-#define QEI_CAPMODE_4X ((uint32_t)(1)) /**< Capture mode: BOTH PhA and PhB edges are counted       \
-                                          (4X)*/
+#define QEI_CAPMODE_4X                                                                             \
+    ((uint32_t)(1)) /**< Capture mode: BOTH PhA and PhB edges are counted                          \
+                       (4X)*/
 
 /* QEI Invert Index Signal Option */
 #define QEI_INVINX_NONE ((uint32_t)(0)) /**< Invert Index signal option: None */
@@ -175,8 +176,9 @@ extern "C" {
                                                                          * Macro defines for QEI
                                                                          * Interrupt Status register
                                                                          **********************************************************************/
-#define QEI_INTSTAT_INX_Int ((uint32_t)(1 << 0)) /**< Indicates that an index pulse was detected   \
-                                                  */
+#define QEI_INTSTAT_INX_Int                                                                        \
+    ((uint32_t)(1 << 0)) /**< Indicates that an index pulse was detected                           \
+                          */
 #define QEI_INTSTAT_TIM_Int                                                                        \
     ((uint32_t)(1 << 1)) /**< Indicates that a velocity timer overflow occurred */
 #define QEI_INTSTAT_VELC_Int                                                                       \
@@ -421,8 +423,9 @@ extern "C" {
 #define QEI_IECLR_POS2REV_Int                                                                      \
     ((uint32_t)(1 << 12)) /**< Clear Enabled Interrupt Bit that Combined position 2 and revolution \
                              count interrupt */
-#define QEI_IECLR_BITMASK ((uint32_t)(0x1FFF)) /**< QEI Interrupt Enable Clear register bit-mask   \
-                                                */
+#define QEI_IECLR_BITMASK                                                                          \
+    ((uint32_t)(0x1FFF)) /**< QEI Interrupt Enable Clear register bit-mask                         \
+                          */
 
 /* ---------------- CHECK PARAMETER DEFINITIONS ---------------------------- */
 /* Macro check QEI peripheral */
