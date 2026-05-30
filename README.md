@@ -105,14 +105,22 @@ El diseño electrónico se concibió de manera **modular**, permitiendo un desar
 A continuación, se describen los módulos principales cuyos esquemáticos están documentados:
 - **LPC:** Conexiones principales del microcontrolador LPC1769.
   ![Esquemático LPC](docs/imagenes/LPC.png)
+  <br>
 - **Alimentación:** Etapa de regulación y distribución de potencia.
+<br>
   ![Esquemático Alimentación](docs/imagenes/Alimentacion.png)
+  <br>
 - **Bluetooth:** Interfaz para el módulo HC-05.
+<br>
   ![Esquemático Bluetooth](docs/imagenes/Bluetooth.png)
+  <br>
 - **Sensores y Actuadores:** Módulos para el Fotoresistor (LDR), LEDs de iluminación y el Buzzer.
+<br>
   ![Esquemático Fotoresistor](docs/imagenes/Fotoresistor.png)
   <br>
+  <br>
   ![Esquemático LEDs](docs/imagenes/LEDs.png)
+  <br>
   <br>
   ![Esquemático Buzzer](docs/imagenes/Buzzer.png)
 
