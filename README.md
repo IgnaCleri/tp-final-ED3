@@ -41,7 +41,7 @@ Para cumplir con los objetivos, se planea la utilización de los siguientes mód
 ### 3.1. Diagrama general de componentes
 El siguiente esquema resume la arquitectura funcional prevista para el sistema, mostrando la relación entre el usuario, la etapa de control basada en LPC1769 y los distintos actuadores, sensores y módulos auxiliares.
 
-![Diagrama general de componentes](imagenes/diagrama_modulos_tp_final.png)
+![Diagrama general de componentes](docs/imagenes/diagrama_modulos_tp_final.png)
 
 ## 4. Metodología de Trabajo Propuesta
 El desarrollo se llevó a cabo siguiendo estas etapas planificadas:
@@ -104,15 +104,17 @@ El diseño electrónico se concibió de manera **modular**, permitiendo un desar
 
 A continuación, se describen los módulos principales cuyos esquemáticos están documentados:
 - **LPC:** Conexiones principales del microcontrolador LPC1769.
-  ![Esquemático LPC](imagenes/LPC.png)
+  ![Esquemático LPC](docs/imagenes/LPC.png)
 - **Alimentación:** Etapa de regulación y distribución de potencia.
-  ![Esquemático Alimentación](imagenes/Alimentacion.png)
+  ![Esquemático Alimentación](docs/imagenes/Alimentacion.png)
 - **Bluetooth:** Interfaz para el módulo HC-05.
-  ![Esquemático Bluetooth](imagenes/Bluetooth.png)
+  ![Esquemático Bluetooth](docs/imagenes/Bluetooth.png)
 - **Sensores y Actuadores:** Módulos para el Fotoresistor (LDR), LEDs de iluminación y el Buzzer.
-  ![Esquemático Fotoresistor](imagenes/Fotoresistor.png)
-  ![Esquemático LEDs](imagenes/LEDs.png)
-  ![Esquemático Buzzer](imagenes/Buzzer.png)
+  ![Esquemático Fotoresistor](docs/imagenes/Fotoresistor.png)
+  <br>
+  ![Esquemático LEDs](docs/imagenes/LEDs.png)
+  <br>
+  ![Esquemático Buzzer](docs/imagenes/Buzzer.png)
 
 ### 6.5. Diseño de la PCB Final
 Para la implementación física se optó por una placa de cobre de simple cara utilizando componentes de tecnología **THT** (*Through-Hole Technology* o tecnología de orificio pasante). En este tipo de componentes, los terminales atraviesan la placa a través de perforaciones y se sueldan en el lado opuesto.
@@ -125,12 +127,13 @@ Esta disposición permite que la soldadura sea accesible desde la parte inferior
 
 > **Nota sobre los LEDs:** El soldado de los diodos LED en la placa queda a disposición del desarrollador. Para un acabado más realista, se recomienda soldar cables a los pads de la PCB y montar los LEDs en la parte frontal del chasis del vehículo, simulando las ópticas delanteras.
 
-![Layout de la PCB Final](imagenes/PCBFINAL.png)
-![Pistas de la PCB](imagenes/Pistas.png)
+![Layout de la PCB Final](docs/imagenes/PCBFINAL.png)
+<br>
+![Pistas de la PCB](docs/imagenes/Pistas.png)
 
 **Descarga de Archivos de Diseño:**
 Los archivos fuente de KiCad, incluyendo el esquemático completo y el diseño de la PCB, se encuentran disponibles en el siguiente archivo comprimido:
-- [AutoRCPCB.zip](./AutoRCPCB.zip) (Incluye proyecto KiCad, esquemáticos y archivos de fabricación).
+- [AutoRCPCB.zip](./docs/AutoRCPCB.zip) (Incluye proyecto KiCad, esquemáticos y archivos de fabricación).
 
 ## 7. Bibliografía
 - NXP Semiconductors, "LPC176x/5x User manual (UM10360)".
