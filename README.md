@@ -4,7 +4,7 @@
 
 ---
 
-# Pre-informe de Proyecto Final
+# Informe Final de Proyecto Final
 **Título:** Diseño y Planificación de un Vehículo Terrestre Controlado Mediante Microcontrolador LPC1769
 
 **Integrantes:**
@@ -15,7 +15,7 @@
 ---
 
 ## 1. Introducción y Justificación
-El presente pre-informe detalla la propuesta para el desarrollo de un vehículo a control remoto basado en el microcontrolador LPC1769 (arquitectura Cortex-M3). El proyecto se desarrolla utilizando el IDE **MCUXpresso** de NXP, aprovechando sus herramientas de depuración y gestión de proyectos para sistemas embebidos. El proyecto busca integrar conocimientos de sistemas embebidos, manejo de periféricos en tiempo real y protocolos de comunicación inalámbrica.
+El presente informe detalla el desarrollo de un vehículo a control remoto basado en el microcontrolador LPC1769 (arquitectura Cortex-M3). El proyecto se desarrolla utilizando el IDE **MCUXpresso** de NXP, aprovechando sus herramientas de depuración y gestión de proyectos para sistemas embebidos. El proyecto busca integrar conocimientos de sistemas embebidos, manejo de periféricos en tiempo real y protocolos de comunicación inalámbrica.
  El sistema propuesto combinará la potencia de un motor brushless para la tracción y la precisión de un servomotor para la dirección, todo coordinado mediante señales de control digital y sensado ambiental.
 
 ## 2. Objetivos del Proyecto
@@ -41,10 +41,10 @@ Para cumplir con los objetivos, se planea la utilización de los siguientes mód
 ### 3.1. Diagrama general de componentes
 El siguiente esquema resume la arquitectura funcional prevista para el sistema, mostrando la relación entre el usuario, la etapa de control basada en LPC1769 y los distintos actuadores, sensores y módulos auxiliares.
 
-![Diagrama general de componentes](diagrama_modulos_tp_final.png)
+![Diagrama general de componentes](imagenes/diagrama_modulos_tp_final.png)
 
 ## 4. Metodología de Trabajo Propuesta
-El desarrollo se llevará a cabo siguiendo estas etapas planificadas:
+El desarrollo se llevó a cabo siguiendo estas etapas planificadas:
 
 ### 4.1. Construcción de la Estructura Mecánica y Electrónica
 1. **Chasis:** Se utilizará el diseño de hardware abierto ["Chassis 1/10 Adaptable DKS Basic"](https://www.printables.com/model/447947-chassis-110-adaptable-dks-basic). Se imprimirán las piezas en 3D asegurando durabilidad mecánica.
@@ -65,7 +65,74 @@ Se realizará el montaje electrónico sobre el chasis impreso, seguido de prueba
 ## 5. Resultados Esperados
 Se espera obtener un prototipo funcional capaz de navegar en superficies planas, respondiendo con baja latencia a los comandos del usuario y activando sistemas automáticos (como luces o bocina) según el entorno.
 
-## 6. Bibliografía Preliminar
+## 6. Documentación de la Placa Electrónica (PCB)
+El diseño de la PCB se centró en la creación de una plataforma centralizada para el LPC1769, garantizando la integridad de las señales y una distribución eficiente de la potencia para los actuadores.
+
+### 6.1. Características del Diseño
+- **Dimensiones:** 113mm x 83mm
+- **Capas:** Placa de simple cara de fabricación artesanal.
+
+### 6.2. Herramientas de Diseño
+- **Software:** KiCad
+- **Fabricación:** Método de transferencia de tóner.
+
+### 6.3. Lista de Componentes
+#### Electrónica de Control
+- **Resistencias (THT):**
+  - 220 $\Omega$ (x2)
+  - 1k $\Omega$ (x2)
+  - 10k $\Omega$ (x1)
+  - 2,2k $\Omega$ (x1)
+- **Semiconductores y Módulos:**
+  - Transistor NPN BC547 (x2)
+  - Diodo LED (x2)
+  - Fotoresistor LDR (x1)
+  - Módulo Bluetooth HC-05 (x1)
+  - Módulo Regulador de voltaje Step Down (x1)
+  - Buzzer Piezoeléctrico pasivo (x1)
+- **Conectividad:**
+  - Pines macho/hembra (x64)
+  - Pines macho/macho (x2)
+
+#### Actuadores y Alimentación
+- **Motor:** Brushless A2212 1400KV.
+- **Servo:** MG90S (Dirección).
+- **Batería:** Pack 4S de Li-ion.
+
+### 6.4. Esquema y Layout
+El diseño electrónico se concibió de manera **modular**, permitiendo un desarrollo y testeo independiente de cada etapa (Alimentación, Bluetooth, Sensores, etc.). Es importante destacar que, aunque los esquemáticos se presenten por separado para mayor claridad, **todos los módulos están integrados en una única placa de cobre (PCB)**.
+
+A continuación, se describen los módulos principales cuyos esquemáticos están documentados:
+- **LPC:** Conexiones principales del microcontrolador LPC1769.
+  ![Esquemático LPC](imagenes/LPC.png)
+- **Alimentación:** Etapa de regulación y distribución de potencia.
+  ![Esquemático Alimentación](imagenes/Alimentacion.png)
+- **Bluetooth:** Interfaz para el módulo HC-05.
+  ![Esquemático Bluetooth](imagenes/Bluetooth.png)
+- **Sensores y Actuadores:** Módulos para el Fotoresistor (LDR), LEDs de iluminación y el Buzzer.
+  ![Esquemático Fotoresistor](imagenes/Fotoresistor.png)
+  ![Esquemático LEDs](imagenes/LEDs.png)
+  ![Esquemático Buzzer](imagenes/Buzzer.png)
+
+### 6.5. Diseño de la PCB Final
+Para la implementación física se optó por una placa de cobre de simple cara utilizando componentes de tecnología **THT** (*Through-Hole Technology* o tecnología de orificio pasante). En este tipo de componentes, los terminales atraviesan la placa a través de perforaciones y se sueldan en el lado opuesto.
+
+**Estrategia de Diseño:**
+- **Capa Superior (Top):** Ubicación de los cuerpos de los componentes.
+- **Capa Inferior (Bottom):** Trazado de las pistas de cobre y puntos de soldadura.
+
+Esta disposición permite que la soldadura sea accesible desde la parte inferior mientras los componentes quedan organizados en la parte superior. Una ventaja clave de este planteo en el software de diseño es que **no es necesario reflejar (espejar) el diagrama a la hora de imprimir** para el método de transferencia de tóner, simplificando el proceso de fabricación casera.
+
+> **Nota sobre los LEDs:** El soldado de los diodos LED en la placa queda a disposición del desarrollador. Para un acabado más realista, se recomienda soldar cables a los pads de la PCB y montar los LEDs en la parte frontal del chasis del vehículo, simulando las ópticas delanteras.
+
+![Layout de la PCB Final](imagenes/PCBFINAL.png)
+![Pistas de la PCB](imagenes/Pistas.png)
+
+**Descarga de Archivos de Diseño:**
+Los archivos fuente de KiCad, incluyendo el esquemático completo y el diseño de la PCB, se encuentran disponibles en el siguiente archivo comprimido:
+- [AutoRCPCB.zip](./AutoRCPCB.zip) (Incluye proyecto KiCad, esquemáticos y archivos de fabricación).
+
+## 7. Bibliografía
 - NXP Semiconductors, "LPC176x/5x User manual (UM10360)".
 - David-A-T-M, "LPC17xx-CMSIS-Driver-Enhancement", disponible en: https://github.com/David-A-T-M/LPC17xx-CMSIS-Driver-Enhancement.git
 - "Chassis 1/10 Adaptable DKS Basic" project documentation, Printables.
