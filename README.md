@@ -103,26 +103,36 @@ El diseño de la PCB se centró en la creación de una plataforma centralizada p
 El diseño electrónico se concibió de manera **modular**, permitiendo un desarrollo y testeo independiente de cada etapa (Alimentación, Bluetooth, Sensores, etc.). Es importante destacar que, aunque los esquemáticos se presenten por separado para mayor claridad, **todos los módulos están integrados en una única placa de cobre (PCB)**.
 
 A continuación, se describen los módulos principales cuyos esquemáticos están documentados:
-- **LPC:** Conexiones principales del microcontrolador LPC1769.
-  ![Esquemático LPC](docs/imagenes/LPC.png)
-  <br>
-- **Alimentación:** Etapa de regulación y distribución de potencia.
-<br>
-  ![Esquemático Alimentación](docs/imagenes/Alimentacion.png)
-  <br>
-- **Bluetooth:** Interfaz para el módulo HC-05.
-<br>
-  ![Esquemático Bluetooth](docs/imagenes/Bluetooth.png)
-  <br>
-- **Sensores y Actuadores:** Módulos para el Fotoresistor (LDR), LEDs de iluminación y el Buzzer.
-<br>
-  ![Esquemático Fotoresistor](docs/imagenes/Fotoresistor.png)
-  <br>
-  <br>
-  ![Esquemático LEDs](docs/imagenes/LEDs.png)
-  <br>
-  <br>
-  ![Esquemático Buzzer](docs/imagenes/Buzzer.png)
+
+**Módulo LPC:**
+![Esquemático LPC](docs/imagenes/LPC.png)
+
+---
+
+**Módulo Alimentación:**
+![Esquemático Alimentación](docs/imagenes/Alimentacion.png)
+
+---
+
+**Módulo Bluetooth:**
+![Esquemático Bluetooth](docs/imagenes/Bluetooth.png)
+
+---
+
+**Sensores y Actuadores:**
+
+**Módulo Fotoresistor:**
+![Esquemático Fotoresistor](docs/imagenes/Fotoresistor.png)
+
+---
+
+**Módulo LEDs:**
+![Esquemático LEDs](docs/imagenes/LEDs.png)
+
+---
+
+**Módulo Buzzer:**
+![Esquemático Buzzer](docs/imagenes/Buzzer.png)
 
 ### 6.5. Diseño de la PCB Final
 Para la implementación física se optó por una placa de cobre de simple cara utilizando componentes de tecnología **THT** (*Through-Hole Technology* o tecnología de orificio pasante). En este tipo de componentes, los terminales atraviesan la placa a través de perforaciones y se sueldan en el lado opuesto.
@@ -135,9 +145,14 @@ Esta disposición permite que la soldadura sea accesible desde la parte inferior
 
 > **Nota sobre los LEDs:** El soldado de los diodos LED en la placa queda a disposición del desarrollador. Para un acabado más realista, se recomienda soldar cables a los pads de la PCB y montar los LEDs en la parte frontal del chasis del vehículo, simulando las ópticas delanteras.
 
+**Vista de Componentes (Top):**
 ![Layout de la PCB Final](docs/imagenes/PCBFINAL.png)
-<br>
+
+---
+
+**Vista de Pistas (Bottom):**
 ![Pistas de la PCB](docs/imagenes/Pistas.png)
+
 
 **Descarga de Archivos de Diseño:**
 Los archivos fuente de KiCad, incluyendo el esquemático completo y el diseño de la PCB, se encuentran disponibles en el siguiente archivo comprimido:
