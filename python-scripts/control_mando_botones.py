@@ -4,7 +4,7 @@ import time
 import sys
 
 # --- CONFIGURACIÓN ---
-BT_MAC = '00:25:03:01:6F:C5'  # Dirección MAC de tu HC-05
+BT_MAC = '10:06:1C:F4:CE:8E'  # Dirección MAC de tu HC-05
 BT_PORT = 1                   # Puerto/Canal estándar para HC-05
 SEND_INTERVAL = 0.01          # Intervalo de envío en segundos (100Hz - Máxima velocidad recomendada)
 

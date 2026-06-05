@@ -5,8 +5,10 @@
 #include "LPC17xx.h"
 #include "dac.h"
 #include "lpc17xx_gpdma.h"
+#include "lpc17xx_dac.h"
 
 static GPDMA_LLI_T lliSenoidal;
+uint8_t dac_enable=0;
 
 static uint32_t lli_control(uint32_t transferSize)
 {
@@ -48,4 +50,17 @@ void DMA_ConfigurarSirenaDAC(void)
 
     GPDMA_SetupChannel(&conDMA);
     GPDMA_ChannelStart(GPDMA_CH_3);
+    GPDMA_ChannelPause(GPDMA_CH_3);
+}
+
+void toggle_dac(){
+	if(dac_enable){
+		GPDMA_ChannelPause(GPDMA_CH_3);
+		dac_enable=0;
+		DAC_UpdateValue(0);
+	}
+	else{
+		GPDMA_ChannelResume(GPDMA_CH_3);
+		dac_enable=1;
+	}
 }

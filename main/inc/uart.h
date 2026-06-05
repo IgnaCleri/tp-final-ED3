@@ -9,9 +9,9 @@ typedef struct mando {
     uint8_t gatillo;
     uint8_t joystick;
     uint8_t botones;
-} mando_t;
+} __attribute__((packed)) mando_t;
 
-void conf_uart2(void);
+void conf_uart0(void);
 void dma_uart(void);
 
 #endif /* UART_H_ */

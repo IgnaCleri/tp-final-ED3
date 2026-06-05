@@ -2,34 +2,34 @@
 #include "lpc17xx_uart.h"
 #include "lpc17xx_gpdma.h"
 
-// Estructuras de configuración para DMA
+// Estructuras de configuracion para DMA
 GPDMA_LLI_T uart_lli;
 GPDMA_Channel_CFG_T dma_cfg = {0};
 
-void conf_uart2(void) {
-    // Configuración de pines para UART2 (P0.10 TX, P0.11 RX)
-    UART_PinConfig(UART_TX2_P0_10);
-    UART_PinConfig(UART_RX2_P0_11);
+void conf_uart0(void) {
+    // Configuracion de pines para UART0 (P0.2 TX, P0.3 RX)
+    UART_PinConfig(UART_TX0_P0_2);
+    UART_PinConfig(UART_RX0_P0_3);
 
-    UART_CFG_T confuart2 = {
+    UART_CFG_T confuart0 = {
         .baudRate = 115200,
         .parity = UART_PARITY_NONE,
         .dataBits = UART_DBITS_8,
         .stopBits = UART_STOPBIT_1,
     };
 
-    UART_Init(LPC_UART2, &confuart2);
+    UART_Init(LPC_UART0, &confuart0);
 
     UART_FIFO_CFG_T conf_fifo = {
         .resetRxBuf = ENABLE, .resetTxBuf = ENABLE, .dmaMode = ENABLE, .level = UART_FIFO_TRGLEV0};
 
-    UART_FIFOConfig(LPC_UART2, &conf_fifo);
+    UART_FIFOConfig(LPC_UART0, &conf_fifo);
 }
 
 void dma_uart(void) {
     GPDMA_Init();
 
-    uart_lli.srcAddr = (uint32_t)&LPC_UART2->RBR;
+    uart_lli.srcAddr = (uint32_t)&LPC_UART0->RBR;
     uart_lli.dstAddr = (uint32_t)MANDO_DATA_ADDR;
     uart_lli.nextLLI = (uint32_t)&uart_lli;
     uart_lli.control = 3 | (1 << 27);
@@ -39,7 +39,7 @@ void dma_uart(void) {
     dma_cfg.type = GPDMA_P2M;
     dma_cfg.srcMemAddr = 0;
     dma_cfg.dstMemAddr = (uint32_t)MANDO_DATA_ADDR;
-    dma_cfg.srcConn = GPDMA_UART2_Rx;
+    dma_cfg.srcConn = GPDMA_UART0_Rx;
     dma_cfg.dstConn = 0; // No usado para P2M
     dma_cfg.src.width = GPDMA_BYTE;
     dma_cfg.src.burst = GPDMA_BSIZE_1;
