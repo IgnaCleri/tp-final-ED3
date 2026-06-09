@@ -14,14 +14,16 @@ static void TIMER0_GenerarBufferDelay(void)
     const float pclkDac = 25000000.0f;
     int i;
 
-    for (i = 0; i < 200; i++) {
+    for (i = 0; i < 200; i++)
+    {
         float progreso = (float)i / (200 - 1);
         float barrido = (progreso < 0.5f) ? (2.0f * progreso) : (2.0f * (1.0f - progreso));
         float frecuencia = 800.0f + (barrido * (2000.0f - 800.0f));
         float delayFloat = pclkDac / (128.0f * frecuencia);
         uint32_t delay = (uint32_t)(delayFloat + 0.5f);
 
-        if (delay > 65535U) {
+        if (delay > 65535U)
+        {
             delay = 65535U;
         }
 
@@ -58,7 +60,8 @@ void TIMER0_IRQHandler(void)
     TIM_ClearIntPending(LPC_TIM0, TIM_MR0_INT);
 
     indiceDelay++;
-    if (indiceDelay >= 200U) {
+    if (indiceDelay >= 200U)
+    {
         indiceDelay = 0;
     }
 

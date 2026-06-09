@@ -27,8 +27,9 @@
 // The entry point for the C++ library startup
 //
 //*****************************************************************************
-extern "C" {
-extern void __libc_init_array(void);
+extern "C"
+{
+    extern void __libc_init_array(void);
 }
 #endif
 #endif
@@ -38,81 +39,82 @@ extern void __libc_init_array(void);
 
 //*****************************************************************************
 #if defined(__cplusplus)
-extern "C" {
+extern "C"
+{
 #endif
 
 //*****************************************************************************
 #if defined(__USE_CMSIS) || defined(__USE_LPCOPEN)
-// Declaration of external SystemInit function
-extern void SystemInit(void);
+    // Declaration of external SystemInit function
+    extern void SystemInit(void);
 #endif
 
-//*****************************************************************************
-//
-// Forward declaration of the default handlers. These are aliased.
-// When the application defines a handler (with the same name), this will
-// automatically take precedence over these weak definitions
-//
-//*****************************************************************************
-void ResetISR(void);
-WEAK void NMI_Handler(void);
-WEAK void HardFault_Handler(void);
-WEAK void MemManage_Handler(void);
-WEAK void BusFault_Handler(void);
-WEAK void UsageFault_Handler(void);
-WEAK void SVC_Handler(void);
-WEAK void DebugMon_Handler(void);
-WEAK void PendSV_Handler(void);
-WEAK void SysTick_Handler(void);
-WEAK void IntDefaultHandler(void);
+    //*****************************************************************************
+    //
+    // Forward declaration of the default handlers. These are aliased.
+    // When the application defines a handler (with the same name), this will
+    // automatically take precedence over these weak definitions
+    //
+    //*****************************************************************************
+    void ResetISR(void);
+    WEAK void NMI_Handler(void);
+    WEAK void HardFault_Handler(void);
+    WEAK void MemManage_Handler(void);
+    WEAK void BusFault_Handler(void);
+    WEAK void UsageFault_Handler(void);
+    WEAK void SVC_Handler(void);
+    WEAK void DebugMon_Handler(void);
+    WEAK void PendSV_Handler(void);
+    WEAK void SysTick_Handler(void);
+    WEAK void IntDefaultHandler(void);
 
-//*****************************************************************************
-//
-// Forward declaration of the specific IRQ handlers. These are aliased
-// to the IntDefaultHandler, which is a 'forever' loop. When the application
-// defines a handler (with the same name), this will automatically take
-// precedence over these weak definitions
-//
-//*****************************************************************************
-void WDT_IRQHandler(void) ALIAS(IntDefaultHandler);
-void TIMER0_IRQHandler(void) ALIAS(IntDefaultHandler);
-void TIMER1_IRQHandler(void) ALIAS(IntDefaultHandler);
-void TIMER2_IRQHandler(void) ALIAS(IntDefaultHandler);
-void TIMER3_IRQHandler(void) ALIAS(IntDefaultHandler);
-void UART0_IRQHandler(void) ALIAS(IntDefaultHandler);
-void UART1_IRQHandler(void) ALIAS(IntDefaultHandler);
-void UART2_IRQHandler(void) ALIAS(IntDefaultHandler);
-void UART3_IRQHandler(void) ALIAS(IntDefaultHandler);
-void PWM1_IRQHandler(void) ALIAS(IntDefaultHandler);
-void I2C0_IRQHandler(void) ALIAS(IntDefaultHandler);
-void I2C1_IRQHandler(void) ALIAS(IntDefaultHandler);
-void I2C2_IRQHandler(void) ALIAS(IntDefaultHandler);
-void SPI_IRQHandler(void) ALIAS(IntDefaultHandler);
-void SSP0_IRQHandler(void) ALIAS(IntDefaultHandler);
-void SSP1_IRQHandler(void) ALIAS(IntDefaultHandler);
-void PLL0_IRQHandler(void) ALIAS(IntDefaultHandler);
-void RTC_IRQHandler(void) ALIAS(IntDefaultHandler);
-void EINT0_IRQHandler(void) ALIAS(IntDefaultHandler);
-void EINT1_IRQHandler(void) ALIAS(IntDefaultHandler);
-void EINT2_IRQHandler(void) ALIAS(IntDefaultHandler);
-void EINT3_IRQHandler(void) ALIAS(IntDefaultHandler);
-void ADC_IRQHandler(void) ALIAS(IntDefaultHandler);
-void BOD_IRQHandler(void) ALIAS(IntDefaultHandler);
-void USB_IRQHandler(void) ALIAS(IntDefaultHandler);
-void CAN_IRQHandler(void) ALIAS(IntDefaultHandler);
-void DMA_IRQHandler(void) ALIAS(IntDefaultHandler);
-void I2S_IRQHandler(void) ALIAS(IntDefaultHandler);
+    //*****************************************************************************
+    //
+    // Forward declaration of the specific IRQ handlers. These are aliased
+    // to the IntDefaultHandler, which is a 'forever' loop. When the application
+    // defines a handler (with the same name), this will automatically take
+    // precedence over these weak definitions
+    //
+    //*****************************************************************************
+    void WDT_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void TIMER0_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void TIMER1_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void TIMER2_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void TIMER3_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void UART0_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void UART1_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void UART2_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void UART3_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void PWM1_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void I2C0_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void I2C1_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void I2C2_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void SPI_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void SSP0_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void SSP1_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void PLL0_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void RTC_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void EINT0_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void EINT1_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void EINT2_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void EINT3_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void ADC_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void BOD_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void USB_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void CAN_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void DMA_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void I2S_IRQHandler(void) ALIAS(IntDefaultHandler);
 #if defined(__USE_LPCOPEN)
-void ETH_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void ETH_IRQHandler(void) ALIAS(IntDefaultHandler);
 #else
 void ENET_IRQHandler(void) ALIAS(IntDefaultHandler);
 #endif
-void RIT_IRQHandler(void) ALIAS(IntDefaultHandler);
-void MCPWM_IRQHandler(void) ALIAS(IntDefaultHandler);
-void QEI_IRQHandler(void) ALIAS(IntDefaultHandler);
-void PLL1_IRQHandler(void) ALIAS(IntDefaultHandler);
-void USBActivity_IRQHandler(void) ALIAS(IntDefaultHandler);
-void CANActivity_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void RIT_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void MCPWM_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void QEI_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void PLL1_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void USBActivity_IRQHandler(void) ALIAS(IntDefaultHandler);
+    void CANActivity_IRQHandler(void) ALIAS(IntDefaultHandler);
 
 //*****************************************************************************
 //
@@ -122,22 +124,22 @@ void CANActivity_IRQHandler(void) ALIAS(IntDefaultHandler);
 //
 //*****************************************************************************
 #if defined(__REDLIB__)
-extern void __main(void);
+    extern void __main(void);
 #endif
-extern int main(void);
-//*****************************************************************************
-//
-// External declaration for the pointer to the stack top from the Linker Script
-//
-//*****************************************************************************
-extern void _vStackTop(void);
+    extern int main(void);
+    //*****************************************************************************
+    //
+    // External declaration for the pointer to the stack top from the Linker Script
+    //
+    //*****************************************************************************
+    extern void _vStackTop(void);
 
-//*****************************************************************************
-//
-// External declaration for LPC MCU vector table checksum from  Linker Script
-//
-//*****************************************************************************
-WEAK extern void __valid_user_code_checksum();
+    //*****************************************************************************
+    //
+    // External declaration for LPC MCU vector table checksum from  Linker Script
+    //
+    //*****************************************************************************
+    WEAK extern void __valid_user_code_checksum();
 
 //*****************************************************************************
 #if defined(__cplusplus)
@@ -218,7 +220,8 @@ __attribute__((used, section(".isr_vector"))) void (*const g_pfnVectors[])(void)
 // memory.
 //*****************************************************************************
 __attribute__((section(".after_vectors"))) void data_init(unsigned int romstart, unsigned int start,
-                                                          unsigned int len) {
+                                                          unsigned int len)
+{
     unsigned int *pulDest = (unsigned int *)start;
     unsigned int *pulSrc = (unsigned int *)romstart;
     unsigned int loop;
@@ -226,7 +229,8 @@ __attribute__((section(".after_vectors"))) void data_init(unsigned int romstart,
         *pulDest++ = *pulSrc++;
 }
 
-__attribute__((section(".after_vectors"))) void bss_init(unsigned int start, unsigned int len) {
+__attribute__((section(".after_vectors"))) void bss_init(unsigned int start, unsigned int len)
+{
     unsigned int *pulDest = (unsigned int *)start;
     unsigned int loop;
     for (loop = 0; loop < len; loop = loop + 4)
@@ -250,7 +254,8 @@ extern unsigned int __bss_section_table_end;
 // Sets up a simple runtime environment and initializes the C/C++
 // library.
 //*****************************************************************************
-__attribute__((section(".after_vectors"))) void ResetISR(void) {
+__attribute__((section(".after_vectors"))) void ResetISR(void)
+{
 
     //
     // Copy the data sections from flash to SRAM.
@@ -262,7 +267,8 @@ __attribute__((section(".after_vectors"))) void ResetISR(void) {
     SectionTableAddr = &__data_section_table;
 
     // Copy the data sections from flash to SRAM.
-    while (SectionTableAddr < &__data_section_table_end) {
+    while (SectionTableAddr < &__data_section_table_end)
+    {
         LoadAddr = *SectionTableAddr++;
         ExeAddr = *SectionTableAddr++;
         SectionLen = *SectionTableAddr++;
@@ -270,7 +276,8 @@ __attribute__((section(".after_vectors"))) void ResetISR(void) {
     }
     // At this point, SectionTableAddr = &__bss_section_table;
     // Zero fill the bss segment
-    while (SectionTableAddr < &__bss_section_table_end) {
+    while (SectionTableAddr < &__bss_section_table_end)
+    {
         ExeAddr = *SectionTableAddr++;
         SectionLen = *SectionTableAddr++;
         bss_init(ExeAddr, SectionLen);
@@ -297,7 +304,8 @@ __attribute__((section(".after_vectors"))) void ResetISR(void) {
     //
     // main() shouldn't return, but if it does, we'll just enter an infinite loop
     //
-    while (1) {
+    while (1)
+    {
         ;
     }
 }
@@ -306,48 +314,66 @@ __attribute__((section(".after_vectors"))) void ResetISR(void) {
 // Default exception handlers. Override the ones here by defining your own
 // handler routines in your application code.
 //*****************************************************************************
-__attribute__((section(".after_vectors"))) void NMI_Handler(void) {
-    while (1) {
+__attribute__((section(".after_vectors"))) void NMI_Handler(void)
+{
+    while (1)
+    {
     }
 }
 
-__attribute__((section(".after_vectors"))) void HardFault_Handler(void) {
-    while (1) {
+__attribute__((section(".after_vectors"))) void HardFault_Handler(void)
+{
+    while (1)
+    {
     }
 }
 
-__attribute__((section(".after_vectors"))) void MemManage_Handler(void) {
-    while (1) {
+__attribute__((section(".after_vectors"))) void MemManage_Handler(void)
+{
+    while (1)
+    {
     }
 }
 
-__attribute__((section(".after_vectors"))) void BusFault_Handler(void) {
-    while (1) {
+__attribute__((section(".after_vectors"))) void BusFault_Handler(void)
+{
+    while (1)
+    {
     }
 }
 
-__attribute__((section(".after_vectors"))) void UsageFault_Handler(void) {
-    while (1) {
+__attribute__((section(".after_vectors"))) void UsageFault_Handler(void)
+{
+    while (1)
+    {
     }
 }
 
-__attribute__((section(".after_vectors"))) void SVC_Handler(void) {
-    while (1) {
+__attribute__((section(".after_vectors"))) void SVC_Handler(void)
+{
+    while (1)
+    {
     }
 }
 
-__attribute__((section(".after_vectors"))) void DebugMon_Handler(void) {
-    while (1) {
+__attribute__((section(".after_vectors"))) void DebugMon_Handler(void)
+{
+    while (1)
+    {
     }
 }
 
-__attribute__((section(".after_vectors"))) void PendSV_Handler(void) {
-    while (1) {
+__attribute__((section(".after_vectors"))) void PendSV_Handler(void)
+{
+    while (1)
+    {
     }
 }
 
-__attribute__((section(".after_vectors"))) void SysTick_Handler(void) {
-    while (1) {
+__attribute__((section(".after_vectors"))) void SysTick_Handler(void)
+{
+    while (1)
+    {
     }
 }
 
@@ -357,7 +383,9 @@ __attribute__((section(".after_vectors"))) void SysTick_Handler(void) {
 // handler is not present in the application code.
 //
 //*****************************************************************************
-__attribute__((section(".after_vectors"))) void IntDefaultHandler(void) {
-    while (1) {
+__attribute__((section(".after_vectors"))) void IntDefaultHandler(void)
+{
+    while (1)
+    {
     }
 }

@@ -6,11 +6,9 @@
 #include "uart.h"
 #include "stdio.h"
 
-
 volatile mando_t *mando_data = (volatile mando_t *)MANDO_DATA_ADDR;
 uint8_t posicion_actual = 0;
 uint8_t posicion_anterior = 0;
-
 
 int main(void)
 {
@@ -36,8 +34,9 @@ int main(void)
             posicion_anterior = posicion_actual;
             servo_actualizar(posicion_actual);
         }
-        if(mando_data->botones==1){
-			//toggle_dac();
+        if (mando_data->botones == 1)
+        {
+            // toggle_dac();
         }
     }
 }

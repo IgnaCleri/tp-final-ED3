@@ -6,7 +6,8 @@
 GPDMA_LLI_T uart_lli;
 GPDMA_Channel_CFG_T dma_cfg = {0};
 
-void conf_uart0(void) {
+void conf_uart0(void)
+{
     // Configuracion de pines para UART0 (P0.2 TX, P0.3 RX)
     UART_PinConfig(UART_TX0_P0_2);
     UART_PinConfig(UART_RX0_P0_3);
@@ -26,7 +27,8 @@ void conf_uart0(void) {
     UART_FIFOConfig(LPC_UART0, &conf_fifo);
 }
 
-void dma_uart(void) {
+void dma_uart(void)
+{
     GPDMA_Init();
 
     uart_lli.srcAddr = (uint32_t)&LPC_UART0->RBR;

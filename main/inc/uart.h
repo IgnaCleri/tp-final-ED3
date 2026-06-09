@@ -5,7 +5,8 @@
 
 #define MANDO_DATA_ADDR 0x20080000UL
 
-typedef struct mando {
+typedef struct mando
+{
     uint8_t gatillo;
     uint8_t joystick;
     uint8_t botones;

@@ -3,7 +3,8 @@
 #include "lpc17xx_gpio.h"
 #include "lpc17xx_pinsel.h"
 
-void ADC_Config(void) {
+void ADC_Config(void)
+{
     PINSEL_CFG_T PinCfg;
     PinCfg.port = 0;
     PinCfg.pin = 22;
@@ -24,13 +25,16 @@ void ADC_Config(void) {
     NVIC_EnableIRQ(ADC_IRQn);
 }
 
-void ADC_IRQHandler(void) {
+void ADC_IRQHandler(void)
+{
     uint16_t adc_value = ADC_ChannelGetData(ADC_CHANNEL_0);
 
-    if (adc_value > 400) {
+    if (adc_value > 400)
+    {
         GPIO_SetPins(0, (1 << 22));
     }
-    else {
-       GPIO_ClearPins(0, (1 << 22));
+    else
+    {
+        GPIO_ClearPins(0, (1 << 22));
     }
 }

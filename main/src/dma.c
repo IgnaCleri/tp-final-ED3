@@ -8,15 +8,13 @@
 #include "lpc17xx_dac.h"
 
 static GPDMA_LLI_T lliSenoidal;
-uint8_t dac_enable=0;
+uint8_t dac_enable = 0;
 
 static uint32_t lli_control(uint32_t transferSize)
 {
     return GPDMA_DMACCxControl_TransferSize(transferSize) |
-           GPDMA_DMACCxControl_SBSize(GPDMA_BSIZE_1) |
-           GPDMA_DMACCxControl_DBSize(GPDMA_BSIZE_1) |
-           GPDMA_DMACCxControl_SWidth(GPDMA_HALFWORD) |
-           GPDMA_DMACCxControl_DWidth(GPDMA_HALFWORD) |
+           GPDMA_DMACCxControl_SBSize(GPDMA_BSIZE_1) | GPDMA_DMACCxControl_DBSize(GPDMA_BSIZE_1) |
+           GPDMA_DMACCxControl_SWidth(GPDMA_HALFWORD) | GPDMA_DMACCxControl_DWidth(GPDMA_HALFWORD) |
            GPDMA_DMACCxControl_SI;
 }
 
@@ -53,14 +51,17 @@ void DMA_ConfigurarSirenaDAC(void)
     GPDMA_ChannelPause(GPDMA_CH_3);
 }
 
-void toggle_dac(){
-	if(dac_enable){
-		GPDMA_ChannelPause(GPDMA_CH_3);
-		dac_enable=0;
-		DAC_UpdateValue(0);
-	}
-	else{
-		GPDMA_ChannelResume(GPDMA_CH_3);
-		dac_enable=1;
-	}
+void toggle_dac()
+{
+    if (dac_enable)
+    {
+        GPDMA_ChannelPause(GPDMA_CH_3);
+        dac_enable = 0;
+        DAC_UpdateValue(0);
+    }
+    else
+    {
+        GPDMA_ChannelResume(GPDMA_CH_3);
+        dac_enable = 1;
+    }
 }

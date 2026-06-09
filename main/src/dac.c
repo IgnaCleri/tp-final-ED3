@@ -4,7 +4,7 @@
 
 #include "lpc17xx_dac.h"
 
-static uint16_t * const vectorDAC = (uint16_t *)0x2007C000UL;
+static uint16_t *const vectorDAC = (uint16_t *)0x2007C000UL;
 
 void DAC_ConfigurarSalidaDMA(void)
 {
@@ -26,11 +26,13 @@ void DAC_GenerarSenoidal(void)
     const float dosPi = 2.0f * acosf(-1.0f);
     int i;
 
-    for (i = 0; i < 128; i++) {
+    for (i = 0; i < 128; i++)
+    {
         float angulo = (dosPi * i) / 128.0f;
         uint32_t muestra = (uint32_t)(512.0f + (511.0f * sinf(angulo)));
 
-        if (muestra > 1023U) {
+        if (muestra > 1023U)
+        {
             muestra = 1023U;
         }
 
@@ -38,17 +40,8 @@ void DAC_GenerarSenoidal(void)
     }
 }
 
-void DAC_ActualizarDelay(uint16_t delay)
-{
-    DAC_SetDMATimeOut(delay);
-}
+void DAC_ActualizarDelay(uint16_t delay) { DAC_SetDMATimeOut(delay); }
 
-uint16_t *DAC_ObtenerBufferSirena(void)
-{
-    return vectorDAC;
-}
+uint16_t *DAC_ObtenerBufferSirena(void) { return vectorDAC; }
 
-uint32_t DAC_ObtenerCantidadMuestrasSirena(void)
-{
-    return 128U;
-}
+uint32_t DAC_ObtenerCantidadMuestrasSirena(void) { return 128U; }

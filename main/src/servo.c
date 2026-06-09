@@ -4,7 +4,8 @@
 
 MCPWM_CHANNEL_CFG_Type mcpwmCfg = {0};
 
-void servo_pines(void) {
+void servo_pines(void)
+{
     PINSEL_CFG_T pinCfg;
 
     pinCfg.port = PORT_1;
@@ -16,7 +17,8 @@ void servo_pines(void) {
     PINSEL_ConfigPin(&pinCfg);
 }
 
-void conf_servo(void) {
+void conf_servo(void)
+{
     MCPWM_Init(LPC_MCPWM);
 
     mcpwmCfg.channelType = MCPWM_CHANNEL_EDGE_MODE;
@@ -33,13 +35,15 @@ void conf_servo(void) {
     MCPWM_Start(LPC_MCPWM, 1, 0, 0);
 }
 
-uint32_t calcular_ticks_servo(uint8_t valor_entrada) {
+uint32_t calcular_ticks_servo(uint8_t valor_entrada)
+{
     uint32_t duty_escalado = 1250 - (((uint32_t)valor_entrada * 1000) / 255);
 
     return (PERIOD_TICKS * duty_escalado) / 10000;
 }
 
-void servo_actualizar(uint8_t valor_entrada) {
+void servo_actualizar(uint8_t valor_entrada)
+{
     mcpwmCfg.channelPulsewidthValue = calcular_ticks_servo(valor_entrada);
     MCPWM_ConfigChannel(LPC_MCPWM, 0, &mcpwmCfg);
 }
