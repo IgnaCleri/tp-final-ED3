@@ -3,7 +3,7 @@ IndentWidth: 4
 TabWidth: 4
 UseTab: Never
 ColumnLimit: 100
-BreakBeforeBraces: Attach
+BreakBeforeBraces: Allman
 AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
 PointerAlignment: Right
