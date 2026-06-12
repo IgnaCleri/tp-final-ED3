@@ -1,7 +1,5 @@
 #include "dac.h"
-
 #include <math.h>
-
 #include "lpc17xx_dac.h"
 
 static uint16_t *const vectorDAC = (uint16_t *)0x2007C000UL;
